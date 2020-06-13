@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vorpadminmenu_cl", "vorpadminmenu_cl\vorpadminmenu_cl.csproj", "{5C3E3403-7665-4BB4-9B7F-190D585F9A68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vorpadminmenu_sv", "vorpadminmenu_sv\vorpadminmenu_sv.csproj", "{6C21C795-810E-4287-9D91-DE77971AAA22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C3E3403-7665-4BB4-9B7F-190D585F9A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3E3403-7665-4BB4-9B7F-190D585F9A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3E3403-7665-4BB4-9B7F-190D585F9A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3E3403-7665-4BB4-9B7F-190D585F9A68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C21C795-810E-4287-9D91-DE77971AAA22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C21C795-810E-4287-9D91-DE77971AAA22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C21C795-810E-4287-9D91-DE77971AAA22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C21C795-810E-4287-9D91-DE77971AAA22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E160508C-0DB3-46D2-B97D-E4A86BF5FAAB}
+	EndGlobalSection
+EndGlobal
