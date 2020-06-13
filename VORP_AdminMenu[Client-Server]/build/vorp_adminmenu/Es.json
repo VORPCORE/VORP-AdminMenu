@@ -1,28 +1,14 @@
 ﻿{
-  //Menus
   "MenuMainTitle": "VORP AdminMenu",
   "MenuMainDesc": "AdminMenu",
-
   "MenuAdministrationTitle": "Administración",
   "MenuAdministrationDesc": "Menu de administración",
-
-
-
   "MenuNotificationsTitle": "Notificaciones",
   "MenuNotificationsDesc": "Menu de notificaciones",
-
-
-
   "MenuBoostersTitle": "Boosters",
   "MenuBoostersDesc": "Menu de boosters",
-
-
-
   "MenuDatabaseTitle": "Database",
   "MenuDatabaseDesc": "Menu de database",
-
-
-
   "MenuTeleportsTitle": "Teleports",
   "MenuTeleportsDesc": "Menu de teleports"
 

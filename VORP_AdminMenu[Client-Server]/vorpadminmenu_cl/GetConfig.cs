@@ -33,7 +33,7 @@ namespace vorpadminmenu_cl
 
 
             //Start When finish Loading
-            //vorpbountyhunter.InitBounty();
+            
         }
     }
 }
