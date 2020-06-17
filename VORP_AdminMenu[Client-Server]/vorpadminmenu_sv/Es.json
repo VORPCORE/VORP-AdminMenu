@@ -3,8 +3,35 @@
   "MenuMainTitle": "VORP AdminMenu",
   "MenuMainDesc": "AdminMenu",
 
+
+  //Admin
   "MenuAdministrationTitle": "Administración",
   "MenuAdministrationDesc": "Menu de administración",
+
+  //Kick
+  "KickPlayerTitle": "Kick Player",
+  "KickPlayerDesc": "Press here to kick a player form the server or: Command:/k id.",
+
+  //Freeze
+  "FreezeTitle": "Freeze",
+  "FreezeDesc": "Press here to freeze a player or: Command:/stop id.",
+
+  //Slap
+  "SlapTitle": "Slap",
+  "SlapDesc": "Slap a player or: Command:/slap id.",
+
+  //Lightning
+  "LightningTitle": "Lightning",
+  "LightningDesc": "Press here to throw a lightning to a player or: Command:/thorp id.",
+
+  //Fire
+  "FireTitle": "Fire",
+  "FireDesc": "Press here to burn a player to death or: Command:/firep id.",
+
+
+
+  "PlayersListTitle": "Jugadores",
+  "PlayersListDesc": "Lista de jugadores",
 
 
 

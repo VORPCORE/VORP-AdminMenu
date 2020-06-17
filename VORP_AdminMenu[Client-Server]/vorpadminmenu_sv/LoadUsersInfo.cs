@@ -16,11 +16,9 @@ namespace vorpadminmenu_sv
 
         private void LoadPlayerInfo([FromSource]Player source)
         {
-            Debug.WriteLine("entra");
             TriggerEvent("vorp:getCharacter", int.Parse(source.Handle), new Action<dynamic>((user) =>
             {
                 string group = user.group;
-                Debug.WriteLine("o no");
                 source.TriggerEvent("vorp_admin:GetPlayerInfo",group);
             }));
         }

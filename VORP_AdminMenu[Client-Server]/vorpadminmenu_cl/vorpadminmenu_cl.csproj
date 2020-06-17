@@ -55,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functions\AdminControl.cs" />
+    <Compile Include="Functions\Administration\AdministrationFunctions.cs" />
+    <Compile Include="Functions\Teleports\TeleportsFunctions.cs" />
+    <Compile Include="Functions\Utils\UtilsFunctions.cs" />
     <Compile Include="GetConfig.cs" />
     <Compile Include="GetUserInfo.cs" />
     <Compile Include="Menus\Administration.cs" />
@@ -62,16 +65,15 @@
     <Compile Include="Menus\Database.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\Notifications.cs" />
+    <Compile Include="Menus\Players\Players.cs" />
     <Compile Include="Menus\Teleports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Functions\Administration\" />
     <Folder Include="Functions\Boosters\" />
     <Folder Include="Functions\Database\" />
     <Folder Include="Functions\Notifications\" />
-    <Folder Include="Functions\Teleports\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

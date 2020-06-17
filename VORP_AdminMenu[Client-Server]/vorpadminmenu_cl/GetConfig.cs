@@ -25,7 +25,6 @@ namespace vorpadminmenu_cl
         {
 
             Config = JObject.Parse(dc);
-            Debug.WriteLine(dc);
             foreach (var l in dl)
             {
                 Langs[l.Key] = l.Value.ToString();

@@ -28,7 +28,6 @@ namespace vorpadminmenu_cl
             await Delay(2000);
             if (GetUserInfo.userGroup != "user")
             {
-
                 Menus.MainMenu.GetMenu();
             }
         }

@@ -12,6 +12,7 @@ namespace vorpadminmenu_cl.Menus
     {
         private static Menu mainMenu = new Menu(GetConfig.Langs["MenuMainTitle"], GetConfig.Langs["MenuMainDesc"]);
         private static bool setupDone = false;
+        public static List<object> args = new List<object>();
         private static void SetupMenu()
         {
             if (setupDone) return;
