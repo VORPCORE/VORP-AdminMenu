@@ -60,7 +60,6 @@ namespace vorpadminmenu_cl.Menus
                     BoosterFunctions.SetClip(_checked);
                     if (_checked) { nclip.Checked = false; };
                 }
-                //poner el checked en true o false
             };
 
         }

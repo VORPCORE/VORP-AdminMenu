@@ -42,7 +42,7 @@ namespace vorpadminmenu_cl.Functions.Utils
         {
             int playerPedId = API.PlayerPedId();
             heading = API.GetEntityHeading(playerPedId);
-            API.SetEntityCoords(playerPedId, x, y, z, true, true, true, false);
+            API.SetEntityCoords(playerPedId, x, y, z-1.0f, true, true, true, false);
             API.SetEntityHeading(playerPedId, heading);
         }
 

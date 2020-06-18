@@ -1,6 +1,7 @@
 ﻿using CitizenFX.Core;
 using System;
 using System.Threading.Tasks;
+using vorpadminmenu_cl.Functions.Administration;
 using vorpadminmenu_cl.Functions.Boosters;
 using vorpadminmenu_cl.Functions.Notifications;
 using vorpadminmenu_cl.Functions.Teleports;
@@ -32,6 +33,7 @@ namespace vorpadminmenu_cl
                 TeleportsFunctions.SetupTeleports();
                 NotificationFunctions.SetupNotifications();
                 BoosterFunctions.SetupBoosters();
+                AdministrationFunctions.SetupAdministration();
                 await Delay(2000);
                 loaded = true;
             }

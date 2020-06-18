@@ -92,15 +92,6 @@ namespace vorpadminmenu_cl.Menus
                     TeleportsFunctions.Guarma(MainMenu.args);
                 }
             };
-          /*  teleportsMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
-            {
-                if (_index == 7)
-                {
-                    Teleports. = _checked;
-                }
-                //poner el checked en true o false
-            };*/
-
         }
 
 

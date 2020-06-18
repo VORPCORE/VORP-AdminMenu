@@ -19,6 +19,14 @@ namespace vorpadminmenu_sv
             EventHandlers["vorp:broadCastMessage"] += new Action<Player, string>(BroadCastMessage);
 
             EventHandlers["vorp:thor"] += new Action<Vector3>(ThorServer);
+
+
+            EventHandlers["vorp:kick"] += new Action<Player, int>(Kick);
+            EventHandlers["vorp:slap"] += new Action<Player, int>(Slap);
+            EventHandlers["vorp:stopplayer"] += new Action<Player, int>(StopP);
+           
+            EventHandlers["vorp:thorIDserver"] += new Action<Player, int>(ThorToId);
+            EventHandlers["vorp:fireIDserver"] += new Action<Player, int>(FireToId);
         }
 
         private void CoordsToBringPlayer(Vector3 coordToSend, int destinataryID)
@@ -60,6 +68,41 @@ namespace vorpadminmenu_sv
         private void ThorServer(Vector3 thorCoords)
         {
             TriggerClientEvent("vorp:thordone", thorCoords);
+        }
+
+
+        private void StopP([FromSource]Player player, int id)
+        {
+            PlayerList pl = new PlayerList();
+            Player p = pl[id];
+            TriggerClientEvent(p, "vorp:stopit");
+        }
+
+        private void Slap([FromSource]Player player, int idDestinatary)
+        {
+            PlayerList pl = new PlayerList();
+            Player p = pl[idDestinatary];
+            p.TriggerEvent("vorp:slapback");
+        }
+
+        private void Kick([FromSource]Player player, int id)
+        {
+            PlayerList pl = new PlayerList();
+            Player p = pl[id];
+            p.Drop("Kicked by Staff");
+        }
+
+        private void ThorToId([FromSource]Player player, int idDestinatary)
+        {
+            PlayerList pl = new PlayerList();
+            Player p = pl[idDestinatary];
+            TriggerClientEvent(p, "vorp:thorIDdone");
+        }
+        private void FireToId([FromSource]Player player, int idDestinatary)
+        {
+            PlayerList pl = new PlayerList();
+            Player p = pl[idDestinatary];
+            TriggerClientEvent(p, "vorp:fireIDdone");
         }
     }
 }

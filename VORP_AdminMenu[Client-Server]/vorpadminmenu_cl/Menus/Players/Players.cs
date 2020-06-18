@@ -3,6 +3,8 @@ using MenuAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using vorpadminmenu_cl.Functions.Administration;
+using vorpadminmenu_cl.Functions.Teleports;
 
 namespace vorpadminmenu_cl.Menus.Players
 {
@@ -78,10 +80,7 @@ namespace vorpadminmenu_cl.Menus.Players
             {
                 Enabled = true,
             });
-            playersOptionsMenu.AddMenuItem(new MenuItem("Ban", "Press here to ban a player: Command:/sban id.")
-            {
-                Enabled = true,
-            });
+            
 
 
 
@@ -90,51 +89,43 @@ namespace vorpadminmenu_cl.Menus.Players
                 if (_index == 0)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    //AdminControl.executeAdminCommand("TpToPlayer", MainMenu.args, "MethodsTeleports");
+                    TeleportsFunctions.TpToPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 1)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    //AdminControl.executeAdminCommand("TpBring", MainMenu.args, "MethodsTeleports");
+                    TeleportsFunctions.TpBring(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 if (_index == 2)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    //AdminControl.executeAdminCommand("StopPlayer", MainMenu.args, "MethodsPlayerAdministration");
+                    AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 3)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    //AdminControl.executeAdminCommand("Slap", MainMenu.args, "MethodsPlayerAdministration");
+                    AdministrationFunctions.Slap(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 4)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    //AdminControl.executeAdminCommand("ThorToId", MainMenu.args, "MethodsBoosters");
+                    AdministrationFunctions.ThorToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 5)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    //AdminControl.executeAdminCommand("FireToId", MainMenu.args, "MethodsBoosters");
+                    AdministrationFunctions.FireToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 6)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    //AdminControl.executeAdminCommand("Kick", MainMenu.args, "MethodsPlayerAdministration");
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 7)
-                {
-                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    string reason = "Banned by Staff.";
-                    MainMenu.args.Add(reason);
-                    //AdminControl.executeAdminCommand("Sbans", MainMenu.args, "MethodsPlayerAdministration");
+                    AdministrationFunctions.Kick(MainMenu.args);
                     MainMenu.args.Clear();
                 }
             };
