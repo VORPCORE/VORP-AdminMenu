@@ -54,8 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Functions\AdminControl.cs" />
     <Compile Include="Functions\Administration\AdministrationFunctions.cs" />
+    <Compile Include="Functions\Boosters\BoosterFunctions.cs" />
+    <Compile Include="Functions\Notifications\NotificationFunctions.cs" />
     <Compile Include="Functions\Teleports\TeleportsFunctions.cs" />
     <Compile Include="Functions\Utils\UtilsFunctions.cs" />
     <Compile Include="GetConfig.cs" />
@@ -71,9 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Functions\Boosters\" />
     <Folder Include="Functions\Database\" />
-    <Folder Include="Functions\Notifications\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

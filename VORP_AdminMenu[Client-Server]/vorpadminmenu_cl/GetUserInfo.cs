@@ -1,16 +1,16 @@
 ﻿using CitizenFX.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using vorpadminmenu_cl.Functions.Boosters;
+using vorpadminmenu_cl.Functions.Notifications;
+using vorpadminmenu_cl.Functions.Teleports;
 
 namespace vorpadminmenu_cl
 {
     class GetUserInfo : BaseScript
     {
         public static string userGroup = "user";
+        public static bool loaded = false;
         public GetUserInfo()
         {
             EventHandlers["vorp_admin:GetPlayerInfo"] += new Action<string>(GetPlayerInfo);
@@ -26,9 +26,14 @@ namespace vorpadminmenu_cl
         private async Task SetupMenu()
         {
             await Delay(2000);
-            if (GetUserInfo.userGroup != "user")
+            if (userGroup != "user")
             {
                 Menus.MainMenu.GetMenu();
+                TeleportsFunctions.SetupTeleports();
+                NotificationFunctions.SetupNotifications();
+                BoosterFunctions.SetupBoosters();
+                await Delay(2000);
+                loaded = true;
             }
         }
     }

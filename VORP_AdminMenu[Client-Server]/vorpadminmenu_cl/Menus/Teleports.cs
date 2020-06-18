@@ -14,6 +14,9 @@ namespace vorpadminmenu_cl.Menus
     {
         private static Menu teleportsMenu = new Menu(GetConfig.Langs["MenuTeleportsTitle"], GetConfig.Langs["MenuTeleportsDesc"]);
         private static bool setupDone = false;
+        private static MenuCheckboxItem tpview = new MenuCheckboxItem("Tp to cursor", "Teleport to cursor.\nPress checkbox to enable or: Command:/tpview \nUse mouse3 to tp", false) {
+            Style = MenuCheckboxItem.CheckboxStyle.Tick
+        };
         private static void SetupMenu()
         {
             if (setupDone) return;
@@ -50,10 +53,7 @@ namespace vorpadminmenu_cl.Menus
             {
                 Enabled = true,
             });
-            teleportsMenu.AddMenuItem(new MenuCheckboxItem("Tp to cursor", "Teleport to cursor.\nPress checkbox to enable or: Command:/tpview \nUse mouse3 to tp", TeleportsFunctions.tpView)
-            {
-                Style = MenuCheckboxItem.CheckboxStyle.Tick
-            });
+            teleportsMenu.AddMenuItem(tpview);
 
             teleportsMenu.OnItemSelect += async (_menu, _item, _index) =>
             {
@@ -92,14 +92,14 @@ namespace vorpadminmenu_cl.Menus
                     TeleportsFunctions.Guarma(MainMenu.args);
                 }
             };
-            teleportsMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
+          /*  teleportsMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
                 if (_index == 7)
                 {
-                    TeleportsFunctions.tpView = _checked;
+                    Teleports. = _checked;
                 }
                 //poner el checked en true o false
-            };
+            };*/
 
         }
 
@@ -108,6 +108,16 @@ namespace vorpadminmenu_cl.Menus
         {
             SetupMenu();
             return teleportsMenu;
+        }
+
+        public static bool GetTpView()
+        {
+            return tpview.Checked;
+        }
+
+        public static void SetTpView(bool tpView)
+        {
+            tpview.Checked = tpView;
         }
     }
 }
