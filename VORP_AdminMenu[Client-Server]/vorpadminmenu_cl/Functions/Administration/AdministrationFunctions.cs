@@ -3,6 +3,7 @@ using CitizenFX.Core.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,14 @@ namespace vorpadminmenu_cl.Functions.Administration
         static List<int> blipsList = new List<int>();
         public static bool playersFollow = false;
         static bool fireguy = false;
+        public static bool spectating;
+        public static int camera;
+        float speed = 1.28F;
         public AdministrationFunctions()
         {
             Tick += freezeAnim;
             Tick += CreateBlips;
+            
 
             EventHandlers["vorp:slapback"] += new Action(SlapDone);
             EventHandlers["vorp:stopit"] += new Action(StopIt);
@@ -28,6 +33,8 @@ namespace vorpadminmenu_cl.Functions.Administration
             EventHandlers["vorp:thorIDdone"] += new Action(ThorIDdone);
             EventHandlers["vorp:fireIDdone"] += new Action(FireIDDone);
         }
+
+        
 
         public static void SetupAdministration()
         {
@@ -59,6 +66,16 @@ namespace vorpadminmenu_cl.Functions.Administration
             API.RegisterCommand("cblip", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 PlayerBlips(args);
+            }), false);
+
+            API.RegisterCommand("son", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                Spectate(args);
+            }), false);
+
+            API.RegisterCommand("soff", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                SpectateOff(args);
             }), false);
 
         }
@@ -208,6 +225,20 @@ namespace vorpadminmenu_cl.Functions.Administration
                 fireguy = false;
             }
             await Delay(2000);
+        }
+
+        private static void Spectate(List<object> args)
+        {
+            int playerId = int.Parse(args[0].ToString());
+            int player = API.GetPlayerFromServerId(playerId);
+            int playerPed = API.GetPlayerPed(player);
+            API.NetworkSetInSpectatorMode(true, playerPed);
+        }
+
+        private static void SpectateOff(List<object> args)
+        {
+            API.NetworkSetInSpectatorMode(false, API.PlayerPedId());
+            //isInSpectatorMode
         }
     }
 }
