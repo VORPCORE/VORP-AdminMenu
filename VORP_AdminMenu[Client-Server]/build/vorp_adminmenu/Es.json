@@ -51,6 +51,10 @@
 
 
   "MenuTeleportsTitle": "Teleports",
-  "MenuTeleportsDesc": "Menu de teleports"
+  "MenuTeleportsDesc": "Menu de teleports",
+
+  "YouArePermanentBanned": "Actualmente te encuentras baneado de por vida.",
+
+  "YouAreTempBanned": "Tu baneo expirara en {0} Dias {1} Horas {2} Minutos."
 
 }
