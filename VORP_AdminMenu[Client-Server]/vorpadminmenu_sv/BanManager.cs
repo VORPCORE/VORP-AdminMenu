@@ -17,6 +17,25 @@ namespace vorpadminmenu_sv
             EventHandlers["vorp_adminmenu:addNewBan"] += new Action<Player, int, DateTime, int>(AddNewBan);
             EventHandlers["playerConnecting"] += new Action<Player, string, dynamic, dynamic>(OnPlayerConnecting);
             LoadBannedsFromDB();
+            Tick += CheckBanneds;
+        }
+
+        private async Task CheckBanneds()
+        {
+            await Delay(300000); // 5 minutos
+            for (int i=0; i < userBanneds.Count(); i++)
+            {
+                if (!userBanneds[i].Permanent)
+                {
+                    TimeSpan diff = (userBanneds[i].Unban - DateTime.Now);
+                    if(diff.TotalSeconds < 0)
+                    {
+                        userBanneds[i].DeleteInDB();
+                        await Delay(100);
+                        userBanneds.RemoveAt(i);
+                    }
+                }
+            }
         }
 
         private async void OnPlayerConnecting([FromSource]Player player, string playerName, dynamic setKickReason, dynamic deferrals)
@@ -38,8 +57,8 @@ namespace vorpadminmenu_sv
                 else
                 {
                     TimeSpan diff = (userBan.Unban - DateTime.Now);
-                    deferrals.done(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.TotalDays.ToString(), diff.TotalHours.ToString(), diff.TotalMinutes.ToString()));
-                    setKickReason(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.TotalDays.ToString(), diff.TotalHours.ToString(), diff.TotalMinutes.ToString()));
+                    deferrals.done(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.Days.ToString(), diff.Hours.ToString(), diff.Minutes.ToString()));
+                    setKickReason(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.Days.ToString(), diff.Hours.ToString(), diff.Minutes.ToString()));
                 }
              
             } else if (userBanneds.Any(x => x.License.Contains(license)))
@@ -53,8 +72,8 @@ namespace vorpadminmenu_sv
                 else
                 {
                     TimeSpan diff = (userBan.Unban - DateTime.Now);
-                    deferrals.done(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.TotalDays.ToString(), diff.TotalHours.ToString(), diff.TotalMinutes.ToString()));
-                    setKickReason(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.TotalDays.ToString(), diff.TotalHours.ToString(), diff.TotalMinutes.ToString()));
+                    deferrals.done(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.Days.ToString(), diff.Hours.ToString(), diff.Minutes.ToString()));
+                    setKickReason(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.Days.ToString(), diff.Hours.ToString(), diff.Minutes.ToString()));
                 }
             }
 
