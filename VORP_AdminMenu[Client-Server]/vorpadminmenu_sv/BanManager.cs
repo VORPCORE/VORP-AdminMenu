@@ -14,7 +14,7 @@ namespace vorpadminmenu_sv
         public BanManager()
         {
             EventHandlers["playerConnecting"] += new Action<Player, string, dynamic, dynamic>(OnPlayerConnecting);
-            EventHandlers["vorp_adminmenu:addNewBan"] += new Action<Player, int, DateTime, int>(AddNewBan);
+            EventHandlers["vorp_adminmenu:addNewBan"] += new Action<Player, int, DateTime, string, int>(AddNewBan);
             LoadBannedsFromDB();
             Tick += CheckBanneds;
         }
@@ -80,7 +80,7 @@ namespace vorpadminmenu_sv
 
         }
 
-        public async void AddNewBan([FromSource]Player player, int targetId, DateTime unban, int permanent = 0)
+        public async void AddNewBan([FromSource]Player player, int targetId, DateTime unban, string reason, int permanent)
         {
             DateTime banned = DateTime.Now;
 
@@ -104,10 +104,20 @@ namespace vorpadminmenu_sv
                 }
             }
 
-            Exports["ghmattimysql"].execute("INSERT INTO banneds (b_steam,b_license,b_discord,b_banned,b_unban,b_permanent) VALUES (?,?,?,?,?,?)", new[] { steam, license, discord, banned.ToString(), unban.ToString(), permanent.ToString()}, new Action<dynamic>((result) =>
+            Exports["ghmattimysql"].execute("INSERT INTO banneds (b_steam,b_license,b_discord,b_reason,b_banned,b_unban,b_permanent) VALUES (?,?,?,?,?,?)", new[] { steam, license, discord, reason, banned.ToString(), unban.ToString(), permanent.ToString()}, new Action<dynamic>((result) =>
             {
                 int newId = result.insertId;
-                userBanneds.Add(new PlayerBanned(newId, steam, license, discord, banned, unban, Convert.ToBoolean(permanent)));
+                userBanneds.Add(new PlayerBanned(newId, steam, license, discord, banned, unban, Convert.ToBoolean(permanent), reason));
+                string duration = "";
+                if (permanent == 1)
+                {
+                    duration = LoadConfig.Langs["Permament"];
+                }
+                else
+                {
+                    duration = unban.ToString();
+                }
+                target.Drop(string.Format(LoadConfig.Langs["YouHasBeenBanned"], reason, duration));
             }));
         }
 
@@ -123,10 +133,11 @@ namespace vorpadminmenu_sv
                         string steam = r.b_steam;
                         string license = r.b_license;
                         string discord = r.b_discord;
+                        string reason = r.b_reason;
                         DateTime banned = DateTime.Parse(r.b_banned);
                         DateTime unban = DateTime.Parse(r.b_unban);
                         bool permanent = Convert.ToBoolean(r.b_permanent);
-                        userBanneds.Add(new PlayerBanned(id, steam, license, discord, banned, unban, permanent));
+                        userBanneds.Add(new PlayerBanned(id, steam, license, discord, banned, unban, permanent, reason));
                     }
                 }
 

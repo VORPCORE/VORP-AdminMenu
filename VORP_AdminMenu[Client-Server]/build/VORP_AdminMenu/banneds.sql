@@ -26,6 +26,7 @@ CREATE TABLE `banneds`  (
   `b_steam` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `b_license` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `b_discord` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `b_reason` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL,
   `b_banned` datetime(0) NOT NULL,
   `b_unban` datetime(0) NOT NULL,
   `b_permanent` tinyint(1) NOT NULL DEFAULT 0,

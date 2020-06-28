@@ -55,6 +55,8 @@
 
   "YouArePermanentBanned": "Actualmente te encuentras baneado de por vida.",
 
-  "YouAreTempBanned": "Tu baneo expirara en {0} Dias {1} Horas {2} Minutos."
+  "YouAreTempBanned": "Tu baneo expirara en {0} Dias {1} Horas {2} Minutos.",
 
+  "YouHasBeenBanned": "Has sido baneado por ({0}) | Expira: ({1})",
+  "Permament": "Permanente"
 }

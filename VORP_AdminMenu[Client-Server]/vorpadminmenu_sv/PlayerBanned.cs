@@ -16,13 +16,14 @@ namespace vorpadminmenu_sv
         DateTime banned;
         DateTime unban;
         bool permanent;
+        string reason;
 
         public PlayerBanned()
         {
 
         }
 
-        public PlayerBanned(int id, string steam, string license, string discord, DateTime banned, DateTime unban, bool permanent)
+        public PlayerBanned(int id, string steam, string license, string discord, DateTime banned, DateTime unban, bool permanent, string reason = "")
         {
             this.id = id;
             this.steam = steam;
@@ -31,6 +32,7 @@ namespace vorpadminmenu_sv
             this.banned = banned;
             this.unban = unban;
             this.permanent = permanent;
+            this.reason = reason;
         }
 
         public int Id { get => id; set => id = value; }
@@ -40,6 +42,7 @@ namespace vorpadminmenu_sv
         public DateTime Banned { get => banned; set => banned = value; }
         public DateTime Unban { get => unban; set => unban = value; }
         public bool Permanent { get => permanent; set => permanent = value; }
+        public string Reason { get => reason; set => reason = value; }
 
         public void DeleteInDB()
         {
