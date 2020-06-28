@@ -15,7 +15,6 @@ namespace vorpadminmenu_sv
         {
             EventHandlers["playerConnecting"] += new Action<Player, string, dynamic, dynamic>(OnPlayerConnecting);
             EventHandlers["vorp_adminmenu:addNewBan"] += new Action<Player, int, DateTime, int>(AddNewBan);
-            EventHandlers["playerConnecting"] += new Action<Player, string, dynamic, dynamic>(OnPlayerConnecting);
             LoadBannedsFromDB();
             Tick += CheckBanneds;
         }
