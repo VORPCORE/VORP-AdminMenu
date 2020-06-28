@@ -1,4 +1,5 @@
 ﻿using System;
+using CitizenFX.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace vorpadminmenu_sv
 {
-    public class PlayerBanned
+    public class PlayerBanned : BaseScript
     {
         int id;
         string steam;
@@ -15,6 +16,11 @@ namespace vorpadminmenu_sv
         DateTime banned;
         DateTime unban;
         bool permanent;
+
+        public PlayerBanned()
+        {
+
+        }
 
         public PlayerBanned(int id, string steam, string license, string discord, DateTime banned, DateTime unban, bool permanent)
         {
@@ -34,6 +40,11 @@ namespace vorpadminmenu_sv
         public DateTime Banned { get => banned; set => banned = value; }
         public DateTime Unban { get => unban; set => unban = value; }
         public bool Permanent { get => permanent; set => permanent = value; }
+
+        public void DeleteInDB()
+        {
+            Exports["ghmattimysql"].execute($"DELETE FROM BANNEDS WHERE b_id=?", new[] { id });
+        }
 
     }
 }
