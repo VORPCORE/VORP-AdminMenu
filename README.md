@@ -2,7 +2,8 @@
 Admin Menu for VORP Core
 
 ## Requirements
-- [VORP-CORE](https://github.com/VORPCORE/VORP-Core/releases)
+- [VORP-Core](https://github.com/VORPCORE/VORP-Core/releases)
+- [VORP-Inputs](https://github.com/VORPCORE/VORP-Inputs/releases)
 
 ## How to install
 * [Download the lastest version of VORP Admin Menu](https://github.com/VORPCORE/VORP-AdminMenu/releases)
