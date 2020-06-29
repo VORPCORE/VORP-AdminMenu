@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Administration;
 using vorpadminmenu_cl.Functions.Boosters;
+using vorpadminmenu_cl.Functions.Database;
 using vorpadminmenu_cl.Functions.Notifications;
 using vorpadminmenu_cl.Functions.Teleports;
 
@@ -34,6 +35,7 @@ namespace vorpadminmenu_cl
                 NotificationFunctions.SetupNotifications();
                 BoosterFunctions.SetupBoosters();
                 AdministrationFunctions.SetupAdministration();
+                DatabaseFunctions.SetupDatabase();
                 await Delay(2000);
                 loaded = true;
             }

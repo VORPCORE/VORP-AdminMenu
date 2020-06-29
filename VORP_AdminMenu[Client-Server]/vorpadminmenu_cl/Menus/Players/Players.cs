@@ -49,6 +49,16 @@ namespace vorpadminmenu_cl.Menus.Players
                 
             };
 
+            playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SpectateTitle"], GetConfig.Langs["SpectateDesc"])
+            {
+                Enabled = true,
+            });
+
+            playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SpectateTitleOff"], GetConfig.Langs["SpectateDescOff"])
+            {
+                Enabled = true,
+            });
+
             playersOptionsMenu.AddMenuItem(new MenuItem("Tp to the player", "Press here to tp to the player or: Command:/tptoplayer id.")
             {
                 Enabled = true,
@@ -89,40 +99,50 @@ namespace vorpadminmenu_cl.Menus.Players
                 if (_index == 0)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    AdministrationFunctions.Spectate(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if(_index == 1)
+                {
+                    AdministrationFunctions.SpectateOff(MainMenu.args);
+                }
+                else if(_index == 2)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     TeleportsFunctions.TpToPlayer(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 1)
-                {
-                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    TeleportsFunctions.TpBring(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                if (_index == 2)
-                {
-                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 3)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    AdministrationFunctions.Slap(MainMenu.args);
+                    TeleportsFunctions.TpBring(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 4)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    AdministrationFunctions.ThorToId(MainMenu.args);
+                    AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 5)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    AdministrationFunctions.FireToId(MainMenu.args);
+                    AdministrationFunctions.Slap(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 6)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    AdministrationFunctions.ThorToId(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 7)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    AdministrationFunctions.FireToId(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 8)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     AdministrationFunctions.Kick(MainMenu.args);

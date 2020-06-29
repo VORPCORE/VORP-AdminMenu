@@ -13,7 +13,7 @@ namespace vorpadminmenu_cl.Menus
     class Administration
     {
         private static Menu administrationMenu = new Menu(GetConfig.Langs["MenuAdministrationTitle"], GetConfig.Langs["MenuAdministrationDesc"]);
-        private static MenuCheckboxItem pfollow = new MenuCheckboxItem("Players in map", "Press here to see all players in map or Command:/cblip", false) {
+        private static MenuCheckboxItem pfollow = new MenuCheckboxItem(GetConfig.Langs["PlayersBlipsTitle"], GetConfig.Langs["PlayersBlipsDesc"], false) {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
         private static bool setupDone = false;
@@ -54,44 +54,65 @@ namespace vorpadminmenu_cl.Menus
             {
                 Enabled = true,
             });
+            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SpectateTitle"], GetConfig.Langs["SpectateDesc"])
+            {
+                Enabled = true,
+            });
+            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SpectateTitleOff"], GetConfig.Langs["SpectateDescOff"])
+            {
+                Enabled = true,
+            });
             administrationMenu.AddMenuItem(pfollow);
+
+            
+            
 
             administrationMenu.OnItemSelect += async (_menu, _item, _index) =>
             {
                 if (_index == 1)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Kick", "Id player");
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["KickPlayerTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.Kick(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 2)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Freeze", "Id player");
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["FreezeTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 3)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Slap", "Id player");
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["SlapTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.Slap(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 4)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Lightning", "Id player");
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["LightningTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.ThorToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 5)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Burn", "Id player");
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["FireTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.FireToId(MainMenu.args);
                     MainMenu.args.Clear();
+                }
+                else if (_index == 6)
+                {
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["SpectateTitle"], GetConfig.Langs["ID"]);
+                    AdministrationFunctions.Spectate(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 7)
+                {
+                    AdministrationFunctions.SpectateOff(MainMenu.args);
                 }
             };
             administrationMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
-                if (_index == 6)
+                if (_index == 8)
                 {
                     if (!_checked) {
                         AdministrationFunctions.ClearBlips();

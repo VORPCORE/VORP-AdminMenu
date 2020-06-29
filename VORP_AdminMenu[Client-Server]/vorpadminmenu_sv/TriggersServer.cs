@@ -27,7 +27,14 @@ namespace vorpadminmenu_sv
            
             EventHandlers["vorp:thorIDserver"] += new Action<Player, int>(ThorToId);
             EventHandlers["vorp:fireIDserver"] += new Action<Player, int>(FireToId);
+
+            EventHandlers["vorp:revivePlayer"] += new Action<Player, int>(RevivePlayer);
+
+
+
         }
+
+       
 
         private void CoordsToBringPlayer(Vector3 coordToSend, int destinataryID)
         {
@@ -103,6 +110,13 @@ namespace vorpadminmenu_sv
             PlayerList pl = new PlayerList();
             Player p = pl[idDestinatary];
             TriggerClientEvent(p, "vorp:fireIDdone");
+        }
+
+        private void RevivePlayer([FromSource]Player player, int idDestinatary)
+        {
+            PlayerList pl = new PlayerList();
+            Player p = pl[idDestinatary];
+            TriggerClientEvent(p, "vorp:resurrectPlayer");
         }
     }
 }

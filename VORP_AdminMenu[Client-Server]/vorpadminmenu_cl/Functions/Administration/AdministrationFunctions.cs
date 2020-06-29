@@ -18,9 +18,6 @@ namespace vorpadminmenu_cl.Functions.Administration
         static List<int> blipsList = new List<int>();
         public static bool playersFollow = false;
         static bool fireguy = false;
-        public static bool spectating;
-        public static int camera;
-        float speed = 1.28F;
         public AdministrationFunctions()
         {
             Tick += freezeAnim;
@@ -76,6 +73,10 @@ namespace vorpadminmenu_cl.Functions.Administration
             API.RegisterCommand("soff", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 SpectateOff(args);
+            }), false);
+            API.RegisterCommand("revive", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                Revive(args);
             }), false);
 
         }
@@ -227,7 +228,7 @@ namespace vorpadminmenu_cl.Functions.Administration
             await Delay(2000);
         }
 
-        private static void Spectate(List<object> args)
+        public static void Spectate(List<object> args)
         {
             int playerId = int.Parse(args[0].ToString());
             int player = API.GetPlayerFromServerId(playerId);
@@ -235,10 +236,16 @@ namespace vorpadminmenu_cl.Functions.Administration
             API.NetworkSetInSpectatorMode(true, playerPed);
         }
 
-        private static void SpectateOff(List<object> args)
+        public static void SpectateOff(List<object> args)
         {
             API.NetworkSetInSpectatorMode(false, API.PlayerPedId());
             //isInSpectatorMode
+        }
+
+        public static void Revive(List<object> args)
+        {
+            int idDestinatary = int.Parse(args[0].ToString());
+            TriggerServerEvent("vorp:revivePlayer", idDestinatary);
         }
     }
 }

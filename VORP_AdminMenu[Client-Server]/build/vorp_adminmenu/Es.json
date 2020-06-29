@@ -1,9 +1,12 @@
 ﻿{
+  //Shared
+  "ID": "player id",
+
   //Menus
   "MenuMainTitle": "VORP AdminMenu",
   "MenuMainDesc": "AdminMenu",
 
-
+  ///////
   //Admin
   "MenuAdministrationTitle": "Administración",
   "MenuAdministrationDesc": "Menu de administración",
@@ -28,28 +31,62 @@
   "FireTitle": "Fire",
   "FireDesc": "Press here to burn a player to death or: Command:/firep id.",
 
+  //Spectate
+  "SpectateTitle": "Spectate",
+  "SpectateDesc": "Press here to spectate a player or: Command:/son id",
+
+  //SpectateOff
+  "SpectateTitleOff": "Spectate Off",
+  "SpectateDescOff": "Press here to stop spectate a player or: Command:/soff",
+
+  //PlayerBlips
+  "PlayersBlipsTitle": "Players in map",
+  "PlayersBlipsDesc": "Press here to see all players in map or Command:/cblip",
 
 
+  ///////
   "PlayersListTitle": "Jugadores",
   "PlayersListDesc": "Lista de jugadores",
 
 
-
+  ///////
   "MenuNotificationsTitle": "Notificaciones",
   "MenuNotificationsDesc": "Menu de notificaciones",
 
 
-
+  ///////
+  //Boosters
   "MenuBoostersTitle": "Boosters",
   "MenuBoostersDesc": "Menu de boosters",
 
+  //GodMode
+  "GodModeTitle": "Godmode",
+  "GodModeDesc": "Press here to be god or Command:/gm",
 
+  //Thor
+  "ThorTitle": "Thor",
+  "ThorDesc": "Press here to be Thor or: Command:/thor. After activate it use mouse3 to throw lightnings",
 
+  //Noclp
+  "NoClipTitle": "Noclip",
+  "NoClipDesc": "Press here to use noclip or: Command:/n. Mouse rotation",
+
+  //Mclip
+  "NoClip2Title": "NoclipV2",
+  "NoClip2Desc": "Press here to use the improved noclip or: Mouse direction.",
+
+  //Golden
+  "GoldenTitle": "Golden",
+  "GoldenDesc": "Press here to be gold or: Command:/golden",
+
+  ///////
   "MenuDatabaseTitle": "Database",
   "MenuDatabaseDesc": "Menu de database",
 
 
 
+
+  ///////
   "MenuTeleportsTitle": "Teleports",
   "MenuTeleportsDesc": "Menu de teleports"
 

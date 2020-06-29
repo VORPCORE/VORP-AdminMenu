@@ -12,19 +12,19 @@ namespace vorpadminmenu_cl.Menus
     class Boosters
     {
         private static Menu boostersMenu = new Menu(GetConfig.Langs["MenuBoostersTitle"], GetConfig.Langs["MenuBoostersDesc"]);
-        private static MenuCheckboxItem gmode = new MenuCheckboxItem("Godmode", "Press here to be god or Command:/gm", false)
+        private static MenuCheckboxItem gmode = new MenuCheckboxItem(GetConfig.Langs["GodModeTitle"], GetConfig.Langs["GodModeDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private static MenuCheckboxItem tmode = new MenuCheckboxItem("Thor", "Press here to be Thor or: Command:/thor. After activate it use mouse3 to throw lightnings", false)
+        private static MenuCheckboxItem tmode = new MenuCheckboxItem(GetConfig.Langs["ThorTitle"], GetConfig.Langs["ThorDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private static MenuCheckboxItem nclip = new MenuCheckboxItem("Noclip", "Press here to use noclip or: Command:/n. Mouse rotation", false)
+        private static MenuCheckboxItem nclip = new MenuCheckboxItem(GetConfig.Langs["NoClipTitle"], GetConfig.Langs["NoClipDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private static MenuCheckboxItem mclip = new MenuCheckboxItem("NoclipV2", "Press here to use the improved noclip or: Mouse direction.", false)
+        private static MenuCheckboxItem mclip = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
@@ -35,7 +35,7 @@ namespace vorpadminmenu_cl.Menus
             setupDone = true;
             MenuController.AddMenu(boostersMenu);
 
-            boostersMenu.AddMenuItem(new MenuItem("Golden", "Press here to be gold or: Command:/golden")
+            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["GoldenTitle"], GetConfig.Langs["GoldenDesc"])
             {
                 Enabled = true,
             });
