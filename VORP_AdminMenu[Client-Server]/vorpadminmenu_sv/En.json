@@ -20,6 +20,9 @@
   "BanPlayerTime": "[quantity or 0(permanent)][Y(years),M(months),D(days),H(hours), m(minutes)]",
   "BanPlayerReason": "Reason",
 
+  "ReviveTitle": "Revive Player",
+  "ReviveDesc": "Press here to revive a player form the server or: Command:/revive id.",
+
   //Freeze
   "FreezeTitle": "Freeze",
   "FreezeDesc": "Press here to freeze a player or: Command:/stop id.",
