@@ -13,5 +13,5 @@ Admin Menu for VORP Core
 * Now you are ready!
 
 ## Wiki
-[Wiki VORP Character](http://docs.vorpcore.com:3000/vorp-adminmenu)
+[Wiki VORP Admin Menu](http://docs.vorpcore.com:3000/vorp-adminmenu)
 
