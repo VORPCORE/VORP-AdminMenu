@@ -88,6 +88,13 @@
 
   ///////
   "MenuTeleportsTitle": "Teleports",
-  "MenuTeleportsDesc": "Menu de teleports"
+  "MenuTeleportsDesc": "Menu de teleports",
 
+  "YouArePermanentBanned": "Actualmente te encuentras baneado de por vida.",
+
+  "YouAreTempBanned": "Tu baneo expirara en {0} Dias {1} Horas {2} Minutos.",
+
+  "YouHasBeenBanned": "Has sido baneado por ({0}) | Expira: ({1})",
+  "Permament": "Permanente",
+  "SyntaxIncorrect": "Por favor usa la sintaxis de [ 0 = Permanente, 10Y = 10 Años, 10M = 10 Meses, 10D = 10 Dias, 10H = 10 Horas, 10m = 10 Minutos ]"
 }
