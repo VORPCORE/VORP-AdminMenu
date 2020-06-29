@@ -53,6 +53,11 @@ namespace vorpadminmenu_cl.Functions.Administration
                 Kick(args);
             }), false);
 
+            API.RegisterCommand("ban", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                Ban(args);
+            }), false);
+
             API.RegisterCommand("thorp", new Action<int, List<object>, string>((source, args, raw) =>
             {
                 ThorToId(args);
@@ -131,6 +136,59 @@ namespace vorpadminmenu_cl.Functions.Administration
         {
             int id = int.Parse(args[0].ToString());
             TriggerServerEvent("vorp:kick", id);
+        }
+
+        public static void Ban(List<object> args)
+        {
+            int target = int.Parse(args[0].ToString());
+            string temp = args[1].ToString().Trim();
+            bool permanent = true;
+            DateTime unban = DateTime.Now;
+
+            try
+            {
+                if (!temp.StartsWith("0"))
+                {
+                    permanent = false;
+                    if (temp.EndsWith("Y"))
+                    {
+                        unban.AddYears(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("M"))
+                    {
+                        unban.AddMonths(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("D"))
+                    {
+                        unban.AddDays(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("H"))
+                    {
+                        unban.AddHours(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("m"))
+                    {
+                        unban.AddMinutes(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else
+                    {
+                        TriggerEvent("vorp:Tip", GetConfig.Langs["SyntaxIncorrect"], 5000);
+                        return;
+                    }
+                }
+            }
+            catch
+            {
+                TriggerEvent("vorp:Tip", GetConfig.Langs["SyntaxIncorrect"], 5000);
+                return;
+            }
+
+            string reason = "";
+
+            for(int i = 2; i < args.Count(); i++)
+                reason = args[i].ToString() + " ";
+
+            TriggerServerEvent("vorp_adminmenu:addNewBan", target, unban, Convert.ToInt32(permanent));
         }
 
         public static void PlayerBlips(List<object> args)
