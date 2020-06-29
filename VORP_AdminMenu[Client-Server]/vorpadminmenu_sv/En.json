@@ -8,12 +8,17 @@
 
   ///////
   //Admin
-  "MenuAdministrationTitle": "Administración",
-  "MenuAdministrationDesc": "Menu de administración",
+  "MenuAdministrationTitle": "Administration",
+  "MenuAdministrationDesc": "Administration menu",
 
   //Kick
   "KickPlayerTitle": "Kick Player",
   "KickPlayerDesc": "Press here to kick a player form the server or: Command:/k id.",
+
+  "BanPlayerTitle": "Ban Player",
+  "BanPlayerDesc": "Press here to ban a player form the server or: Command:/ban id [quantity or 0(permanent)][Y(years),M(months),D(days),H(hours), m(minutes)].",
+  "BanPlayerTime": "[quantity or 0(permanent)][Y(years),M(months),D(days),H(hours), m(minutes)]",
+  "BanPlayerReason": "Reason",
 
   //Freeze
   "FreezeTitle": "Freeze",
@@ -45,19 +50,19 @@
 
 
   ///////
-  "PlayersListTitle": "Jugadores",
-  "PlayersListDesc": "Lista de jugadores",
+  "PlayersListTitle": "Players",
+  "PlayersListDesc": "Players list",
 
 
   ///////
-  "MenuNotificationsTitle": "Notificaciones",
-  "MenuNotificationsDesc": "Menu de notificaciones",
+  "MenuNotificationsTitle": "Notifications",
+  "MenuNotificationsDesc": "Notifications menu",
 
 
   ///////
   //Boosters
   "MenuBoostersTitle": "Boosters",
-  "MenuBoostersDesc": "Menu de boosters",
+  "MenuBoostersDesc": "Boosters menu",
 
   //GodMode
   "GodModeTitle": "Godmode",
@@ -81,20 +86,20 @@
 
   ///////
   "MenuDatabaseTitle": "Database",
-  "MenuDatabaseDesc": "Menu de database",
+  "MenuDatabaseDesc": "Database menu",
 
 
 
 
   ///////
   "MenuTeleportsTitle": "Teleports",
-  "MenuTeleportsDesc": "Menu de teleports",
+  "MenuTeleportsDesc": "Teleports menu",
 
-  "YouArePermanentBanned": "Actualmente te encuentras baneado de por vida.",
+  "YouArePermanentBanned": "You have a permanent ban.",
 
-  "YouAreTempBanned": "Tu baneo expirara en {0} Dias {1} Horas {2} Minutos.",
+  "YouAreTempBanned": "Your ban expires in {0} days {1} hours {2} minutes.",
 
-  "YouHasBeenBanned": "Has sido baneado por ({0}) | Expira: ({1})",
-  "Permament": "Permanente",
-  "SyntaxIncorrect": "Por favor usa la sintaxis de [ 0 = Permanente, 10Y = 10 Años, 10M = 10 Meses, 10D = 10 Dias, 10H = 10 Horas, 10m = 10 Minutos ]"
+  "YouHasBeenBanned": "You has been banned for ({0}) | Expire: ({1})",
+  "Permament": "Permanent",
+  "SyntaxIncorrect": "Please use the correct sintax [ 0 = Permanente, 10Y = 10 Años, 10M = 10 Meses, 10D = 10 Dias, 10H = 10 Horas, 10m = 10 Minutos ]"
 }

@@ -184,5 +184,20 @@ namespace vorpadminmenu_cl.Functions.Utils
             }
             return args;
         }
+
+        public async static Task<string> GetOneByNUIString(List<object> args, string title, string hint)
+        {
+            string postValue = null;
+            TriggerEvent("vorpinputs:getInput", title, hint, new Action<dynamic>((value) =>
+            {
+                postValue = value;
+            }));
+
+            while (postValue == null)
+            {
+                await Delay(1000);
+            }
+            return postValue;
+        }
     }
 }

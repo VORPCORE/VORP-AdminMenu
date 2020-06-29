@@ -38,6 +38,10 @@ namespace vorpadminmenu_cl.Menus
             {
                 Enabled = true,
             });
+            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerDesc"])
+            {
+                Enabled = true,
+            });
             administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["FreezeTitle"], GetConfig.Langs["FreezeDesc"])
             {
                 Enabled = true,
@@ -62,6 +66,10 @@ namespace vorpadminmenu_cl.Menus
             {
                 Enabled = true,
             });
+            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["ReviveTitle"], GetConfig.Langs["ReviveDesc"])
+            {
+                Enabled = true,
+            });
             administrationMenu.AddMenuItem(pfollow);
 
             
@@ -77,50 +85,59 @@ namespace vorpadminmenu_cl.Menus
                 }
                 else if (_index == 2)
                 {
+                    MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["ID"], GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerTime"], GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerReason"]);
+                    AdministrationFunctions.Ban(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 3)
+                {
                     MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["FreezeTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 3)
+                else if (_index == 4)
                 {
                     MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["SlapTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.Slap(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 4)
+                else if (_index == 5)
                 {
                     MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["LightningTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.ThorToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 5)
+                else if (_index == 6)
                 {
                     MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["FireTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.FireToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 6)
+                else if (_index == 7)
                 {
                     MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["SpectateTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.Spectate(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 7)
+                else if (_index == 8)
                 {
                     AdministrationFunctions.SpectateOff(MainMenu.args);
+                }
+                else if (_index == 9)
+                {
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["ReviveTitle"], GetConfig.Langs["ID"]);
+                    AdministrationFunctions.Revive(MainMenu.args);
                 }
             };
             administrationMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
-                if (_index == 8)
+                if (_index == 10)
                 {
                     if (!_checked) {
                         AdministrationFunctions.ClearBlips();
                     };
                 }
-               
             };
-
         }
         public static Menu GetMenu()
         {

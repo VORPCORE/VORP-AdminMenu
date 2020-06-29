@@ -297,7 +297,6 @@ namespace vorpadminmenu_cl.Functions.Administration
         public static void SpectateOff(List<object> args)
         {
             API.NetworkSetInSpectatorMode(false, API.PlayerPedId());
-            //isInSpectatorMode
         }
 
         public static void Revive(List<object> args)
