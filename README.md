@@ -8,7 +8,7 @@ Admin Menu for VORP Core
 * [Download the lastest version of VORP Admin Menu](https://github.com/VORPCORE/VORP-AdminMenu/releases)
 * Copy and paste ```vorp_adminmenu``` folder to ```resources/vorp_adminmenu```
 * Add ```ensure vorp_adminmenu``` to your ```server.cfg``` file
-* To change the language go to ```resources/vorp_adminmenu``` and change the default language
+* To change the language go to ```resources/vorp_adminmenu/Config``` and change the default language
 * Now you are ready!
 
 ## Wiki
