@@ -21,6 +21,16 @@ namespace vorpadminmenu_cl.Menus
             setupDone = true;
             MenuController.AddMenu(databaseMenu);
 
+            MenuController.AddSubmenu(databaseMenu, Players.PlayersDatabase.GetMenu());
+
+            MenuItem subMenuPlayersDatabaseBtn = new MenuItem(GetConfig.Langs["PlayersListTitle"], " ")
+            {
+                RightIcon = MenuItem.Icon.ARROW_RIGHT
+            };
+
+            databaseMenu.AddMenuItem(subMenuPlayersDatabaseBtn);
+            MenuController.BindMenuItem(databaseMenu, Players.PlayersDatabase.GetMenu(), subMenuPlayersDatabaseBtn);
+
             databaseMenu.AddMenuItem(new MenuItem("AddMoney", "Press here to")
             {
                 Enabled = true,
@@ -38,27 +48,40 @@ namespace vorpadminmenu_cl.Menus
                 Enabled = true,
             });
 
+            databaseMenu.AddMenuItem(new MenuItem("AddItem", "Press here to ")
+            {
+                Enabled = true,
+            });
+            databaseMenu.AddMenuItem(new MenuItem("RemoveItem", "Press here to ")
+            {
+                Enabled = true,
+            });
+            databaseMenu.AddMenuItem(new MenuItem("AddWeapon", "Press here to ")
+            {
+                Enabled = true,
+            });
+
             databaseMenu.OnItemSelect += async (_menu, _item, _index) =>
             {
-                if (_index == 0)
+                if (_index == 1)
                 {
                     MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, "Addmoney", "id", "Type:0-dollar,1-gold,2-rolpoints", "type", "Quantity", "quantity");
                     DatabaseFunctions.AddMoney(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 1)
+                else if (_index == 2)
                 {
                     MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, "Addmoney", "id", "Type:0-dollar,1-gold,2-rolpoints", "type", "Quantity", "quantity");
                     DatabaseFunctions.RemoveMoney(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                if (_index == 2)
+                if (_index == 3)
                 {
                     MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "AddXp", "id", "Quantity", "quantity");
                     DatabaseFunctions.AddXp(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 3)
+                else if (_index == 4)
                 {
                     MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "AddXp", "id", "Quantity", "quantity");
                     DatabaseFunctions.RemoveXp(MainMenu.args);

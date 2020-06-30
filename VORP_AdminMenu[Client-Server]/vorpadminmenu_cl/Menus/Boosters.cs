@@ -48,7 +48,15 @@ namespace vorpadminmenu_cl.Menus
 
             boostersMenu.AddMenuItem(mclip);
 
-            boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
+            boostersMenu.OnItemSelect += async (_menu, _item, _index) =>
+            {
+                if (_index == 0)
+                {
+                    BoosterFunctions.Golden(MainMenu.args);
+                }
+            };
+
+                boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
                 if (_index == 3)
                 {

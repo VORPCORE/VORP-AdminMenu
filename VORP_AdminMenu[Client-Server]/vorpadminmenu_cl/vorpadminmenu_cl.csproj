@@ -68,6 +68,7 @@
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\Notifications.cs" />
     <Compile Include="Menus\Players\Players.cs" />
+    <Compile Include="Menus\Players\PlayersDatabase.cs" />
     <Compile Include="Menus\Teleports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -337,12 +337,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
                 Vector3 sourceCoords = UtilsFunctions.GetCoordsFromCam(1000.0F);
                 int rayHandle = API.StartShapeTestRay(camCoords.X, camCoords.Y, camCoords.Z, sourceCoords.X, sourceCoords.Y, sourceCoords.Z, -1, API.PlayerPedId(), 0);
                 API.GetShapeTestResult(rayHandle, ref hit, ref endCoord, ref surfaceNormal, ref entity);
-                if (API.IsControlJustPressed(0, 0xCEE12B50) && thorON)
+                if (API.IsControlJustPressed(0, 0xCEE12B50) && Menus.Boosters.Gettmode())
                 {
                     TriggerServerEvent("vorp:thor", endCoord);
                 }
 
-                if (thorON)
+                if (Menus.Boosters.Gettmode())
                 {
                     Function.Call((Hash)0x2A32FAA57B937173, -1795314153, endCoord.X, endCoord.Y, endCoord.Z, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 50.0F, 255, 255, 0, 155, false, false, 2, false, 0, 0, false);
                 }
