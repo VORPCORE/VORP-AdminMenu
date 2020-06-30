@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="CitizenFX.Core">
       <HintPath>C:\Users\usa3\AppData\Local\RedM\RedM.app\citizen\clr2\lib\mono\4.5\CitizenFX.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="MenuAPI">
       <HintPath>..\..\MenuAPI.dll</HintPath>

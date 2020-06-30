@@ -29,6 +29,7 @@ namespace vorpadminmenu_sv
             EventHandlers["vorp:fireIDserver"] += new Action<Player, int>(FireToId);
 
             EventHandlers["vorp:revivePlayer"] += new Action<Player, int>(RevivePlayer);
+            EventHandlers["vorp:healPlayer"] += new Action<Player, int>(HealPlayer);
 
 
 
@@ -117,6 +118,15 @@ namespace vorpadminmenu_sv
             PlayerList pl = new PlayerList();
             Player p = pl[idDestinatary];
             TriggerClientEvent(p, "vorp:resurrectPlayer");
+        }
+
+        private void HealPlayer([FromSource]Player player, int idDestinatary)
+        {
+            PlayerList pl = new PlayerList();
+            Player p = pl[idDestinatary];
+            p.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
+            p.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
+            p.TriggerEvent("vorp:healDone");
         }
     }
 }

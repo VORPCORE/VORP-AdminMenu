@@ -70,6 +70,10 @@ namespace vorpadminmenu_cl.Menus
             {
                 Enabled = true,
             });
+            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["HealTitle"], GetConfig.Langs["HealDesc"])
+            {
+                Enabled = true,
+            });
             administrationMenu.AddMenuItem(pfollow);
 
             
@@ -128,10 +132,15 @@ namespace vorpadminmenu_cl.Menus
                     MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["ReviveTitle"], GetConfig.Langs["ID"]);
                     AdministrationFunctions.Revive(MainMenu.args);
                 }
+                else if (_index == 10)
+                {
+                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["HealTitle"], GetConfig.Langs["ID"]);
+                    AdministrationFunctions.Heal(MainMenu.args);
+                }
             };
             administrationMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
-                if (_index == 10)
+                if (_index == 11)
                 {
                     if (!_checked) {
                         AdministrationFunctions.ClearBlips();
@@ -139,7 +148,7 @@ namespace vorpadminmenu_cl.Menus
                 }
             };
         }
-        public static Menu GetMenu()
+        public static Menu GetMenu()    
         {
             SetupMenu();
             return administrationMenu;

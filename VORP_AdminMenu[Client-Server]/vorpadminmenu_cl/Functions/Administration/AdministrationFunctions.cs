@@ -29,9 +29,11 @@ namespace vorpadminmenu_cl.Functions.Administration
 
             EventHandlers["vorp:thorIDdone"] += new Action(ThorIDdone);
             EventHandlers["vorp:fireIDdone"] += new Action(FireIDDone);
+
+            EventHandlers["vorp:healDone"] += new Action(healDone);
         }
 
-        
+       
 
         public static void SetupAdministration()
         {
@@ -82,6 +84,10 @@ namespace vorpadminmenu_cl.Functions.Administration
             API.RegisterCommand("revive", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Revive(args);
+            }), false);
+            API.RegisterCommand("heal", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                Heal(args);
             }), false);
 
         }
@@ -303,6 +309,19 @@ namespace vorpadminmenu_cl.Functions.Administration
         {
             int idDestinatary = int.Parse(args[0].ToString());
             TriggerServerEvent("vorp:revivePlayer", idDestinatary);
+        }
+
+        public static void Heal(List<object> args)
+        {
+            int idDestinatary = int.Parse(args[0].ToString());
+            TriggerServerEvent("vorp:healPlayer", idDestinatary);
+        }
+
+        private void healDone()
+        {
+            Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 1, 100);
+            Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 1, 100);
+            Function.Call((Hash)0xAC2767ED8BDFAB15, API.PlayerPedId(), 100, 0);
         }
     }
 }

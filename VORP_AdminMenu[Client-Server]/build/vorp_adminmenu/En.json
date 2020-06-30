@@ -16,9 +16,15 @@
   "KickPlayerDesc": "Press here to kick a player form the server or: Command:/k id.",
 
   "BanPlayerTitle": "Ban Player",
-  "BanPlayerDesc": "Press here to ban a player form the server or: Command:/ban id [quantity or 0(permanent)][Y(years),M(months),D(days),H(hours), m(minutes)].",
-  "BanPlayerTime": "[quantity or 0(permanent)][Y(years),M(months),D(days),H(hours), m(minutes)]",
+  "BanPlayerDesc": "Press here to ban a player form the server or: Command Example:/ban 1 1H reason.",
+  "BanPlayerTime": " Example:/ban 1 1H reason",
   "BanPlayerReason": "Reason",
+
+  "ReviveTitle": "Revive Player",
+  "ReviveDesc": "Press here to revive a player form the server or: Command:/revive id.",
+
+  "HealTitle": "Heal a Player",
+  "HealDesc": "Press here to heal a player form the server or: Command:/heal id.",
 
   //Freeze
   "FreezeTitle": "Freeze",
