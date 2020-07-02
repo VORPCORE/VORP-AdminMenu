@@ -19,6 +19,8 @@ namespace vorpadminmenu_sv
 
             EventHandlers["vorp:adminAddItem"] += new Action<Player, List<object>>(AdminAddItem);
             EventHandlers["vorp:adminAddWeapon"] += new Action<Player, List<object>>(AdminAddWeapon);
+
+            EventHandlers["vorp:getInventory"] += new Action<Player, List<object>>(GetInventory);
         }
 
         
@@ -87,6 +89,15 @@ namespace vorpadminmenu_sv
             Dictionary<string, int> ammoaux = new Dictionary<string, int>();
             ammoaux.Add(ammo, quantity);
             TriggerEvent("vorpCore:registerWeapon", idPlayer, item, ammoaux, ammoaux);
+        }
+
+        private void GetInventory([FromSource]Player source, List<object> args)
+        {
+            int idPlayer = int.Parse(args[0].ToString());
+            TriggerEvent("vorpCore:getUserInventory", idPlayer, new Action<dynamic>((items) =>
+            {
+                source.TriggerEvent("vorp:loadPlayerInventory",items);
+            }));
         }
     }
 }

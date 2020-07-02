@@ -13,8 +13,8 @@ namespace vorpadminmenu_cl.Menus.Players
     {
         private static Menu playersListDatabaseMenu = new Menu(GetConfig.Langs["PlayersListTitle"], GetConfig.Langs["PlayersListDesc"]);
         private static Menu playersOptionsDatabaseMenu = new Menu("", GetConfig.Langs["PlayersListDesc"]);
-        private static List<int> idPlayers = new List<int>();
-        private static int indexPlayer;
+        public static List<int> idPlayers = new List<int>();
+        public static int indexPlayer;
         private static bool setupDone = false;
         private static void SetupMenu()
         {

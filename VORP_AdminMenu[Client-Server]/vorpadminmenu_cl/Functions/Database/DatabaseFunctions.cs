@@ -6,11 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Utils;
+using vorpadminmenu_cl.Menus.Players.Inventory;
 
 namespace vorpadminmenu_cl.Functions.Database
 {
     class DatabaseFunctions : BaseScript
     {
+        public DatabaseFunctions()
+        {
+            EventHandlers["vorp:loadPlayerInventory"] += new Action<dynamic>(LoadPlayerInventory);
+        }
+
+        
+
         public static void SetupDatabase()
         {
             API.RegisterCommand("money", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
@@ -181,6 +189,16 @@ namespace vorpadminmenu_cl.Functions.Database
         private static void Vehicle(List<object> args)
         {
             
+        }
+
+        public static void GetInventoryItems(List<object> args)
+        {
+            TriggerServerEvent("vorp:getInventory",args);
+        }
+
+        private void LoadPlayerInventory(dynamic items)
+        {
+            Inventory.LoadItems(items);
         }
     }
 }
