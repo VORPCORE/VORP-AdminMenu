@@ -199,5 +199,20 @@ namespace vorpadminmenu_cl.Functions.Utils
             }
             return postValue;
         }
+
+        public async static Task<dynamic> GetInput(string title, string hint)
+        {
+            dynamic postValue = null;
+            TriggerEvent("vorpinputs:getInput", title, hint, new Action<dynamic>((value) =>
+            {
+                postValue = value;
+            }));
+
+            while (postValue == null)
+            {
+                await Delay(1000);
+            }
+            return postValue;
+        }
     }
 }

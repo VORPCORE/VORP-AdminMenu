@@ -94,6 +94,27 @@
   "MenuDatabaseTitle": "Database",
   "MenuDatabaseDesc": "Database menu",
 
+  "AddMoneyTitle": "Add money",
+  "AddMoneyDesc": "Add money",
+
+  "DelMoneyTitle": "Del money",
+  "DelMoneyDesc": "Del money",
+
+  "AddXpTitle": "Add Xp",
+  "AddXpDesc": "Add Xp",
+
+  "DelXpTitle": "Del Xp",
+  "DelXpDesc": "Del Xp",
+
+  "AddItemTitle": "Add Item",
+  "AddItemDesc": "Add Item",
+
+  "InventoryTitle": "Inventory",
+  "InventoryListTitle": "Inventory",
+  "InventoryListDesc": "Inventory",
+
+
+
 
 
 
@@ -107,5 +128,7 @@
 
   "YouHasBeenBanned": "You has been banned for ({0}) | Expire: ({1})",
   "Permament": "Permanent",
-  "SyntaxIncorrect": "Please use the correct sintax [ 0 = Permanente, 10Y = 10 Años, 10M = 10 Meses, 10D = 10 Dias, 10H = 10 Horas, 10m = 10 Minutos ]"
+  "SyntaxIncorrect": "Please use the correct sintax [ 0 = Permanente, 10Y = 10 Años, 10M = 10 Meses, 10D = 10 Dias, 10H = 10 Horas, 10m = 10 Minutos ]",
+
+  "NeedWeaponOnHand": "You have to hold a weapon in your hands"
 }

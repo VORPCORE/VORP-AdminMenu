@@ -22,6 +22,7 @@ namespace vorpadminmenu_cl.Menus.Players
             setupDone = true;
             MenuController.AddMenu(playersListDatabaseMenu);
 
+
             playersListDatabaseMenu.OnMenuOpen += (_menu) =>
             {
                 playersListDatabaseMenu.ClearMenuItems();
@@ -40,8 +41,47 @@ namespace vorpadminmenu_cl.Menus.Players
                     playersListDatabaseMenu.AddMenuItem(playerNameDatabaseButton);
                     MenuController.BindMenuItem(playersListDatabaseMenu, playersOptionsDatabaseMenu, playerNameDatabaseButton);
 
+                    
                 }
             };
+            playersListDatabaseMenu.OnItemSelect += (_menu, _item, _index) =>
+            {
+                indexPlayer = _index;
+                playersOptionsDatabaseMenu.MenuTitle = API.GetPlayerName(idPlayers.ElementAt(indexPlayer)) + "," + API.GetPlayerServerId((idPlayers.ElementAt(indexPlayer)));
+
+            };
+
+            playersOptionsDatabaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddMoneyTitle"], GetConfig.Langs["AddMoneyDesc"])
+            {
+                Enabled = true,
+            });
+            playersOptionsDatabaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["DelMoneyTitle"], GetConfig.Langs["DelMoneyDesc"])
+            {
+                Enabled = true,
+            });
+            playersOptionsDatabaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddXpTitle"], GetConfig.Langs["AddXpDesc"])
+            {
+                Enabled = true,
+            });
+            playersOptionsDatabaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["DelXpTitle"], GetConfig.Langs["DelXpDesc"])
+            {
+                Enabled = true,
+            });
+            playersOptionsDatabaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddItemTitle"], GetConfig.Langs["AddItemDesc"])
+            {
+                Enabled = true,
+            });
+
+            MenuController.AddSubmenu(playersOptionsDatabaseMenu, Inventory.Inventory.GetMenu());
+
+            MenuItem subMenuInventoryBtn = new MenuItem(GetConfig.Langs["InventoryTitle"], " ")
+            {
+                RightIcon = MenuItem.Icon.ARROW_RIGHT
+            };
+
+            playersOptionsDatabaseMenu.AddMenuItem(subMenuInventoryBtn);
+            MenuController.BindMenuItem(playersOptionsDatabaseMenu, Inventory.Inventory.GetMenu(), subMenuInventoryBtn);
+
         }
         public static Menu GetMenu()
         {

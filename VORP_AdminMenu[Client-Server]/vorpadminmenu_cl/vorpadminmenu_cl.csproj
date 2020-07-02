@@ -59,7 +59,9 @@
     <Compile Include="Functions\Database\DatabaseFunctions.cs" />
     <Compile Include="Functions\Notifications\NotificationFunctions.cs" />
     <Compile Include="Functions\Teleports\TeleportsFunctions.cs" />
+    <Compile Include="Functions\Utils\AmmoList.cs" />
     <Compile Include="Functions\Utils\UtilsFunctions.cs" />
+    <Compile Include="Functions\Utils\WeaponsList.cs" />
     <Compile Include="GetConfig.cs" />
     <Compile Include="GetUserInfo.cs" />
     <Compile Include="Menus\Administration.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Menus\Database.cs" />
     <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Menus\Notifications.cs" />
+    <Compile Include="Menus\Players\Inventory\Inventory.cs" />
     <Compile Include="Menus\Players\Players.cs" />
     <Compile Include="Menus\Players\PlayersDatabase.cs" />
     <Compile Include="Menus\Teleports.cs" />

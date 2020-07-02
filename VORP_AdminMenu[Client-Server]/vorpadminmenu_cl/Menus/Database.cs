@@ -71,7 +71,7 @@ namespace vorpadminmenu_cl.Menus
                 }
                 else if (_index == 2)
                 {
-                    MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, "Addmoney", "id", "Type:0-dollar,1-gold,2-rolpoints", "type", "Quantity", "quantity");
+                    MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, "DelMoney", "id", "Type:0-dollar,1-gold,2-rolpoints", "type", "Quantity", "quantity");
                     DatabaseFunctions.RemoveMoney(MainMenu.args);
                     MainMenu.args.Clear();
                 }
@@ -82,6 +82,36 @@ namespace vorpadminmenu_cl.Menus
                     MainMenu.args.Clear();
                 }
                 else if (_index == 4)
+                {
+                    MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "DelXp", "id", "Quantity", "quantity");
+                    DatabaseFunctions.RemoveXp(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 5)
+                {
+                    int idPlayer = await UtilsFunctions.GetInput("Player id", "id");
+                    string item = await UtilsFunctions.GetInput("Item Name", "name");
+                    string quantity = await UtilsFunctions.GetInput("Quantity", "quantity");
+                    MainMenu.args.Add(idPlayer);
+                    MainMenu.args.Add(item);
+                    MainMenu.args.Add(quantity);
+                    DatabaseFunctions.AddItem(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 6)
+                {
+                    int idPlayer = await UtilsFunctions.GetInput("Player id", "id");
+                    string weaponName = await UtilsFunctions.GetInput("Weapon Name", "name");
+                    string ammoName = await UtilsFunctions.GetInput("Weapon ammo", "weapon ammo");
+                    int ammoQuantity = await UtilsFunctions.GetInput("Ammo quantity", "quantity");
+                    MainMenu.args.Add(idPlayer);
+                    MainMenu.args.Add(weaponName);
+                    MainMenu.args.Add(ammoName);
+                    MainMenu.args.Add(ammoQuantity);
+                    DatabaseFunctions.AddWeapon(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 7)
                 {
                     MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "AddXp", "id", "Quantity", "quantity");
                     DatabaseFunctions.RemoveXp(MainMenu.args);

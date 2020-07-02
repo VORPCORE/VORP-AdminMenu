@@ -16,7 +16,12 @@ namespace vorpadminmenu_sv
             EventHandlers["vorp:adminRemoveMoney"] += new Action<Player, List<object>>(AdminRemoveMoney);
             EventHandlers["vorp:adminAddXp"] += new Action<Player, List<object>>(AdminAddXp);
             EventHandlers["vorp:adminRemoveXp"] += new Action<Player, List<object>>(AdminRemoveXp);
+
+            EventHandlers["vorp:adminAddItem"] += new Action<Player, List<object>>(AdminAddItem);
+            EventHandlers["vorp:adminAddWeapon"] += new Action<Player, List<object>>(AdminAddWeapon);
         }
+
+        
 
         private void AdminAddMoney([FromSource]Player source, List<object> args)
         {
@@ -62,7 +67,26 @@ namespace vorpadminmenu_sv
         {
             int id = int.Parse(args[0].ToString());
             int quantity = int.Parse(args[1].ToString());
-            TriggerEvent("vorp:removeMoney", id, quantity);
+            TriggerEvent("vorp:removeXp", id, quantity);
+        }
+
+        private void AdminAddItem([FromSource]Player source, List<object> args)
+        {
+            int idPlayer = int.Parse(args[0].ToString());
+            string item = args[1].ToString();
+            string quantity = args[2].ToString();
+            TriggerEvent("vorpCore:addItem", idPlayer, item, quantity);
+        }
+
+        private void AdminAddWeapon([FromSource]Player source, List<object> args)
+        {
+            int idPlayer = int.Parse(args[0].ToString());
+            string item = args[1].ToString();
+            string ammo = args[2].ToString();
+            int quantity = int.Parse(args[3].ToString());
+            Dictionary<string, int> ammoaux = new Dictionary<string, int>();
+            ammoaux.Add(ammo, quantity);
+            TriggerEvent("vorpCore:registerWeapon", idPlayer, item, ammoaux, ammoaux);
         }
     }
 }
