@@ -83,43 +83,54 @@ namespace vorpadminmenu_cl.Menus
             {
                 if (_index == 1)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["KickPlayerTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["KickPlayerTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Kick(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 2)
                 {
-                    MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["ID"], GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerTime"], GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerReason"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    dynamic time = await UtilsFunctions.GetInput(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerTime"]);
+                    MainMenu.args.Add(time);
+                    dynamic reason = await UtilsFunctions.GetInput(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerReason"]);
+                    MainMenu.args.Add(reason);
                     AdministrationFunctions.Ban(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 3)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["FreezeTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["FreezeTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 4)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["SlapTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["SlapTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Slap(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 5)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["LightningTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["LightningTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.ThorToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 6)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["FireTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["FireTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.FireToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 7)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["SpectateTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["SpectateTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Spectate(MainMenu.args);
                     MainMenu.args.Clear();
                 }
@@ -129,12 +140,15 @@ namespace vorpadminmenu_cl.Menus
                 }
                 else if (_index == 9)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["ReviveTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["ReviveTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Revive(MainMenu.args);
                 }
                 else if (_index == 10)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, GetConfig.Langs["HealTitle"], GetConfig.Langs["ID"]);
+
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["HealTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Heal(MainMenu.args);
                 }
             };

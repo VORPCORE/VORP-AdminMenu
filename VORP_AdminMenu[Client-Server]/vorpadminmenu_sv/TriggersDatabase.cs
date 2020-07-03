@@ -18,6 +18,7 @@ namespace vorpadminmenu_sv
             EventHandlers["vorp:adminRemoveXp"] += new Action<Player, List<object>>(AdminRemoveXp);
 
             EventHandlers["vorp:adminAddItem"] += new Action<Player, List<object>>(AdminAddItem);
+            EventHandlers["vorp:adminDelItem"] += new Action<Player, List<object>>(AdminDelItem);
             EventHandlers["vorp:adminAddWeapon"] += new Action<Player, List<object>>(AdminAddWeapon);
 
             EventHandlers["vorp:getInventory"] += new Action<Player, List<object>>(GetInventory);
@@ -80,6 +81,14 @@ namespace vorpadminmenu_sv
             TriggerEvent("vorpCore:addItem", idPlayer, item, quantity);
         }
 
+        private void AdminDelItem([FromSource]Player source, List<object> args)
+        {
+            int idPlayer = int.Parse(args[0].ToString());
+            string item = args[1].ToString();
+            string quantity = args[2].ToString();
+            TriggerEvent("vorpCore:subItem", idPlayer, item, quantity);
+        }
+
         private void AdminAddWeapon([FromSource]Player source, List<object> args)
         {
             int idPlayer = int.Parse(args[0].ToString());
@@ -96,7 +105,7 @@ namespace vorpadminmenu_sv
             int idPlayer = int.Parse(args[0].ToString());
             TriggerEvent("vorpCore:getUserInventory", idPlayer, new Action<dynamic>((items) =>
             {
-                source.TriggerEvent("vorp:loadPlayerInventory",items);
+                source.TriggerEvent("vorp:loadPlayerInventory", items);
             }));
         }
     }

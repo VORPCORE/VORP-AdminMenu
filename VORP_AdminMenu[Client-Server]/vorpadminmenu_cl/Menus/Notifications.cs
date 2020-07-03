@@ -21,11 +21,11 @@ namespace vorpadminmenu_cl.Menus
             MenuController.AddMenu(notificationsMenu);
 
 
-            notificationsMenu.AddMenuItem(new MenuItem("Pm", "Press here to send a private message or Command:/pm id message")
+            notificationsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["PrivateMessageTitle"], GetConfig.Langs["PrivateMessageDesc"])
             {
                 Enabled = true,
             });
-            notificationsMenu.AddMenuItem(new MenuItem("Bc", "Press here to send a broadcast message or Command:/bc id message")
+            notificationsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["BroadcastMessageTitle"], GetConfig.Langs["BroadcastMessageDesc"])
             {
                 Enabled = true,
             });
@@ -34,13 +34,17 @@ namespace vorpadminmenu_cl.Menus
             {
                 if (_index == 0)
                 {
-                    MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "Send to", "id", "Send", "message");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["PrivateMessageTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    dynamic message = await UtilsFunctions.GetInput(GetConfig.Langs["PrivateMessageTitle"], GetConfig.Langs["PMDesc"]);
+                    MainMenu.args.Add(message);
                     NotificationFunctions.PrivateMessage(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 1)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Send broadcast", "message");
+                    dynamic message = await UtilsFunctions.GetInput(GetConfig.Langs["BroadcastMessageTitle"], GetConfig.Langs["BMDesc"]);
+                    MainMenu.args.Add(message);
                     NotificationFunctions.BroadCast(MainMenu.args);
                     MainMenu.args.Clear();
                 }

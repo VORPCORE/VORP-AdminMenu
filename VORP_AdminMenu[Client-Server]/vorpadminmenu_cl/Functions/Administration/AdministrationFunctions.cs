@@ -37,55 +37,55 @@ namespace vorpadminmenu_cl.Functions.Administration
 
         public static void SetupAdministration()
         {
-            API.RegisterCommand("stop", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Freeze"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 StopPlayer(args);
             }), false);
 
-            API.RegisterCommand("slap", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Slap"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Slap(args);
             }), false);
 
-            API.RegisterCommand("k", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Kick"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Kick(args);
             }), false);
 
-            API.RegisterCommand("ban", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Ban"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Ban(args);
             }), false);
 
-            API.RegisterCommand("thorp", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["ThorP"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 ThorToId(args);
             }), false);
 
-            API.RegisterCommand("firep", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["FireP"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 FireToId(args);
             }), false);
 
-            API.RegisterCommand("cblip", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Cblip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 PlayerBlips(args);
             }), false);
 
-            API.RegisterCommand("son", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["SpectateOn"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Spectate(args);
             }), false);
 
-            API.RegisterCommand("soff", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["SpectateOff"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 SpectateOff(args);
             }), false);
-            API.RegisterCommand("revive", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Revive"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Revive(args);
             }), false);
-            API.RegisterCommand("heal", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Heal"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Heal(args);
             }), false);

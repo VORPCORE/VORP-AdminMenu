@@ -70,12 +70,12 @@ namespace vorpadminmenu_cl.Menus.Players
                 Enabled = true,
             });
 
-            playersOptionsMenu.AddMenuItem(new MenuItem("Tp to the player", "Press here to tp to the player or: Command:/tptoplayer id.")
+            playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["TpToPlayerTitle"], GetConfig.Langs["TpToPlayerDesc"])
             {
                 Enabled = true,
             });
 
-            playersOptionsMenu.AddMenuItem(new MenuItem("Bring the player", "Press here to bring the player or: Command:/slap id.")
+            playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["BringPlayerTitle"], GetConfig.Langs["BringPlayerDesc"])
             {
                 Enabled = true,
             });
@@ -176,9 +176,9 @@ namespace vorpadminmenu_cl.Menus.Players
                 else if (_index == 11)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    string time = await UtilsFunctions.GetOneByNUIString(MainMenu.args, GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerTime"]);
+                    dynamic time = await UtilsFunctions.GetInput(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerTime"]);
                     MainMenu.args.Add(time);
-                    string reason = await UtilsFunctions.GetOneByNUIString(MainMenu.args, GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerReason"]);
+                    dynamic reason = await UtilsFunctions.GetInput(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerReason"]);
                     MainMenu.args.Add(reason);
                     AdministrationFunctions.Ban(MainMenu.args);
                     MainMenu.args.Clear();

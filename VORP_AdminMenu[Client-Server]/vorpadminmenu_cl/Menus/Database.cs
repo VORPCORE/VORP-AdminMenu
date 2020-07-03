@@ -31,32 +31,28 @@ namespace vorpadminmenu_cl.Menus
             databaseMenu.AddMenuItem(subMenuPlayersDatabaseBtn);
             MenuController.BindMenuItem(databaseMenu, Players.PlayersDatabase.GetMenu(), subMenuPlayersDatabaseBtn);
 
-            databaseMenu.AddMenuItem(new MenuItem("AddMoney", "Press here to")
+            databaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddMoneyTitle"], GetConfig.Langs["AddMoneyDesc"])
             {
                 Enabled = true,
             });
-            databaseMenu.AddMenuItem(new MenuItem("RemoveMoney", "Press here to")
+            databaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["DelMoneyTitle"], GetConfig.Langs["DelMoneyDesc"])
             {
                 Enabled = true,
             });
-            databaseMenu.AddMenuItem(new MenuItem("AddXp", "Press here to ")
+            databaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddXpTitle"], GetConfig.Langs["AddXpDesc"])
             {
                 Enabled = true,
             });
-            databaseMenu.AddMenuItem(new MenuItem("RemoveXp", "Press here ")
+            databaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["DelXpTitle"], GetConfig.Langs["DelXpDesc"])
             {
                 Enabled = true,
             });
 
-            databaseMenu.AddMenuItem(new MenuItem("AddItem", "Press here to ")
+            databaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddItemTitle"], GetConfig.Langs["AddItemDesc"])
             {
                 Enabled = true,
             });
-            databaseMenu.AddMenuItem(new MenuItem("RemoveItem", "Press here to ")
-            {
-                Enabled = true,
-            });
-            databaseMenu.AddMenuItem(new MenuItem("AddWeapon", "Press here to ")
+            databaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddWeaponTitle"], GetConfig.Langs["AddWeaponDesc"])
             {
                 Enabled = true,
             });
@@ -65,56 +61,66 @@ namespace vorpadminmenu_cl.Menus
             {
                 if (_index == 1)
                 {
-                    MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, "Addmoney", "id", "Type:0-dollar,1-gold,2-rolpoints", "type", "Quantity", "quantity");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["DelMoneyTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    dynamic type = await UtilsFunctions.GetInput(GetConfig.Langs["TypeOfMoneyTitle"], GetConfig.Langs["TypeOfMoneyDesc"]);
+                    MainMenu.args.Add(type);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
                     DatabaseFunctions.AddMoney(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 2)
                 {
-                    MainMenu.args = await UtilsFunctions.GetThreeByNUI(MainMenu.args, "DelMoney", "id", "Type:0-dollar,1-gold,2-rolpoints", "type", "Quantity", "quantity");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["DelMoneyTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    dynamic type = await UtilsFunctions.GetInput(GetConfig.Langs["TypeOfMoneyTitle"], GetConfig.Langs["TypeOfMoneyDesc"]);
+                    MainMenu.args.Add(type);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
                     DatabaseFunctions.RemoveMoney(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 if (_index == 3)
                 {
-                    MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "AddXp", "id", "Quantity", "quantity");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["AddXpTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
                     DatabaseFunctions.AddXp(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 4)
                 {
-                    MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "DelXp", "id", "Quantity", "quantity");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["AddXpTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
                     DatabaseFunctions.RemoveXp(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 5)
                 {
-                    int idPlayer = await UtilsFunctions.GetInput("Player id", "id");
-                    string item = await UtilsFunctions.GetInput("Item Name", "name");
-                    string quantity = await UtilsFunctions.GetInput("Quantity", "quantity");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["ID"], GetConfig.Langs["ID"]);
                     MainMenu.args.Add(idPlayer);
+                    dynamic item = await UtilsFunctions.GetInput(GetConfig.Langs["ItemName"], GetConfig.Langs["ItemName"]);
                     MainMenu.args.Add(item);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
                     MainMenu.args.Add(quantity);
                     DatabaseFunctions.AddItem(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 6)
                 {
-                    int idPlayer = await UtilsFunctions.GetInput("Player id", "id");
-                    string weaponName = await UtilsFunctions.GetInput("Weapon Name", "name");
-                    string ammoName = await UtilsFunctions.GetInput("Weapon ammo", "weapon ammo");
-                    int ammoQuantity = await UtilsFunctions.GetInput("Ammo quantity", "quantity");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["ID"], GetConfig.Langs["ID"]);
+                    dynamic weaponName = await UtilsFunctions.GetInput(GetConfig.Langs["WeaponName"], GetConfig.Langs["WeaponName"]);
+                    dynamic ammoName = await UtilsFunctions.GetInput(GetConfig.Langs["Weaponammo"], GetConfig.Langs["Weaponammo"]);
+                    dynamic ammoQuantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
                     MainMenu.args.Add(idPlayer);
                     MainMenu.args.Add(weaponName);
                     MainMenu.args.Add(ammoName);
                     MainMenu.args.Add(ammoQuantity);
                     DatabaseFunctions.AddWeapon(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 7)
-                {
-                    MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "AddXp", "id", "Quantity", "quantity");
-                    DatabaseFunctions.RemoveXp(MainMenu.args);
                     MainMenu.args.Clear();
                 }
             };

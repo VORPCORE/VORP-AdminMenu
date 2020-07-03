@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Boosters;
+using vorpadminmenu_cl.Functions.Utils;
 
 namespace vorpadminmenu_cl.Menus
 {
@@ -48,11 +49,52 @@ namespace vorpadminmenu_cl.Menus
 
             boostersMenu.AddMenuItem(mclip);
 
+            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseDesc"])
+            {
+                Enabled = true,
+            });
+
+            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"])
+            {
+                Enabled = true,
+            });
+            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["InfiniteAmmoOnTitle"], GetConfig.Langs["InfiniteAmmoOnDesc"])
+            {
+                Enabled = true,
+            });
+
+            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["InfiniteAmmoOffTitle"], GetConfig.Langs["InfiniteAmmoOffDesc"])
+            {
+                Enabled = true,
+            });
+
             boostersMenu.OnItemSelect += async (_menu, _item, _index) =>
             {
                 if (_index == 0)
                 {
                     BoosterFunctions.Golden(MainMenu.args);
+                }
+                else if (_index == 5)
+                {
+                    dynamic ped = await UtilsFunctions.GetInput(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseTitle"]);
+                    MainMenu.args.Add(ped);
+                    BoosterFunctions.Horse(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 6)
+                {
+                    dynamic veh = await UtilsFunctions.GetInput(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"]);
+                    MainMenu.args.Add(veh);
+                    BoosterFunctions.Vehicle(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 5)
+                {
+                    BoosterFunctions.InfiniteAmmo(MainMenu.args);
+                }
+                else if (_index == 6)
+                {
+                    BoosterFunctions.InfiniteAmmoOff(MainMenu.args);
                 }
             };
 

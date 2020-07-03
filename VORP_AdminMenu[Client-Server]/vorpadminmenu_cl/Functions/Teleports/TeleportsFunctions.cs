@@ -27,42 +27,42 @@ namespace vorpadminmenu_cl.Functions.Teleports
 
         public static void SetupTeleports()
         {
-            API.RegisterCommand("tpwayp", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["TpWayPoint"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 TpToWaypoint(args);
             }), false);
 
-            API.RegisterCommand("tpcoords", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["TpCoords"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 TpToCoords(args);
             }), false);
 
-            API.RegisterCommand("tpplayer", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["TpPlayer"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 TpToPlayer(args);
             }), false);
 
-            API.RegisterCommand("tpbring", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["TpBring"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 TpBring(args);
             }), false);
 
-            API.RegisterCommand("tpback", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["TpBack"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 TpBack(args);
             }), false);
 
-            API.RegisterCommand("delback", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["DelBack"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 DelBack(args);
             }), false);
 
-            API.RegisterCommand("guarma", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["Guarma"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 Guarma(args);
             }), false);
 
-            API.RegisterCommand("tpview", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["TpView"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 TpView(args);
             }), false);
@@ -202,8 +202,9 @@ namespace vorpadminmenu_cl.Functions.Teleports
                 {
                     Function.Call((Hash)0x2A32FAA57B937173, -1795314153, endCoord.X, endCoord.Y, endCoord.Z, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 50.0F, 0, 255, 0, 155, false, false, 2, false, 0, 0, false);
                 }
-
-                if (API.IsControlJustPressed(0, 0xCEE12B50) && Menus.Teleports.GetTpView() && endCoord.X != 0.0)
+                string keyPress = GetConfig.Config["TpviewDelviewKey"].ToString();
+                int KeyInt = Convert.ToInt32(keyPress, 16);
+                if (API.IsControlJustPressed(0, (uint)KeyInt) && Menus.Teleports.GetTpView() && endCoord.X != 0.0)
                 {
                     Vector3 waypointCoords = API.GetWaypointCoords();
                     if (UtilsFunctions.blip == -1)

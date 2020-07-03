@@ -15,6 +15,7 @@ namespace vorpadminmenu_cl.Menus.Players.Inventory
         private static Menu inventory = new Menu(GetConfig.Langs["InventoryListTitle"], GetConfig.Langs["InventoryListDesc"]);
         private static int indexItem;
         private static bool setupDone = false;
+        private static dynamic itemInventoryList;
         private static void SetupMenu()
         {
             if (setupDone) return;
@@ -34,25 +35,56 @@ namespace vorpadminmenu_cl.Menus.Players.Inventory
                 });
             };
 
-            inventory.OnItemSelect += (_menu, _item, _index) =>
+            inventory.OnListItemSelect += (_menu, _listItem, _listIndex, _itemIndex) =>
             {
-                indexItem = _index;
-                
-
+                if (itemInventoryList[_itemIndex].count < _listIndex)
+                {
+                    int idPlayerInventory = API.GetPlayerServerId(PlayersDatabase.idPlayers.ElementAt(PlayersDatabase.indexPlayer));
+                    MainMenu.args.Add(idPlayerInventory);
+                    string item = itemInventoryList[_itemIndex].name;
+                    MainMenu.args.Add(item);
+                    int itemQuantity = _listIndex - itemInventoryList[_itemIndex].count;
+                    MainMenu.args.Add(itemQuantity);
+                    DatabaseFunctions.AddItem(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else
+                {
+                    int idPlayerInventory = API.GetPlayerServerId(PlayersDatabase.idPlayers.ElementAt(PlayersDatabase.indexPlayer));
+                    MainMenu.args.Add(idPlayerInventory);
+                    string item = itemInventoryList[_itemIndex].name;
+                    MainMenu.args.Add(item);
+                    int itemQuantity = 0;
+                    if (_listIndex == 0)
+                    {
+                        itemQuantity = itemInventoryList[_itemIndex].count;
+                    }
+                    else
+                    {
+                        itemQuantity = (itemInventoryList[_itemIndex].count - _listIndex);
+                    }
+                    
+                    MainMenu.args.Add(itemQuantity);
+                    DatabaseFunctions.DelItem(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
             };
-
-
         }
 
         public static void LoadItems(dynamic items)
         {
             inventory.ClearMenuItems();
+            itemInventoryList = items;
+
             foreach (var i in items)
             {
-                inventory.AddMenuItem(new MenuItem(i.label + " " + i.count.ToString(), i.name)
+                List<string> itemCount = new List<string>();
+                for (var a = 0; a < i.limit+1; a++)
                 {
-                    Enabled = true,
-                });
+                    itemCount.Add($"{a}");
+                }
+                MenuListItem itemList = new MenuListItem(i.label, itemCount, i.count, i.name);
+                inventory.AddMenuItem(itemList);
             }
         }
 

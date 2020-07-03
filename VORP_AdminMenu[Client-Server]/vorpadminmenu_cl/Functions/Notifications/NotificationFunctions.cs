@@ -13,12 +13,12 @@ namespace vorpadminmenu_cl.Functions.Notifications
 
         public static void SetupNotifications()
         {
-            API.RegisterCommand("pm", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["PMessage"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 PrivateMessage(args);
             }), false);
 
-            API.RegisterCommand("bc", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["BMessage"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 BroadCast(args);
             }), false);

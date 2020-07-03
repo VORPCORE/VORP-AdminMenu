@@ -30,28 +30,44 @@ namespace vorpadminmenu_cl.Functions.Boosters
 
         public static void SetupBoosters()
         {
-            API.RegisterCommand("golden", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Golden"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Golden(args);
             }), false);
 
-            API.RegisterCommand("gm", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Gm"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 GodMode(args);
             }), false);
 
-            API.RegisterCommand("n", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Noclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Noclip(args);
             }), false);
-            API.RegisterCommand("m", new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Mclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Noclip2(args);
             }), false);
 
-            API.RegisterCommand("thor", new Action<int, List<object>, string>((source, args, raw) =>
+            API.RegisterCommand(GetConfig.Config["Thor"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
             {
                 Thor(args);
+            }), false);
+            API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                Horse(args);
+            }), false);
+            API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                Vehicle(args);
+            }), false);
+            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOn"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                InfiniteAmmo(args);
+            }), false);
+            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOff"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                InfiniteAmmoOff(args);
             }), false);
         }
 
@@ -366,6 +382,75 @@ namespace vorpadminmenu_cl.Functions.Boosters
                 Menus.Boosters.Settmode(true);
             }
         }
+        public static async Task Horse(List<object> args)
+        {
+            string ped = args[0].ToString();
+            int HashPed = API.GetHashKey(ped);
+            Vector3 coords = API.GetEntityCoords(API.PlayerPedId(), true, true);
+            await UtilsFunctions.LoadModel(HashPed);
+            int pedCreated = API.CreatePed((uint)HashPed, coords.X + 1, coords.Y, coords.Z - 1, 0, true, true, true, true);
+            Function.Call((Hash)0x283978A15512B2FE, pedCreated, true);
+            Function.Call((Hash)0x028F76B6E78246EB, API.PlayerPedId(), pedCreated, -1, false);
+            API.SetModelAsNoLongerNeeded((uint)HashPed);
+        }
 
+        public static async Task Vehicle(List<object> args)
+        {
+            string veh = args[0].ToString();
+            int HashVeh = API.GetHashKey(veh);
+            Vector3 coords = API.GetEntityCoords(API.PlayerPedId(), true, true);
+            await UtilsFunctions.LoadModel(HashVeh);
+            int vehCreated = API.CreateVehicle((uint)HashVeh, coords.X + 1, coords.Y, coords.Z, 0, true, true, false, false);
+            SET_PED_DEFAULT_OUTFIT(vehCreated);
+            //Spawn
+            Function.Call((Hash)0x283978A15512B2FE, vehCreated, true);
+            //TaskWanderStandard
+            Function.Call((Hash)0xBB9CE077274F6A1B, vehCreated, 10, 10);
+            //SetPedIntoVehicle
+            Function.Call((Hash)0xF75B0D629E1C063D, API.PlayerPedId(), vehCreated, -1, false);
+            API.SetModelAsNoLongerNeeded((uint)HashVeh);
+        }
+
+
+        public static void InfiniteAmmo(List<object> args)
+        {
+            uint weaponHash = 0;
+            if (API.GetCurrentPedWeapon(API.PlayerPedId(), ref weaponHash, false, 0, false))
+            {
+                string weaponName = Function.Call<string>((Hash)0x89CF5FF3D363311E, weaponHash);
+                if (weaponName.Contains("UNARMED"))
+                {
+                    TriggerEvent("vorp:Tip", GetConfig.Langs["NeedWeaponOnHand"], 3000);
+                }
+                else
+                {
+
+                    API.SetPedInfiniteAmmo(API.PlayerPedId(), true, weaponHash);
+                }
+            }
+        }
+
+        public static void InfiniteAmmoOff(List<object> args)
+        {
+            uint weaponHash = 0;
+            if (API.GetCurrentPedWeapon(API.PlayerPedId(), ref weaponHash, false, 0, false))
+            {
+                string weaponName = Function.Call<string>((Hash)0x89CF5FF3D363311E, weaponHash);
+                if (weaponName.Contains("UNARMED"))
+                {
+                    TriggerEvent("vorp:Tip", GetConfig.Langs["NeedWeaponOnHand"], 3000);
+                }
+                else
+                {
+
+                    API.SetPedInfiniteAmmo(API.PlayerPedId(), false, weaponHash);
+                }
+            }
+        }
+
+        public static int SET_PED_DEFAULT_OUTFIT(int coach)
+        {
+            return Function.Call<int>((Hash)0xAF35D0D2583051B0, coach, true);
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace vorpadminmenu_cl.Menus
     {
         private static Menu teleportsMenu = new Menu(GetConfig.Langs["MenuTeleportsTitle"], GetConfig.Langs["MenuTeleportsDesc"]);
         private static bool setupDone = false;
-        private static MenuCheckboxItem tpview = new MenuCheckboxItem("Tp to cursor", "Teleport to cursor.\nPress checkbox to enable or: Command:/tpview \nUse mouse3 to tp", false) {
+        private static MenuCheckboxItem tpview = new MenuCheckboxItem(GetConfig.Langs["TpToCursorTitle"], GetConfig.Langs["TpToCursorDesc"], false) {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
         private static void SetupMenu()
@@ -25,31 +25,31 @@ namespace vorpadminmenu_cl.Menus
             
             
 
-            teleportsMenu.AddMenuItem(new MenuItem("Tp to Waypoint", "Teleport to wayPoint.\nAdd a waypoint on the map and press here or:\n Command: /tpwayp")
+            teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["TpToWaypointTitle"], GetConfig.Langs["TpToWaypointDesc"])
             {
                 Enabled = true,
             });
-            teleportsMenu.AddMenuItem(new MenuItem("Tp to Coords", "Teleport to coords.\nPress here and enter the coords or:\n Command:/tpcoords coordX coordY (coords whit decimals)")
+            teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["TpToCoordsTitle"], GetConfig.Langs["TpToCoordsDesc"])
             {
                 Enabled = true,
             });
-            teleportsMenu.AddMenuItem(new MenuItem("Tp to player", "Teleport to player.\nPress here and enter the id of the player or:\n Command:/tpplayer id")
+            teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["TpToPlayerTitle"], GetConfig.Langs["TpToPlayerDesc"])
             {
                 Enabled = true,
             });
-            teleportsMenu.AddMenuItem(new MenuItem("Bring player", "Bring player.\nPress here and enter the id of the player or:\n Command:/tpbring id")
+            teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["BringPlayerTitle"], GetConfig.Langs["BringPlayerDesc"])
             {
                 Enabled = true,
             });
-            teleportsMenu.AddMenuItem(new MenuItem("Go back to first tp", "Teleport back to the first tp and delete the blip in the map.\nPress here or:\n Command:/tpback")
+            teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["TpBackTitle"], GetConfig.Langs["TpBackDesc"])
             {
                 Enabled = true,
             });
-            teleportsMenu.AddMenuItem(new MenuItem("Delete coords of first tp", "Delete the mark and position of the first tp position.\nPress here or:\n Command:/delback")
+            teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["DelBackTitle"], GetConfig.Langs["DelBackDesc"])
             {
                 Enabled = true,
             });
-            teleportsMenu.AddMenuItem(new MenuItem("Guarma", "Teleport to guarma map.\nPress here or: Command:/guarma\n Use again to come back to the normal map")
+            teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["GuarmaTitle"], GetConfig.Langs["GuarmaDesc"])
             {
                 Enabled = true,
             });
@@ -63,19 +63,24 @@ namespace vorpadminmenu_cl.Menus
                 }
                 else if (_index == 1)
                 {
-                    MainMenu.args = await UtilsFunctions.GetTwoByNUI(MainMenu.args, "X Coord", "0.0", "Y Coord", "0.0");
+                    dynamic X = await UtilsFunctions.GetInput(GetConfig.Langs["XCoord"], "0.0");
+                    MainMenu.args.Add(X);
+                    dynamic Y = await UtilsFunctions.GetInput(GetConfig.Langs["YCoord"], "0.0");
+                    MainMenu.args.Add(Y);
                     TeleportsFunctions.TpToCoords(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 2)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Id player", "id player");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["ID"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     TeleportsFunctions.TpToPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 3)
                 {
-                    MainMenu.args = await UtilsFunctions.GetOneByNUI(MainMenu.args, "Id player", "id player");
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["ID"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
                     TeleportsFunctions.TpBring(MainMenu.args);
                     MainMenu.args.Clear();
                 }

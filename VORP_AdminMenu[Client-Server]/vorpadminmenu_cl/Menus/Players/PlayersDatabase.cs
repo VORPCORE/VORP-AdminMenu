@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using vorpadminmenu_cl.Functions.Database;
+using vorpadminmenu_cl.Functions.Utils;
 
 namespace vorpadminmenu_cl.Menus.Players
 {
@@ -71,6 +73,13 @@ namespace vorpadminmenu_cl.Menus.Players
             {
                 Enabled = true,
             });
+            playersOptionsDatabaseMenu.AddMenuItem(new MenuItem(GetConfig.Langs["AddWeaponTitle"], GetConfig.Langs["AddWeaponDesc"])
+            {
+                Enabled = true,
+            });
+
+
+
 
             MenuController.AddSubmenu(playersOptionsDatabaseMenu, Inventory.Inventory.GetMenu());
 
@@ -82,7 +91,70 @@ namespace vorpadminmenu_cl.Menus.Players
             playersOptionsDatabaseMenu.AddMenuItem(subMenuInventoryBtn);
             MenuController.BindMenuItem(playersOptionsDatabaseMenu, Inventory.Inventory.GetMenu(), subMenuInventoryBtn);
 
+
+            playersOptionsDatabaseMenu.OnItemSelect += async (_menu, _item, _index) =>
+            {
+                if (_index == 0)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    dynamic type = await UtilsFunctions.GetInput(GetConfig.Langs["TypeOfMoneyTitle"], GetConfig.Langs["TypeOfMoneyDesc"]);
+                    MainMenu.args.Add(type);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
+                    DatabaseFunctions.AddMoney(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 1)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    dynamic type = await UtilsFunctions.GetInput(GetConfig.Langs["TypeOfMoneyTitle"], GetConfig.Langs["TypeOfMoneyDesc"]);
+                    MainMenu.args.Add(type);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
+                    DatabaseFunctions.RemoveMoney(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 2)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
+                    DatabaseFunctions.AddXp(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 3)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
+                    DatabaseFunctions.RemoveXp(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 4)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    dynamic item = await UtilsFunctions.GetInput(GetConfig.Langs["ItemName"], GetConfig.Langs["ItemName"]);
+                    MainMenu.args.Add(item);
+                    dynamic quantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(quantity);
+                    DatabaseFunctions.AddItem(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 5)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    dynamic weaponName = await UtilsFunctions.GetInput(GetConfig.Langs["WeaponName"], GetConfig.Langs["WeaponName"]);
+                    dynamic ammoName = await UtilsFunctions.GetInput(GetConfig.Langs["Weaponammo"], GetConfig.Langs["Weaponammo"]);
+                    dynamic ammoQuantity = await UtilsFunctions.GetInput(GetConfig.Langs["Quantity"], GetConfig.Langs["Quantity"]);
+                    MainMenu.args.Add(weaponName);
+                    MainMenu.args.Add(ammoName);
+                    MainMenu.args.Add(ammoQuantity);
+                    DatabaseFunctions.AddWeapon(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+            };
         }
+
         public static Menu GetMenu()
         {
             SetupMenu();
