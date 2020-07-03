@@ -88,11 +88,11 @@ namespace vorpadminmenu_cl.Menus
                     BoosterFunctions.Vehicle(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 5)
+                else if (_index == 7)
                 {
                     BoosterFunctions.InfiniteAmmo(MainMenu.args);
                 }
-                else if (_index == 6)
+                else if (_index == 8)
                 {
                     BoosterFunctions.InfiniteAmmoOff(MainMenu.args);
                 }

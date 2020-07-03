@@ -84,9 +84,9 @@
   "VehicleTitle": "Vehicle",
   "VehicleDesc": "Spawn a vehicle",
 
-  "InfiniteAmmoOnTitle": "Infinite Ammo",
+  "InfiniteAmmoOnTitle": "Infinite Ammo On",
   "InfiniteAmmoOnDesc": "Turn On",
-  "InfiniteAmmoOffTitle": "Infinite Ammo",
+  "InfiniteAmmoOffTitle": "Infinite Ammo Off",
   "InfiniteAmmoOffDesc": "Turn Off",
 
   "Quantity": "quantity",
