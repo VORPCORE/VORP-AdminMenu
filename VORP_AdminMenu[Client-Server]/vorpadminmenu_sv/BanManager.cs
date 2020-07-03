@@ -14,7 +14,7 @@ namespace vorpadminmenu_sv
         public BanManager()
         {
             EventHandlers["playerConnecting"] += new Action<Player, string, dynamic, dynamic>(OnPlayerConnecting);
-            EventHandlers["vorp_adminmenu:addNewBan"] += new Action<Player, int, DateTime, string, int>(AddNewBan);
+            EventHandlers["vorp_adminmenu:addNewBan"] += new Action<Player, int, string, string>(AddNewBan);
             LoadBannedsFromDB();
             Tick += CheckBanneds;
         }
@@ -80,14 +80,17 @@ namespace vorpadminmenu_sv
 
         }
 
-        public async void AddNewBan([FromSource]Player player, int targetId, DateTime unban, string reason, int permanent)
+        public async void AddNewBan([FromSource]Player player, int targetId, string temp, string reason)
         {
-            DateTime banned = DateTime.Now;
 
+            DateTime banned = DateTime.Now;
             Player target = getPlayerFromSource(targetId);
             string steam = "none";
             string license = "none";
             string discord = "none";
+            DateTime unban = new DateTime();
+            int permanent = 1;
+            
 
             foreach (var identifier in target.Identifiers)
             {
@@ -104,7 +107,49 @@ namespace vorpadminmenu_sv
                 }
             }
 
-            Exports["ghmattimysql"].execute("INSERT INTO banneds (b_steam,b_license,b_discord,b_reason,b_banned,b_unban,b_permanent) VALUES (?,?,?,?,?,?)", new[] { steam, license, discord, reason, banned.ToString(), unban.ToString(), permanent.ToString()}, new Action<dynamic>((result) =>
+
+            try
+            {
+                
+                if (!temp.StartsWith("0"))
+                {
+                    permanent = 0;
+                    if (temp.EndsWith("Y"))
+                    {
+                        Debug.WriteLine("Entra en el try");
+                        unban = banned.AddYears(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("M"))
+                    {
+                        unban = banned.AddMonths(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("D"))
+                    {
+                        unban = banned.AddDays(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("H"))
+                    {
+                        unban = banned.AddHours(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else if (temp.EndsWith("m"))
+                    {
+                        Debug.WriteLine("Entra en el try");
+                        unban = banned.AddMinutes(int.Parse(temp.Remove(temp.Length - 1)));
+                    }
+                    else
+                    {
+                        player.TriggerEvent("vorp:Tip", LoadConfig.Langs["SyntaxIncorrect"], 5000);
+                        return;
+                    }
+                }
+            }
+            catch
+            {
+                player.TriggerEvent("vorp:Tip", LoadConfig.Langs["SyntaxIncorrect"], 5000);
+                return;
+            }
+            await Delay(2000);
+            Exports["ghmattimysql"].execute("INSERT INTO banneds (b_steam,b_license,b_discord,b_reason,b_banned,b_unban,b_permanent) VALUES (?,?,?,?,?,?,?)", new[] { steam, license, discord, reason, banned.ToString() , unban.ToString(), permanent.ToString()}, new Action<dynamic>((result) =>
             {
                 int newId = result.insertId;
                 userBanneds.Add(new PlayerBanned(newId, steam, license, discord, banned, unban, Convert.ToBoolean(permanent), reason));
