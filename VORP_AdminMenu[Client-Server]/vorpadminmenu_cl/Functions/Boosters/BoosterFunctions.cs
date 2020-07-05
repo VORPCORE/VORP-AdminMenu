@@ -30,45 +30,48 @@ namespace vorpadminmenu_cl.Functions.Boosters
 
         public static void SetupBoosters()
         {
-            API.RegisterCommand(GetConfig.Config["Golden"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            if (GetUserInfo.userGroup.Contains("admin"))
+            {
+                API.RegisterCommand(GetConfig.Config["Golden"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Golden(args);
             }), false);
 
-            API.RegisterCommand(GetConfig.Config["Gm"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                GodMode(args);
-            }), false);
+                API.RegisterCommand(GetConfig.Config["Gm"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    GodMode(args);
+                }), false);
 
-            API.RegisterCommand(GetConfig.Config["Noclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Noclip(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["Mclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Noclip2(args);
-            }), false);
+                API.RegisterCommand(GetConfig.Config["Noclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    Noclip(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["Mclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    Noclip2(args);
+                }), false);
 
-            API.RegisterCommand(GetConfig.Config["Thor"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
-            {
-                Thor(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Horse(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Vehicle(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOn"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                InfiniteAmmo(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOff"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                InfiniteAmmoOff(args);
-            }), false);
+                API.RegisterCommand(GetConfig.Config["Thor"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
+                {
+                    Thor(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    Horse(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    Vehicle(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["InfiniteAmmoOn"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    InfiniteAmmo(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["InfiniteAmmoOff"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    InfiniteAmmoOff(args);
+                }), false);
+            }
         }
 
         public static void Golden(List<object> args)

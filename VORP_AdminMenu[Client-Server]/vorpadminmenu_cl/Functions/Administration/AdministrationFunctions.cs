@@ -75,7 +75,13 @@ namespace vorpadminmenu_cl.Functions.Administration
             }), false);
             API.RegisterCommand(GetConfig.Config["Heal"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                Heal(args);
+                if (args.Count == 0)
+                {
+                    Healme();
+                } else
+                {
+                    Heal(args);
+                }
             }), false);
 
             if (GetUserInfo.userGroup.Contains("admin"))
@@ -276,6 +282,11 @@ namespace vorpadminmenu_cl.Functions.Administration
             TriggerServerEvent("vorp:revivePlayer", idDestinatary);
         }
 
+        public static void Healme() {
+            Debug.WriteLine(API.GetPlayerServerId(API.PlayerPedId()).ToString());
+            TriggerServerEvent("vorp:healPlayer", 0);
+        }
+
         public static void Heal(List<object> args)
         {
             int idDestinatary = int.Parse(args[0].ToString());
@@ -284,7 +295,7 @@ namespace vorpadminmenu_cl.Functions.Administration
 
         private void healDone()
         {
-            Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 1, 100);
+            Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 0, 100);
             Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 1, 100);
             Function.Call((Hash)0xAC2767ED8BDFAB15, API.PlayerPedId(), 100, 0);
         }
