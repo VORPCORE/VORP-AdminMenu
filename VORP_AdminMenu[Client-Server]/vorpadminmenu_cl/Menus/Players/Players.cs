@@ -84,19 +84,6 @@ namespace vorpadminmenu_cl.Menus.Players
             {
                 Enabled = true,
             });
-
-            playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SlapTitle"], GetConfig.Langs["SlapDesc"])
-            {
-                Enabled = true,
-            });
-            playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["LightningTitle"], GetConfig.Langs["LightningDesc"])
-            {
-                Enabled = true,
-            });
-            playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["FireTitle"], GetConfig.Langs["FireDesc"])
-            {
-                Enabled = true,
-            });
             playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["KickPlayerTitle"], GetConfig.Langs["KickPlayerDesc"])
             {
                 Enabled = true,
@@ -105,6 +92,21 @@ namespace vorpadminmenu_cl.Menus.Players
             {
                 Enabled = true,
             });
+            if (GetUserInfo.userGroup.Contains("admin"))
+            {
+                playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SlapTitle"], GetConfig.Langs["SlapDesc"])
+                {
+                    Enabled = true,
+                });
+                playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["LightningTitle"], GetConfig.Langs["LightningDesc"])
+                {
+                    Enabled = true,
+                });
+                playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["FireTitle"], GetConfig.Langs["FireDesc"])
+                {
+                    Enabled = true,
+                });
+            }
 
 
 
@@ -149,31 +151,14 @@ namespace vorpadminmenu_cl.Menus.Players
                     AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
+                
                 else if (_index == 7)
-                {
-                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    AdministrationFunctions.Slap(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 8)
-                {
-                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    AdministrationFunctions.ThorToId(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 9)
-                {
-                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
-                    AdministrationFunctions.FireToId(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 10)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     AdministrationFunctions.Kick(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 11)
+                else if (_index == 8)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     dynamic time = await UtilsFunctions.GetInput(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerTime"]);
@@ -181,6 +166,24 @@ namespace vorpadminmenu_cl.Menus.Players
                     dynamic reason = await UtilsFunctions.GetInput(GetConfig.Langs["BanPlayerTitle"], GetConfig.Langs["BanPlayerReason"]);
                     MainMenu.args.Add(reason);
                     AdministrationFunctions.Ban(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 9)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    AdministrationFunctions.Slap(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 10)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    AdministrationFunctions.ThorToId(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 11)
+                {
+                    MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
+                    AdministrationFunctions.FireToId(MainMenu.args);
                     MainMenu.args.Clear();
                 }
             };

@@ -37,15 +37,18 @@ namespace vorpadminmenu_cl.Menus
             MenuController.BindMenuItem(mainMenu, Administration.GetMenu(), subMenuAdministrationBtn);
 
             //Boosters
-            MenuController.AddSubmenu(mainMenu, Boosters.GetMenu());
-
-            MenuItem subMenuBoostersBtn = new MenuItem(GetConfig.Langs["MenuBoostersTitle"], " ")
+            if (GetUserInfo.userGroup.Contains("admin"))
             {
-                RightIcon = MenuItem.Icon.ARROW_RIGHT
-            };
+                MenuController.AddSubmenu(mainMenu, Boosters.GetMenu());
 
-            mainMenu.AddMenuItem(subMenuBoostersBtn);
-            MenuController.BindMenuItem(mainMenu, Boosters.GetMenu(), subMenuBoostersBtn);
+                MenuItem subMenuBoostersBtn = new MenuItem(GetConfig.Langs["MenuBoostersTitle"], " ")
+                {
+                    RightIcon = MenuItem.Icon.ARROW_RIGHT
+                };
+
+                mainMenu.AddMenuItem(subMenuBoostersBtn);
+                MenuController.BindMenuItem(mainMenu, Boosters.GetMenu(), subMenuBoostersBtn);
+            }
 
             //Notifications
             MenuController.AddSubmenu(mainMenu, Notifications.GetMenu());

@@ -21,37 +21,39 @@ namespace vorpadminmenu_cl.Functions.Database
 
         public static void SetupDatabase()
         {
-            API.RegisterCommand(GetConfig.Config["AddMoney"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            if (GetUserInfo.userGroup.Contains("admin"))
             {
-                AddMoney(args);
-            }), false);
+                API.RegisterCommand(GetConfig.Config["AddMoney"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    AddMoney(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["DelMoney"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    RemoveMoney(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["AddXp"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    AddXp(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["DelXp"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    RemoveXp(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["AddItem"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    AddItem(args);
+                }), false);
 
-            API.RegisterCommand(GetConfig.Config["DelMoney"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                RemoveMoney(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["AddXp"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                AddXp(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["DelXp"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                RemoveXp(args);
-            }), false);
-            API.RegisterCommand(GetConfig.Config["AddItem"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                AddItem(args);
-            }), false);
-            
-            API.RegisterCommand(GetConfig.Config["AddWeapon"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                AddWeapon(args);
-            }), false);
+                API.RegisterCommand(GetConfig.Config["AddWeapon"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    AddWeapon(args);
+                }), false);
 
-            API.RegisterCommand(GetConfig.Config["AddAmmo"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                AddAmmo(args);
-            }), false);
+                API.RegisterCommand(GetConfig.Config["AddAmmo"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    AddAmmo(args);
+                }), false);
+            }
         }
 
         public static void AddMoney(List<object> args)

@@ -41,11 +41,7 @@ namespace vorpadminmenu_cl.Functions.Administration
             {
                 StopPlayer(args);
             }), false);
-
-            API.RegisterCommand(GetConfig.Config["Slap"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Slap(args);
-            }), false);
+            
 
             API.RegisterCommand(GetConfig.Config["Kick"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
@@ -57,15 +53,7 @@ namespace vorpadminmenu_cl.Functions.Administration
                 Ban(args);
             }), false);
 
-            API.RegisterCommand(GetConfig.Config["ThorP"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
-            {
-                ThorToId(args);
-            }), false);
-
-            API.RegisterCommand(GetConfig.Config["FireP"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
-            {
-                FireToId(args);
-            }), false);
+            
 
             API.RegisterCommand(GetConfig.Config["Cblip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
@@ -89,6 +77,23 @@ namespace vorpadminmenu_cl.Functions.Administration
             {
                 Heal(args);
             }), false);
+
+            if (GetUserInfo.userGroup.Contains("admin"))
+            {
+                API.RegisterCommand(GetConfig.Config["Slap"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+                {
+                    Slap(args);
+                }), false);
+                API.RegisterCommand(GetConfig.Config["ThorP"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
+                {
+                    ThorToId(args);
+                }), false);
+
+                API.RegisterCommand(GetConfig.Config["FireP"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
+                {
+                    FireToId(args);
+                }), false);
+            }
 
         }
 

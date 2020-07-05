@@ -46,18 +46,6 @@ namespace vorpadminmenu_cl.Menus
             {
                 Enabled = true,
             });
-            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SlapTitle"], GetConfig.Langs["SlapDesc"])
-            {
-                Enabled = true,
-            });
-            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["LightningTitle"], GetConfig.Langs["LightningDesc"])
-            {
-                Enabled = true,
-            });
-            administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["FireTitle"], GetConfig.Langs["FireDesc"])
-            {
-                Enabled = true,
-            });
             administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SpectateTitle"], GetConfig.Langs["SpectateDesc"])
             {
                 Enabled = true,
@@ -75,9 +63,25 @@ namespace vorpadminmenu_cl.Menus
                 Enabled = true,
             });
             administrationMenu.AddMenuItem(pfollow);
+            if (GetUserInfo.userGroup.Contains("admin"))
+            {
+                administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SlapTitle"], GetConfig.Langs["SlapDesc"])
+                {
+                    Enabled = true,
+                });
 
-            
-            
+                administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["LightningTitle"], GetConfig.Langs["LightningDesc"])
+                {
+                    Enabled = true,
+                });
+                administrationMenu.AddMenuItem(new MenuItem(GetConfig.Langs["FireTitle"], GetConfig.Langs["FireDesc"])
+                {
+                    Enabled = true,
+                });
+            }
+
+
+
 
             administrationMenu.OnItemSelect += async (_menu, _item, _index) =>
             {
@@ -106,55 +110,56 @@ namespace vorpadminmenu_cl.Menus
                     AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
+               
                 else if (_index == 4)
-                {
-                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["SlapTitle"], GetConfig.Langs["ID"]);
-                    MainMenu.args.Add(idPlayer);
-                    AdministrationFunctions.Slap(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 5)
-                {
-                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["LightningTitle"], GetConfig.Langs["ID"]);
-                    MainMenu.args.Add(idPlayer);
-                    AdministrationFunctions.ThorToId(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 6)
-                {
-                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["FireTitle"], GetConfig.Langs["ID"]);
-                    MainMenu.args.Add(idPlayer);
-                    AdministrationFunctions.FireToId(MainMenu.args);
-                    MainMenu.args.Clear();
-                }
-                else if (_index == 7)
                 {
                     dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["SpectateTitle"], GetConfig.Langs["ID"]);
                     MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Spectate(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 8)
+                else if (_index == 5)
                 {
                     AdministrationFunctions.SpectateOff(MainMenu.args);
                 }
-                else if (_index == 9)
+                else if (_index == 6)
                 {
                     dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["ReviveTitle"], GetConfig.Langs["ID"]);
                     MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Revive(MainMenu.args);
                 }
-                else if (_index == 10)
+                else if (_index == 7)
                 {
 
                     dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["HealTitle"], GetConfig.Langs["ID"]);
                     MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Heal(MainMenu.args);
                 }
+                else if (_index == 9)
+                {
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["SlapTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    AdministrationFunctions.Slap(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 10)
+                {
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["LightningTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    AdministrationFunctions.ThorToId(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 11)
+                {
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["FireTitle"], GetConfig.Langs["ID"]);
+                    MainMenu.args.Add(idPlayer);
+                    AdministrationFunctions.FireToId(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
             };
             administrationMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
-                if (_index == 11)
+                if (_index == 8)
                 {
                     if (!_checked) {
                         AdministrationFunctions.ClearBlips();

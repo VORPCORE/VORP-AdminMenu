@@ -147,6 +147,8 @@
   "TpToWaypointDesc": "Teleport to wayPoint.\nAdd a waypoint on the map before",
   "TpToCoordsTitle": "Tp to Coords",
   "TpToCoordsDesc": "Teleport to coords.",
+  "XCoord": "X Coord",
+  "YCoord": "Y Coord",
   "TpToPlayerTitle": "Tp to player",
   "TpToPlayerDesc": "Teleport to player.",
   "BringPlayerTitle": "Bring player",

@@ -203,6 +203,7 @@ namespace vorpadminmenu_sv
                 if(w == item)
                 {
                     wC = true;
+                    Debug.WriteLine("Va bien");
                 }
             }
 
@@ -213,11 +214,13 @@ namespace vorpadminmenu_sv
                 if (a == ammo)
                 {
                     aC = true;
+                    Debug.WriteLine("Esta bien");
                 }
             }
-            bool quantityC = int.TryParse(args[2].ToString(), out int quantity);
+            bool quantityC = int.TryParse(args[3].ToString(), out int quantity);
             if(idC && wC && aC && quantityC)
             {
+                Debug.WriteLine("No entiendo nada");
                 Dictionary<string, int> ammoaux = new Dictionary<string, int>();
                 ammoaux.Add(ammo, quantity);
                 TriggerEvent("vorpCore:registerWeapon", id, item, ammoaux, ammoaux);
