@@ -126,7 +126,8 @@ namespace vorpadminmenu_cl.Menus
                 {
                     dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["ReviveTitle"], GetConfig.Langs["ID"]);
                     MainMenu.args.Add(idPlayer);
-                    AdministrationFunctions.Revive(MainMenu.args);
+                    AdministrationFunctions.Revive(idPlayer);
+                    MainMenu.args.Clear();
                 }
                 else if (_index == 7)
                 {
@@ -134,6 +135,7 @@ namespace vorpadminmenu_cl.Menus
                     dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["HealTitle"], GetConfig.Langs["ID"]);
                     MainMenu.args.Add(idPlayer);
                     AdministrationFunctions.Heal(MainMenu.args);
+                    MainMenu.args.Clear();
                 }
                 else if (_index == 9)
                 {

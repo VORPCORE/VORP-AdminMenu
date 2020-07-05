@@ -71,14 +71,24 @@ namespace vorpadminmenu_cl.Functions.Administration
             }), false);
             API.RegisterCommand(GetConfig.Config["Revive"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                Revive(args);
+                if (args.Count == 0)
+                {
+                    Reviveme();
+                }
+                else
+                {
+                    Revive(args);
+                }
+                
+                
             }), false);
             API.RegisterCommand(GetConfig.Config["Heal"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 if (args.Count == 0)
                 {
                     Healme();
-                } else
+                }
+                else
                 {
                     Heal(args);
                 }
@@ -276,6 +286,11 @@ namespace vorpadminmenu_cl.Functions.Administration
             API.NetworkSetInSpectatorMode(false, API.PlayerPedId());
         }
 
+        public static void Reviveme()
+        {
+            TriggerServerEvent("vorp:revivePlayer", 0);
+        }
+
         public static void Revive(List<object> args)
         {
             int idDestinatary = int.Parse(args[0].ToString());
@@ -283,8 +298,10 @@ namespace vorpadminmenu_cl.Functions.Administration
         }
 
         public static void Healme() {
-            Debug.WriteLine(API.GetPlayerServerId(API.PlayerPedId()).ToString());
-            TriggerServerEvent("vorp:healPlayer", 0);
+            Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 0, 100);
+            Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 1, 100);
+            Function.Call((Hash)0xAC2767ED8BDFAB15, API.PlayerPedId(), 100, 0);
+            API.SetEntityHealth(API.PlayerPedId(), API.GetEntityMaxHealth(API.PlayerPedId(),1),0);
         }
 
         public static void Heal(List<object> args)
@@ -298,6 +315,7 @@ namespace vorpadminmenu_cl.Functions.Administration
             Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 0, 100);
             Function.Call((Hash)0xC6258F41D86676E0, API.PlayerPedId(), 1, 100);
             Function.Call((Hash)0xAC2767ED8BDFAB15, API.PlayerPedId(), 100, 0);
+            API.SetEntityHealth(API.PlayerPedId(), API.GetEntityMaxHealth(API.PlayerPedId(), 1), 0);
         }
     }
 }

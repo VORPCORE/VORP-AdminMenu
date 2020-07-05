@@ -127,11 +127,13 @@ namespace vorpadminmenu_cl.Menus.Players
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     AdministrationFunctions.Revive(MainMenu.args);
+                    MainMenu.args.Clear();
                 }
                 else if (_index == 3)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     AdministrationFunctions.Heal(MainMenu.args);
+                    MainMenu.args.Clear();
                 }
                 else if(_index == 4)
                 {

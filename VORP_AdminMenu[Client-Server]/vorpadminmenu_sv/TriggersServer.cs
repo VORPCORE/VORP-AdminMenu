@@ -115,9 +115,17 @@ namespace vorpadminmenu_sv
 
         private void RevivePlayer([FromSource]Player player, int idDestinatary)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[idDestinatary];
-            TriggerClientEvent(p, "vorp:resurrectPlayer");
+            if(idDestinatary == 0)
+            {
+                TriggerClientEvent(player, "vorp:resurrectPlayer");
+            }
+            else
+            {
+                PlayerList pl = new PlayerList();
+                Player p = pl[idDestinatary];
+                if (p == player)
+                    TriggerClientEvent(p, "vorp:resurrectPlayer");
+            }
         }
 
         private void HealPlayer([FromSource]Player player, int idDestinatary)

@@ -19,14 +19,14 @@
   "KickPlayerDesc": "Press here to kick a player form the server or: Command:/k id.",
 
   "BanPlayerTitle": "Ban Player",
-  "BanPlayerDesc": "Press here to ban a player form the server or: Command Example:/ban 1 1H reason.",
-  "BanPlayerTime": " Example:/ban 1 1H reason",
+  "BanPlayerDesc": "Ban a player form the server",
+  "BanPlayerTime": "time",
   "BanPlayerReason": "Reason",
   "YouArePermanentBanned": "You have a permanent ban.",
   "YouAreTempBanned": "Your ban expires in {0} days {1} hours {2} minutes.",
   "YouHasBeenBanned": "You has been banned for ({0}) | Expire: ({1})",
   "Permament": "Permanent",
-  "SyntaxIncorrect": "Please use the correct sintax [ 0 = Permanente, 10Y = 10 Años, 10M = 10 Meses, 10D = 10 Dias, 10H = 10 Horas, 10m = 10 Minutos ]",
+  "SyntaxIncorrect": "Please use the correct sintax [ 0=Permanent, 10Y=10 Years, 10M=10 Moths, 10D=10 Days, 10H=10 Hours, 10m=10 Minutes ]",
 
   "ReviveTitle": "Revive Player",
   "ReviveDesc": "Revive a player",
