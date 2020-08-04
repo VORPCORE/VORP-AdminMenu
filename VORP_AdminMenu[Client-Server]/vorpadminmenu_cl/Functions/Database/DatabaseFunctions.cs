@@ -78,7 +78,10 @@ namespace vorpadminmenu_cl.Functions.Database
 
         public static void AddItem(List<object> args)
         {
-            TriggerServerEvent("vorp:adminAddItem", args);
+            if (args.Count == 3)
+            {
+                TriggerServerEvent("vorp:adminAddItem", args);
+            }
         }
 
         public static void DelItem(List<object> args)

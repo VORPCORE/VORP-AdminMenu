@@ -115,18 +115,34 @@ namespace vorpadminmenu_sv
 
         private void RevivePlayer([FromSource]Player player, int idDestinatary)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[idDestinatary];
-            TriggerClientEvent(p, "vorp:resurrectPlayer");
+            if (idDestinatary != -1)
+            {
+                PlayerList pl = new PlayerList();
+                Player p = pl[idDestinatary];
+                TriggerClientEvent(p, "vorp:resurrectPlayer");
+            }
+            else
+            {
+                player.TriggerEvent("vorp:resurrectPlayer");
+            }
         }
 
         private void HealPlayer([FromSource]Player player, int idDestinatary)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[idDestinatary];
-            p.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
-            p.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
-            p.TriggerEvent("vorp:healDone");
+            if (idDestinatary != -1)
+            {
+                PlayerList pl = new PlayerList();
+                Player p = pl[idDestinatary];
+                p.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
+                p.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
+                p.TriggerEvent("vorp:healDone");
+            }
+            else
+            {
+                player.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
+                player.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
+                player.TriggerEvent("vorp:healDone");
+            }
         }
     }
 }

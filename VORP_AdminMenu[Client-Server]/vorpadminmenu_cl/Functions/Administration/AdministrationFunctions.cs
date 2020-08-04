@@ -272,13 +272,21 @@ namespace vorpadminmenu_cl.Functions.Administration
 
         public static void Revive(List<object> args)
         {
-            int idDestinatary = int.Parse(args[0].ToString());
+            int idDestinatary = -1;
+
+            if (args.Count != 0)
+                idDestinatary = int.Parse(args[0].ToString());
+            
             TriggerServerEvent("vorp:revivePlayer", idDestinatary);
         }
 
         public static void Heal(List<object> args)
         {
-            int idDestinatary = int.Parse(args[0].ToString());
+            int idDestinatary = -1;
+
+            if (args.Count != 0)
+                idDestinatary = int.Parse(args[0].ToString());
+
             TriggerServerEvent("vorp:healPlayer", idDestinatary);
         }
 
