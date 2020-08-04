@@ -83,7 +83,10 @@ namespace vorpadminmenu_cl.Functions.Database
 
         public static void DelItem(List<object> args)
         {
-            TriggerServerEvent("vorp:adminDelItem", args);
+            if (args.Count == 3)
+            {
+                TriggerServerEvent("vorp:adminDelItem", args);
+            }
         }
 
         public static void AddWeapon(List<object> args)
