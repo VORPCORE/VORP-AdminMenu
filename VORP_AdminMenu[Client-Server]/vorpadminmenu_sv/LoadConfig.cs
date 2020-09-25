@@ -11,6 +11,8 @@ namespace vorpadminmenu_sv
 {
     public class LoadConfig : BaseScript
     {
+        public static dynamic VORPCORE;
+
         public static JObject Config = new JObject();
         public static string ConfigString;
         public static Dictionary<string, string> Langs = new Dictionary<string, string>();
@@ -20,6 +22,11 @@ namespace vorpadminmenu_sv
             EventHandlers[$"{API.GetCurrentResourceName()}:getConfig"] += new Action<Player>(getConfig);
 
             LoadConfigAndLang();
+
+            TriggerEvent("getCore", new Action<dynamic>((dic) =>
+            {
+                VORPCORE = dic;
+            }));
         }
         private void LoadConfigAndLang()
         {

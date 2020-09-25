@@ -31,7 +31,9 @@ namespace vorpadminmenu_sv
         {
             bool idC = int.TryParse(args[0].ToString(),out int id);
             bool typeC = int.TryParse(args[1].ToString(), out int type);
-            
+
+            dynamic UserCharacter = LoadConfig.VORPCORE.getUser(id).getUsedCharacter;
+
             if (idC && typeC)
             {
                 if (type == 2)
@@ -40,14 +42,14 @@ namespace vorpadminmenu_sv
                     if (quantityC)
                     {
                         int intQuantity = (int)Math.Ceiling(quantity);
-                        TriggerEvent("vorp:addMoney", id, type, intQuantity);
+                        UserCharacter.addCurrency(type, intQuantity);
                     } 
                     else
                     {
                         bool quantityCInt = int.TryParse(args[2].ToString(), out int quantityInt);
                         if (quantityCInt)
                         {
-                            TriggerEvent("vorp:addMoney", id, type, quantityInt);
+                            UserCharacter.addCurrency(type, quantityInt);
                         }
                         else
                         {
@@ -60,7 +62,7 @@ namespace vorpadminmenu_sv
                     bool quantityC = double.TryParse(args[2].ToString(), out double quantity);
                     if (quantityC)
                     {
-                        TriggerEvent("vorp:addMoney", id, type, quantity);
+                        UserCharacter.addCurrency(type, quantity);
                     }
                 }
                 else
@@ -79,6 +81,8 @@ namespace vorpadminmenu_sv
             bool idC = int.TryParse(args[0].ToString(), out int id);
             bool typeC = int.TryParse(args[1].ToString(), out int type);
 
+            dynamic UserCharacter = LoadConfig.VORPCORE.getUser(id).getUsedCharacter;
+
             if (idC && typeC)
             {
                 if (type == 2)
@@ -87,14 +91,14 @@ namespace vorpadminmenu_sv
                     if (quantityC)
                     {
                         int intQuantity = (int)Math.Ceiling(quantity);
-                        TriggerEvent("vorp:removeMoney", id, type, intQuantity);
+                        UserCharacter.removeCurrency(type, intQuantity);
                     }
                     else
                     {
                         bool quantityCInt = int.TryParse(args[2].ToString(), out int quantityInt);
                         if (quantityCInt)
                         {
-                            TriggerEvent("vorp:removeMoney", id, type, quantityInt);
+                            UserCharacter.removeCurrency(type, quantityInt);
                         }
                         else
                         {
@@ -107,7 +111,7 @@ namespace vorpadminmenu_sv
                     bool quantityC = double.TryParse(args[2].ToString(), out double quantity);
                     if (quantityC)
                     {
-                        TriggerEvent("vorp:removeMoney", id, type, quantity);
+                        UserCharacter.removeCurrency(type, quantity);
                     }
                 }
                 else
@@ -125,9 +129,10 @@ namespace vorpadminmenu_sv
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             bool quantityC = int.TryParse(args[1].ToString(), out int quantity);
+            dynamic UserCharacter = LoadConfig.VORPCORE.getUser(id).getUsedCharacter;
             if (idC && quantityC)
             {
-                TriggerEvent("vorp:addXp", id, quantity);
+                UserCharacter.addXp(quantity);
             }
             else
             {
@@ -139,9 +144,10 @@ namespace vorpadminmenu_sv
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             bool quantityC = int.TryParse(args[1].ToString(), out int quantity);
+            dynamic UserCharacter = LoadConfig.VORPCORE.getUser(id).getUsedCharacter;
             if (idC && quantityC)
             {
-                TriggerEvent("vorp:removeXp", id, quantity);
+                UserCharacter.removeXp(quantity);
             }
             else
             {

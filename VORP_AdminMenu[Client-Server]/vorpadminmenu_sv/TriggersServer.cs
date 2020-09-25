@@ -9,6 +9,7 @@ namespace vorpadminmenu_sv
 {
     class TriggersServer : BaseScript
     {
+
         public TriggersServer()
         {
             EventHandlers["vorp:ownerCoordsToBring"] += new Action<Vector3, int>(CoordsToBringPlayer);
@@ -30,8 +31,6 @@ namespace vorpadminmenu_sv
 
             EventHandlers["vorp:revivePlayer"] += new Action<Player, int>(RevivePlayer);
             EventHandlers["vorp:healPlayer"] += new Action<Player, int>(HealPlayer);
-
-
 
         }
 

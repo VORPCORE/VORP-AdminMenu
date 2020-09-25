@@ -16,7 +16,7 @@ namespace vorpadminmenu_cl
         public GetUserInfo()
         {
             EventHandlers["vorp_admin:GetPlayerInfo"] += new Action<string>(GetPlayerInfo);
-            TriggerServerEvent("vorp_admin:LoadPlayerInfo");
+            EventHandlers["vorp:SelectedCharacter"] += new Action<int>((charId) => { TriggerServerEvent("vorp_admin:LoadPlayerInfo"); });
         }
 
         private void GetPlayerInfo(string group)
