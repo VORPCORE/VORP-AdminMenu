@@ -157,10 +157,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
             if (!Menus.Boosters.Getnclip())
             {
                 API.FreezeEntityPosition(playerPed, true);
+                API.SetEntityVisible(playerPed, false);
                 Menus.Boosters.Setnclip(true);
             }
             else
             {
+                API.SetEntityVisible(playerPed, true);
                 API.FreezeEntityPosition(playerPed, false);
                 Menus.Boosters.Setnclip(false);
             }
@@ -251,10 +253,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
             {
                 API.FreezeEntityPosition(playerPed, true);
                 Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), true);
+                API.SetEntityVisible(playerPed, false);
                 Menus.Boosters.Setmclip(true);
             }
             else
             {
+                API.SetEntityVisible(playerPed, true);
                 API.FreezeEntityPosition(playerPed, false);
                 Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), false);
                 Menus.Boosters.Setmclip(false);
