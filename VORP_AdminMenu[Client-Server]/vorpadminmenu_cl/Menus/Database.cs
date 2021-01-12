@@ -61,7 +61,7 @@ namespace vorpadminmenu_cl.Menus
             {
                 if (_index == 1)
                 {
-                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["DelMoneyTitle"], GetConfig.Langs["ID"]);
+                    dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["AddMoneyTitle"], GetConfig.Langs["ID"]);
                     MainMenu.args.Add(idPlayer);
                     dynamic type = await UtilsFunctions.GetInput(GetConfig.Langs["TypeOfMoneyTitle"], GetConfig.Langs["TypeOfMoneyDesc"]);
                     MainMenu.args.Add(type);
