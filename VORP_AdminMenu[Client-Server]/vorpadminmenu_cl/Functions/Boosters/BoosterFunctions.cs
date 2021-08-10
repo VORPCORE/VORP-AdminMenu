@@ -163,7 +163,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
             }
             else
             {
-                API.SetEntityVisible(playerPed, true);
+                API.FreezeEntityPosition(playerPed, false);
                 Menus.Boosters.Setnclip(false);
             }
         }
