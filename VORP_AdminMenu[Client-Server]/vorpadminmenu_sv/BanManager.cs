@@ -67,6 +67,13 @@ namespace vorpadminmenu_sv
                 }
 
                 TimeSpan diff = (userBan.Unban - DateTime.Now);
+
+                if (diff.TotalSeconds <= 0)
+                {
+                    deferrals.done();
+                    return;
+                }
+
                 deferrals.done(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.Days.ToString(), diff.Hours.ToString(), diff.Minutes.ToString()));
                 setKickReason(string.Format(LoadConfig.Langs["YouAreTempBanned"], diff.Days.ToString(), diff.Hours.ToString(), diff.Minutes.ToString()));
             }
