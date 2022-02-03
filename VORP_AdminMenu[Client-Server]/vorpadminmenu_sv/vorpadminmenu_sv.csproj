@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BanManager.cs" />
+    <Compile Include="Diagnostics\Logger.cs" />
     <Compile Include="LoadUsersInfo.cs" />
     <Compile Include="LoadConfig.cs" />
     <Compile Include="PlayerBanned.cs" />
