@@ -10,8 +10,12 @@ namespace vorpadminmenu_sv
     class TriggersServer : BaseScript
     {
 
+        PlayerList PlayersList;
+
         public TriggersServer()
         {
+            PlayersList = Players;
+
             EventHandlers["vorp:ownerCoordsToBring"] += new Action<Vector3, int>(CoordsToBringPlayer);
             EventHandlers["vorp:askCoordsToTPPlayerDestiny"] += new Action<Player, int>(CoordsToPlayerDestiny);
             EventHandlers["vorp:callbackCoords"] += new Action<string, Vector3>(CoordsToStart);
@@ -38,31 +42,27 @@ namespace vorpadminmenu_sv
 
         private void CoordsToBringPlayer(Vector3 coordToSend, int destinataryID)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[destinataryID];
+            Player p = PlayersList[destinataryID];
             TriggerClientEvent(p, "vorp:sendCoordsToDestinyBring", coordToSend);
         }
 
 
         private void CoordsToPlayerDestiny([FromSource]Player ply, int destinataryID)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[destinataryID];
+            Player p = PlayersList[destinataryID];
             TriggerClientEvent(p, "vorp:askForCoords", ply.Handle);
         }
 
 
         private void CoordsToStart(string sourceID, Vector3 coordsDestiny)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[int.Parse(sourceID)];
+            Player p = PlayersList[int.Parse(sourceID)];
             TriggerClientEvent(p, "vorp:coordsToStart", coordsDestiny);
         }
 
         private void PrivateMessage([FromSource]Player player, int id, string message)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[id];
+            Player p = PlayersList[id];
             TriggerClientEvent(p,"vorp:Tip", message, 8000);
         }
 
@@ -80,35 +80,30 @@ namespace vorpadminmenu_sv
 
         private void StopP([FromSource]Player player, int id)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[id];
+            Player p = PlayersList[id];
             TriggerClientEvent(p, "vorp:stopit");
         }
 
         private void Slap([FromSource]Player player, int idDestinatary)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[idDestinatary];
+            Player p = PlayersList[idDestinatary];
             p.TriggerEvent("vorp:slapback");
         }
 
         private void Kick([FromSource]Player player, int id)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[id];
+            Player p = PlayersList[id];
             p.Drop("Kicked by Staff");
         }
 
         private void ThorToId([FromSource]Player player, int idDestinatary)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[idDestinatary];
+            Player p = PlayersList[idDestinatary];
             TriggerClientEvent(p, "vorp:thorIDdone");
         }
         private void FireToId([FromSource]Player player, int idDestinatary)
         {
-            PlayerList pl = new PlayerList();
-            Player p = pl[idDestinatary];
+            Player p = PlayersList[idDestinatary];
             TriggerClientEvent(p, "vorp:fireIDdone");
         }
 
@@ -116,8 +111,7 @@ namespace vorpadminmenu_sv
         {
             if (idDestinatary != -1)
             {
-                PlayerList pl = new PlayerList();
-                Player p = pl[idDestinatary];
+                Player p = PlayersList[idDestinatary];
                 TriggerClientEvent(p, "vorp:resurrectPlayer");
             }
             else
@@ -130,8 +124,7 @@ namespace vorpadminmenu_sv
         {
             if (idDestinatary != -1)
             {
-                PlayerList pl = new PlayerList();
-                Player p = pl[idDestinatary];
+                Player p = PlayersList[idDestinatary];
                 p.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
                 p.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
                 p.TriggerEvent("vorp:healDone");
