@@ -1,5 +1,6 @@
 ﻿using CitizenFX.Core;
 using System;
+using vorpadminmenu_sv.Diagnostics;
 
 namespace vorpadminmenu_sv
 {
@@ -34,32 +35,56 @@ namespace vorpadminmenu_sv
 
         }
 
-
-
         private void CoordsToBringPlayer(Vector3 coordToSend, int destinataryID)
         {
-            Player p = PlayersList[destinataryID];
-            TriggerClientEvent(p, "vorp:sendCoordsToDestinyBring", coordToSend);
+            try
+            {
+                Player p = PlayersList[destinataryID];
+                TriggerClientEvent(p, "vorp:sendCoordsToDestinyBring", coordToSend);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"CoordsToBringPlayer");
+            }
         }
-
 
         private void CoordsToPlayerDestiny([FromSource] Player ply, int destinataryID)
         {
-            Player p = PlayersList[destinataryID];
-            TriggerClientEvent(p, "vorp:askForCoords", ply.Handle);
+            try
+            {
+                Player p = PlayersList[destinataryID];
+                TriggerClientEvent(p, "vorp:askForCoords", ply.Handle);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"CoordsToPlayerDestiny");
+            }
         }
-
 
         private void CoordsToStart(string sourceID, Vector3 coordsDestiny)
         {
-            Player p = PlayersList[int.Parse(sourceID)];
-            TriggerClientEvent(p, "vorp:coordsToStart", coordsDestiny);
+            try
+            {
+                Player p = PlayersList[int.Parse(sourceID)];
+                TriggerClientEvent(p, "vorp:coordsToStart", coordsDestiny);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"CoordsToStart");
+            }
         }
 
         private void PrivateMessage([FromSource] Player player, int id, string message)
         {
-            Player p = PlayersList[id];
-            TriggerClientEvent(p, "vorp:Tip", message, 8000);
+            try
+            {
+                Player p = PlayersList[id];
+                TriggerClientEvent(p, "vorp:Tip", message, 8000);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"PrivateMessage");
+            }
         }
 
         private void BroadCastMessage([FromSource] Player player, string message)
@@ -73,63 +98,112 @@ namespace vorpadminmenu_sv
             TriggerClientEvent("vorp:thordone", thorCoords);
         }
 
-
         private void StopP([FromSource] Player player, int id)
         {
-            Player p = PlayersList[id];
-            TriggerClientEvent(p, "vorp:stopit");
+            try
+            {
+                Player p = PlayersList[id];
+                TriggerClientEvent(p, "vorp:stopit");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"StopP");
+            }
         }
 
         private void Slap([FromSource] Player player, int idDestinatary)
         {
-            Player p = PlayersList[idDestinatary];
-            p.TriggerEvent("vorp:slapback");
+            try
+            {
+                Player p = PlayersList[idDestinatary];
+                p.TriggerEvent("vorp:slapback");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"Slap");
+            }
         }
 
         private void Kick([FromSource] Player player, int id)
         {
-            Player p = PlayersList[id];
-            p.Drop("Kicked by Staff");
+            try
+            {
+                Player p = PlayersList[id];
+                p.Drop("Kicked by Staff");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"Kick");
+            }
         }
 
         private void ThorToId([FromSource] Player player, int idDestinatary)
         {
-            Player p = PlayersList[idDestinatary];
-            TriggerClientEvent(p, "vorp:thorIDdone");
+            try
+            {
+                Player p = PlayersList[idDestinatary];
+                TriggerClientEvent(p, "vorp:thorIDdone");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"ThorToId");
+            }
         }
+
         private void FireToId([FromSource] Player player, int idDestinatary)
         {
-            Player p = PlayersList[idDestinatary];
-            TriggerClientEvent(p, "vorp:fireIDdone");
+            try
+            {
+                Player p = PlayersList[idDestinatary];
+                TriggerClientEvent(p, "vorp:fireIDdone");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"FireToId");
+            }
         }
 
         private void RevivePlayer([FromSource] Player player, int idDestinatary)
         {
-            if (idDestinatary != -1)
+            try
             {
-                Player p = PlayersList[idDestinatary];
-                TriggerClientEvent(p, "vorp:resurrectPlayer");
+                if (idDestinatary != -1)
+                {
+                    Player p = PlayersList[idDestinatary];
+                    TriggerClientEvent(p, "vorp:resurrectPlayer");
+                }
+                else
+                {
+                    player.TriggerEvent("vorp:resurrectPlayer");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                player.TriggerEvent("vorp:resurrectPlayer");
+                Logger.Error(ex, $"RevivePlayer");
             }
         }
 
         private void HealPlayer([FromSource] Player player, int idDestinatary)
         {
-            if (idDestinatary != -1)
+            try
             {
-                Player p = PlayersList[idDestinatary];
-                p.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
-                p.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
-                p.TriggerEvent("vorp:healDone");
+                if (idDestinatary != -1)
+                {
+                    Player p = PlayersList[idDestinatary];
+                    p.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
+                    p.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
+                    p.TriggerEvent("vorp:healDone");
+                }
+                else
+                {
+                    player.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
+                    player.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
+                    player.TriggerEvent("vorp:healDone");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                player.TriggerEvent("vorpmetabolism:setValue", "Thirst", 1000);
-                player.TriggerEvent("vorpmetabolism:setValue", "Hunger", 1000);
-                player.TriggerEvent("vorp:healDone");
+                Logger.Error(ex, $"HealPlayer");
             }
         }
     }

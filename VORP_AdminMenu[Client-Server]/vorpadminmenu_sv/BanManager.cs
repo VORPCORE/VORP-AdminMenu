@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using vorpadminmenu_sv.Diagnostics;
 
 namespace vorpadminmenu_sv
 {
@@ -77,115 +78,128 @@ namespace vorpadminmenu_sv
 
         public async void AddNewBan([FromSource] Player player, int targetId, string temp, string reason)
         {
-
-            DateTime banned = DateTime.Now;
-            Player target = PlayersList[targetId];
-
-            if (target == null) return;
-
-            string steam = "none";
-            string license = "none";
-            string discord = "none";
-            DateTime unban = new DateTime();
-            int permanent = 1;
-
-
-            foreach (var identifier in target.Identifiers)
-            {
-                if (identifier.Contains("steam:"))
-                {
-                    steam = identifier;
-                }
-                else if (identifier.Contains("license:"))
-                {
-                    license = identifier;
-                }
-                else if (identifier.Contains("discord:"))
-                {
-                    discord = identifier;
-                }
-            }
-
-
             try
             {
+                DateTime banned = DateTime.Now;
+                Player target = PlayersList[targetId];
 
-                if (!temp.StartsWith("0"))
+                if (target == null) return;
+
+                string steam = "none";
+                string license = "none";
+                string discord = "none";
+                DateTime unban = new DateTime();
+                int permanent = 1;
+
+
+                foreach (var identifier in target.Identifiers)
                 {
-                    permanent = 0;
-                    if (temp.EndsWith("Y"))
+                    if (identifier.Contains("steam:"))
                     {
-                        Debug.WriteLine("Entra en el try");
-                        unban = banned.AddYears(int.Parse(temp.Remove(temp.Length - 1)));
+                        steam = identifier;
                     }
-                    else if (temp.EndsWith("M"))
+                    else if (identifier.Contains("license:"))
                     {
-                        unban = banned.AddMonths(int.Parse(temp.Remove(temp.Length - 1)));
+                        license = identifier;
                     }
-                    else if (temp.EndsWith("D"))
+                    else if (identifier.Contains("discord:"))
                     {
-                        unban = banned.AddDays(int.Parse(temp.Remove(temp.Length - 1)));
+                        discord = identifier;
                     }
-                    else if (temp.EndsWith("H"))
+                }
+
+
+                try
+                {
+
+                    if (!temp.StartsWith("0"))
                     {
-                        unban = banned.AddHours(int.Parse(temp.Remove(temp.Length - 1)));
+                        permanent = 0;
+                        if (temp.EndsWith("Y"))
+                        {
+                            Debug.WriteLine("Entra en el try");
+                            unban = banned.AddYears(int.Parse(temp.Remove(temp.Length - 1)));
+                        }
+                        else if (temp.EndsWith("M"))
+                        {
+                            unban = banned.AddMonths(int.Parse(temp.Remove(temp.Length - 1)));
+                        }
+                        else if (temp.EndsWith("D"))
+                        {
+                            unban = banned.AddDays(int.Parse(temp.Remove(temp.Length - 1)));
+                        }
+                        else if (temp.EndsWith("H"))
+                        {
+                            unban = banned.AddHours(int.Parse(temp.Remove(temp.Length - 1)));
+                        }
+                        else if (temp.EndsWith("m"))
+                        {
+                            Debug.WriteLine("Entra en el try");
+                            unban = banned.AddMinutes(int.Parse(temp.Remove(temp.Length - 1)));
+                        }
+                        else
+                        {
+                            player.TriggerEvent("vorp:Tip", LoadConfig.Langs["SyntaxIncorrect"], 5000);
+                            return;
+                        }
                     }
-                    else if (temp.EndsWith("m"))
+                }
+                catch
+                {
+                    player.TriggerEvent("vorp:Tip", LoadConfig.Langs["SyntaxIncorrect"], 5000);
+                    return;
+                }
+                await Delay(2000);
+                Exports["ghmattimysql"].execute("INSERT INTO banneds (b_steam,b_license,b_discord,b_reason,b_banned,b_unban,b_permanent) VALUES (?,?,?,?,?,?,?)", new[] { steam, license, discord, reason, banned.ToString(), unban.ToString(), permanent.ToString() }, new Action<dynamic>((result) =>
+                {
+                    int newId = result.insertId;
+                    userBanneds.Add(new PlayerBanned(newId, steam, license, discord, banned, unban, Convert.ToBoolean(permanent), reason));
+                    string duration = "";
+                    if (permanent == 1)
                     {
-                        Debug.WriteLine("Entra en el try");
-                        unban = banned.AddMinutes(int.Parse(temp.Remove(temp.Length - 1)));
+                        duration = LoadConfig.Langs["Permament"];
                     }
                     else
                     {
-                        player.TriggerEvent("vorp:Tip", LoadConfig.Langs["SyntaxIncorrect"], 5000);
-                        return;
+                        duration = unban.ToString();
                     }
-                }
+                    target.Drop(string.Format(LoadConfig.Langs["YouHasBeenBanned"], reason, duration));
+                }));
             }
-            catch
+            catch (Exception ex)
             {
-                player.TriggerEvent("vorp:Tip", LoadConfig.Langs["SyntaxIncorrect"], 5000);
-                return;
+                Logger.Error(ex, $"AddNewBan");
             }
-            await Delay(2000);
-            Exports["ghmattimysql"].execute("INSERT INTO banneds (b_steam,b_license,b_discord,b_reason,b_banned,b_unban,b_permanent) VALUES (?,?,?,?,?,?,?)", new[] { steam, license, discord, reason, banned.ToString(), unban.ToString(), permanent.ToString() }, new Action<dynamic>((result) =>
-            {
-                int newId = result.insertId;
-                userBanneds.Add(new PlayerBanned(newId, steam, license, discord, banned, unban, Convert.ToBoolean(permanent), reason));
-                string duration = "";
-                if (permanent == 1)
-                {
-                    duration = LoadConfig.Langs["Permament"];
-                }
-                else
-                {
-                    duration = unban.ToString();
-                }
-                target.Drop(string.Format(LoadConfig.Langs["YouHasBeenBanned"], reason, duration));
-            }));
         }
 
-        public async Task LoadBannedsFromDB()
+        public void LoadBannedsFromDB()
         {
-            Exports["ghmattimysql"].execute("SELECT * FROM banneds", new[] { "" }, new Action<dynamic>((result) =>
+            try
             {
-                if (result.Count != 0)
+                Exports["ghmattimysql"].execute("SELECT * FROM banneds", new[] { "" }, new Action<dynamic>((result) =>
                 {
-                    foreach (var r in result)
+                    if (result.Count != 0)
                     {
-                        int id = r.b_id;
-                        string steam = r.b_steam;
-                        string license = r.b_license;
-                        string discord = r.b_discord;
-                        string reason = r.b_reason;
-                        DateTime banned = DateTime.Parse(r.b_banned);
-                        DateTime unban = DateTime.Parse(r.b_unban);
-                        bool permanent = Convert.ToBoolean(r.b_permanent);
-                        userBanneds.Add(new PlayerBanned(id, steam, license, discord, banned, unban, permanent, reason));
+                        foreach (var r in result)
+                        {
+                            int id = r.b_id;
+                            string steam = r.b_steam;
+                            string license = r.b_license;
+                            string discord = r.b_discord;
+                            string reason = r.b_reason;
+                            DateTime banned = DateTime.Parse(r.b_banned);
+                            DateTime unban = DateTime.Parse(r.b_unban);
+                            bool permanent = Convert.ToBoolean(r.b_permanent);
+                            userBanneds.Add(new PlayerBanned(id, steam, license, discord, banned, unban, permanent, reason));
+                        }
                     }
-                }
 
-            }));
+                }));
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex, $"LoadBannedsFromDB");
+            }
         }
     }
 }
