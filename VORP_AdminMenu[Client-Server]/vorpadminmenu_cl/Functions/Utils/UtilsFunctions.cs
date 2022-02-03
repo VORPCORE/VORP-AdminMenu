@@ -1,9 +1,4 @@
-﻿using CitizenFX.Core;
-using CitizenFX.Core.Native;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Teleports;
 
@@ -99,7 +94,7 @@ namespace vorpadminmenu_cl.Functions.Utils
             return new Vector3(newCoordX, newCoordY, newCoordZ);
         }
 
-       
+
         public async static Task<dynamic> GetInput(string title, string hint)
         {
             dynamic postValue = null;

@@ -1,11 +1,6 @@
-﻿using CitizenFX.Core;
-using CitizenFX.Core.Native;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Utils;
 using Hash = CitizenFX.Core.Native.Hash;
@@ -22,7 +17,7 @@ namespace vorpadminmenu_cl.Functions.Administration
         {
             Tick += freezeAnim;
             Tick += CreateBlips;
-            
+
 
             EventHandlers["vorp:slapback"] += new Action(SlapDone);
             EventHandlers["vorp:stopit"] += new Action(StopIt);
@@ -33,7 +28,7 @@ namespace vorpadminmenu_cl.Functions.Administration
             EventHandlers["vorp:healDone"] += new Action(healDone);
         }
 
-       
+
 
         public static void SetupAdministration()
         {
@@ -41,7 +36,7 @@ namespace vorpadminmenu_cl.Functions.Administration
             {
                 StopPlayer(args);
             }), false);
-            
+
 
             API.RegisterCommand(GetConfig.Config["Kick"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
@@ -53,7 +48,7 @@ namespace vorpadminmenu_cl.Functions.Administration
                 Ban(args);
             }), false);
 
-            
+
 
             API.RegisterCommand(GetConfig.Config["Cblip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
@@ -97,7 +92,7 @@ namespace vorpadminmenu_cl.Functions.Administration
 
         }
 
-        
+
 
         public static void StopPlayer(List<object> args)
         {
@@ -157,7 +152,7 @@ namespace vorpadminmenu_cl.Functions.Administration
 
             string reason = "";
 
-            for(int i = 2; i < args.Count(); i++)
+            for (int i = 2; i < args.Count(); i++)
                 reason = args[i].ToString() + " ";
 
             TriggerServerEvent("vorp_adminmenu:addNewBan", target, temp, reason);
@@ -276,7 +271,7 @@ namespace vorpadminmenu_cl.Functions.Administration
 
             if (args.Count != 0)
                 idDestinatary = int.Parse(args[0].ToString());
-            
+
             TriggerServerEvent("vorp:revivePlayer", idDestinatary);
         }
 

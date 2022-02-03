@@ -1,10 +1,5 @@
-﻿using CitizenFX.Core;
-using CitizenFX.Core.Native;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Utils;
 using vorpadminmenu_cl.Menus.Players.Inventory;
 
@@ -17,7 +12,7 @@ namespace vorpadminmenu_cl.Functions.Database
             EventHandlers["vorp:loadPlayerInventory"] += new Action<dynamic>(LoadPlayerInventory);
         }
 
-        
+
 
         public static void SetupDatabase()
         {
@@ -112,13 +107,14 @@ namespace vorpadminmenu_cl.Functions.Database
                     string[] weaponNameSubdivided = weaponName.Split('_');
                     foreach (var a in AmmoList.ammo)
                     {
-                        if (a.Contains(weaponNameSubdivided[1])){
+                        if (a.Contains(weaponNameSubdivided[1]))
+                        {
                             int ammoType = API.GetHashKey(a);
                             API.SetPedAmmoByType(API.PlayerPedId(), ammoType, 200);
                         }
                     }
                 }
-            } 
+            }
         }
 
 
@@ -132,6 +128,6 @@ namespace vorpadminmenu_cl.Functions.Database
             Inventory.LoadItems(items);
         }
 
-        
+
     }
 }

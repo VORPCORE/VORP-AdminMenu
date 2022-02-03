@@ -1,5 +1,4 @@
-﻿using CitizenFX.Core;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Administration;
 using vorpadminmenu_cl.Functions.Boosters;

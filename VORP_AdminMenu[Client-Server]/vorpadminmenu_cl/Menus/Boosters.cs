@@ -1,10 +1,4 @@
-﻿using CitizenFX.Core;
-using MenuAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MenuAPI;
 using vorpadminmenu_cl.Functions.Boosters;
 using vorpadminmenu_cl.Functions.Utils;
 
@@ -98,19 +92,19 @@ namespace vorpadminmenu_cl.Menus
                 }
             };
 
-                boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
+            boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
+        {
+            if (_index == 3)
             {
-                if (_index == 3)
-                {
-                    BoosterFunctions.SetClip(_checked);
-                    if (_checked) { mclip.Checked = false; };
-                }
-                else if (_index == 4)
-                {
-                    BoosterFunctions.SetClip(_checked);
-                    if (_checked) { nclip.Checked = false; };
-                }
-            };
+                BoosterFunctions.SetClip(_checked);
+                if (_checked) { mclip.Checked = false; };
+            }
+            else if (_index == 4)
+            {
+                BoosterFunctions.SetClip(_checked);
+                if (_checked) { nclip.Checked = false; };
+            }
+        };
 
         }
         public static Menu GetMenu()

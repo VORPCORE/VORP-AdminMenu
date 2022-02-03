@@ -1,10 +1,6 @@
 ﻿using CitizenFX.Core;
-using CitizenFX.Core.Native;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace vorpadminmenu_sv
 {
@@ -25,11 +21,11 @@ namespace vorpadminmenu_sv
             EventHandlers["vorp:getInventory"] += new Action<Player, List<object>>(GetInventory);
         }
 
-        
 
-        private void AdminAddMoney([FromSource]Player source, List<object> args)
+
+        private void AdminAddMoney([FromSource] Player source, List<object> args)
         {
-            bool idC = int.TryParse(args[0].ToString(),out int id);
+            bool idC = int.TryParse(args[0].ToString(), out int id);
             bool typeC = int.TryParse(args[1].ToString(), out int type);
 
             dynamic UserCharacter = LoadConfig.VORPCORE.getUser(id).getUsedCharacter;
@@ -43,7 +39,7 @@ namespace vorpadminmenu_sv
                     {
                         int intQuantity = (int)Math.Ceiling(quantity);
                         UserCharacter.addCurrency(type, intQuantity);
-                    } 
+                    }
                     else
                     {
                         bool quantityCInt = int.TryParse(args[2].ToString(), out int quantityInt);
@@ -76,7 +72,7 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void AdminRemoveMoney([FromSource]Player source, List<object> args)
+        private void AdminRemoveMoney([FromSource] Player source, List<object> args)
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             bool typeC = int.TryParse(args[1].ToString(), out int type);
@@ -125,7 +121,7 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void AdminAddXp([FromSource]Player source, List<object> args)
+        private void AdminAddXp([FromSource] Player source, List<object> args)
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             bool quantityC = int.TryParse(args[1].ToString(), out int quantity);
@@ -140,7 +136,7 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void AdminRemoveXp([FromSource]Player source, List<object> args)
+        private void AdminRemoveXp([FromSource] Player source, List<object> args)
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             bool quantityC = int.TryParse(args[1].ToString(), out int quantity);
@@ -155,13 +151,13 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void AdminAddItem([FromSource]Player source, List<object> args)
+        private void AdminAddItem([FromSource] Player source, List<object> args)
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             string item = args[1].ToString();
             bool quantityC = int.TryParse(args[2].ToString(), out int quantity);
-            
-           
+
+
             if (idC && quantityC)
             {
                 Exports["ghmattimysql"].execute("SELECT * FROM items WHERE item=(?)", new[] { item }, new Action<dynamic>((result) =>
@@ -169,14 +165,14 @@ namespace vorpadminmenu_sv
                     if (result.Count != 0)
                     {
                         TriggerEvent("vorpCore:addItem", id, item, quantity);
-                    } 
+                    }
                     else
                     {
                         Debug.WriteLine(item + " doesn't exist in db");
                     }
 
                 }));
-                
+
             }
             else
             {
@@ -184,7 +180,7 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void AdminDelItem([FromSource]Player source, List<object> args)
+        private void AdminDelItem([FromSource] Player source, List<object> args)
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             string item = args[1].ToString();
@@ -199,14 +195,14 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void AdminAddWeapon([FromSource]Player source, List<object> args)
+        private void AdminAddWeapon([FromSource] Player source, List<object> args)
         {
             bool idC = int.TryParse(args[0].ToString(), out int id);
             string item = args[1].ToString();
             bool wC = false;
             foreach (string w in Utils.WeaponList.weapons)
             {
-                if(w == item)
+                if (w == item)
                 {
                     wC = true;
                     Debug.WriteLine("Va bien");
@@ -224,7 +220,7 @@ namespace vorpadminmenu_sv
                 }
             }
             bool quantityC = int.TryParse(args[3].ToString(), out int quantity);
-            if(idC && wC && aC && quantityC)
+            if (idC && wC && aC && quantityC)
             {
                 Debug.WriteLine("No entiendo nada");
                 Dictionary<string, int> ammoaux = new Dictionary<string, int>();
@@ -237,7 +233,7 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void GetInventory([FromSource]Player source, List<object> args)
+        private void GetInventory([FromSource] Player source, List<object> args)
         {
             int idPlayer = int.Parse(args[0].ToString());
             TriggerEvent("vorpCore:getUserInventory", idPlayer, new Action<dynamic>((items) =>

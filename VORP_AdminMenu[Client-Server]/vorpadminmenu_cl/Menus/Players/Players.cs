@@ -1,6 +1,4 @@
-﻿using CitizenFX.Core.Native;
-using MenuAPI;
-using System;
+﻿using MenuAPI;
 using System.Collections.Generic;
 using System.Linq;
 using vorpadminmenu_cl.Functions.Administration;
@@ -39,7 +37,7 @@ namespace vorpadminmenu_cl.Menus.Players
                     };
                     playersListMenu.AddMenuItem(playerNameButton);
                     MenuController.BindMenuItem(playersListMenu, playersOptionsMenu, playerNameButton);
-                    
+
                 }
             };
 
@@ -47,7 +45,7 @@ namespace vorpadminmenu_cl.Menus.Players
             {
                 indexPlayer = _index;
                 playersOptionsMenu.MenuTitle = API.GetPlayerName(idPlayers.ElementAt(indexPlayer)) + "," + API.GetPlayerServerId((idPlayers.ElementAt(indexPlayer)));
-                
+
             };
 
             playersOptionsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["SpectateTitle"], GetConfig.Langs["SpectateDesc"])
@@ -119,7 +117,7 @@ namespace vorpadminmenu_cl.Menus.Players
                     AdministrationFunctions.Spectate(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if(_index == 1)
+                else if (_index == 1)
                 {
                     AdministrationFunctions.SpectateOff(MainMenu.args);
                 }
@@ -133,7 +131,7 @@ namespace vorpadminmenu_cl.Menus.Players
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     AdministrationFunctions.Heal(MainMenu.args);
                 }
-                else if(_index == 4)
+                else if (_index == 4)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));
                     TeleportsFunctions.TpToPlayer(MainMenu.args);
@@ -151,7 +149,7 @@ namespace vorpadminmenu_cl.Menus.Players
                     AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                
+
                 else if (_index == 7)
                 {
                     MainMenu.args.Add(API.GetPlayerServerId(idPlayers.ElementAt(indexPlayer)));

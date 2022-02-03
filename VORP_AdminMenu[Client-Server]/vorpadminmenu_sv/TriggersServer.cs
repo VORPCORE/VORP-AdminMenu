@@ -1,9 +1,5 @@
 ﻿using CitizenFX.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace vorpadminmenu_sv
 {
@@ -29,7 +25,7 @@ namespace vorpadminmenu_sv
             EventHandlers["vorp:kick"] += new Action<Player, int>(Kick);
             EventHandlers["vorp:slap"] += new Action<Player, int>(Slap);
             EventHandlers["vorp:stopplayer"] += new Action<Player, int>(StopP);
-           
+
             EventHandlers["vorp:thorIDserver"] += new Action<Player, int>(ThorToId);
             EventHandlers["vorp:fireIDserver"] += new Action<Player, int>(FireToId);
 
@@ -38,7 +34,7 @@ namespace vorpadminmenu_sv
 
         }
 
-       
+
 
         private void CoordsToBringPlayer(Vector3 coordToSend, int destinataryID)
         {
@@ -47,7 +43,7 @@ namespace vorpadminmenu_sv
         }
 
 
-        private void CoordsToPlayerDestiny([FromSource]Player ply, int destinataryID)
+        private void CoordsToPlayerDestiny([FromSource] Player ply, int destinataryID)
         {
             Player p = PlayersList[destinataryID];
             TriggerClientEvent(p, "vorp:askForCoords", ply.Handle);
@@ -60,13 +56,13 @@ namespace vorpadminmenu_sv
             TriggerClientEvent(p, "vorp:coordsToStart", coordsDestiny);
         }
 
-        private void PrivateMessage([FromSource]Player player, int id, string message)
+        private void PrivateMessage([FromSource] Player player, int id, string message)
         {
             Player p = PlayersList[id];
-            TriggerClientEvent(p,"vorp:Tip", message, 8000);
+            TriggerClientEvent(p, "vorp:Tip", message, 8000);
         }
 
-        private void BroadCastMessage([FromSource]Player player, string message)
+        private void BroadCastMessage([FromSource] Player player, string message)
         {
             TriggerClientEvent("vorp:NotifyLeft", player.Name, message, "generic_textures", "tick", 12000);
         }
@@ -78,36 +74,36 @@ namespace vorpadminmenu_sv
         }
 
 
-        private void StopP([FromSource]Player player, int id)
+        private void StopP([FromSource] Player player, int id)
         {
             Player p = PlayersList[id];
             TriggerClientEvent(p, "vorp:stopit");
         }
 
-        private void Slap([FromSource]Player player, int idDestinatary)
+        private void Slap([FromSource] Player player, int idDestinatary)
         {
             Player p = PlayersList[idDestinatary];
             p.TriggerEvent("vorp:slapback");
         }
 
-        private void Kick([FromSource]Player player, int id)
+        private void Kick([FromSource] Player player, int id)
         {
             Player p = PlayersList[id];
             p.Drop("Kicked by Staff");
         }
 
-        private void ThorToId([FromSource]Player player, int idDestinatary)
+        private void ThorToId([FromSource] Player player, int idDestinatary)
         {
             Player p = PlayersList[idDestinatary];
             TriggerClientEvent(p, "vorp:thorIDdone");
         }
-        private void FireToId([FromSource]Player player, int idDestinatary)
+        private void FireToId([FromSource] Player player, int idDestinatary)
         {
             Player p = PlayersList[idDestinatary];
             TriggerClientEvent(p, "vorp:fireIDdone");
         }
 
-        private void RevivePlayer([FromSource]Player player, int idDestinatary)
+        private void RevivePlayer([FromSource] Player player, int idDestinatary)
         {
             if (idDestinatary != -1)
             {
@@ -120,7 +116,7 @@ namespace vorpadminmenu_sv
             }
         }
 
-        private void HealPlayer([FromSource]Player player, int idDestinatary)
+        private void HealPlayer([FromSource] Player player, int idDestinatary)
         {
             if (idDestinatary != -1)
             {

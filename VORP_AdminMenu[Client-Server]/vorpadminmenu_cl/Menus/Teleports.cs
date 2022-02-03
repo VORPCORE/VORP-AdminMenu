@@ -1,10 +1,4 @@
-﻿using CitizenFX.Core;
-using MenuAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MenuAPI;
 using vorpadminmenu_cl.Functions.Teleports;
 using vorpadminmenu_cl.Functions.Utils;
 
@@ -14,7 +8,8 @@ namespace vorpadminmenu_cl.Menus
     {
         private static Menu teleportsMenu = new Menu(GetConfig.Langs["MenuTeleportsTitle"], GetConfig.Langs["MenuTeleportsDesc"]);
         private static bool setupDone = false;
-        private static MenuCheckboxItem tpview = new MenuCheckboxItem(GetConfig.Langs["TpToCursorTitle"], GetConfig.Langs["TpToCursorDesc"], false) {
+        private static MenuCheckboxItem tpview = new MenuCheckboxItem(GetConfig.Langs["TpToCursorTitle"], GetConfig.Langs["TpToCursorDesc"], false)
+        {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
         private static void SetupMenu()
@@ -22,8 +17,8 @@ namespace vorpadminmenu_cl.Menus
             if (setupDone) return;
             setupDone = true;
             MenuController.AddMenu(teleportsMenu);
-            
-            
+
+
 
             teleportsMenu.AddMenuItem(new MenuItem(GetConfig.Langs["TpToWaypointTitle"], GetConfig.Langs["TpToWaypointDesc"])
             {
