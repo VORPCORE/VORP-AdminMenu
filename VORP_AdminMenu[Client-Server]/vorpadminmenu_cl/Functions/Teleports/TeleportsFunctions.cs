@@ -1,7 +1,4 @@
-﻿using CitizenFX.Core;
-using CitizenFX.Core.Native;
-using MenuAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Utils;
@@ -13,11 +10,11 @@ namespace vorpadminmenu_cl.Functions.Teleports
         public static Vector3 lastTpCoords = new Vector3(0.0F, 0.0F, 0.0F);
         static bool guarma = false;
         public static bool deleteOn = false;
-        
-        
+
+
         public TeleportsFunctions()
         {
-            
+
             EventHandlers["vorp:sendCoordsToDestinyBring"] += new Action<Vector3>(Bring);
             EventHandlers["vorp:askForCoords"] += new Action<string>(ResponseCoords);
             EventHandlers["vorp:coordsToStart"] += new Action<Vector3>(TpToPlayerDone);
@@ -67,11 +64,12 @@ namespace vorpadminmenu_cl.Functions.Teleports
                 TpView(args);
             }), false);
         }
-    
+
         public static async void TpToWaypoint(List<object> args)
         {
             Vector3 waypointCoords = API.GetWaypointCoords();
-            if (waypointCoords.X != 0.0f && waypointCoords.Y != 0.0f) {
+            if (waypointCoords.X != 0.0f && waypointCoords.Y != 0.0f)
+            {
                 if (UtilsFunctions.blip == -1)
                 {
                     lastTpCoords = API.GetEntityCoords(API.PlayerPedId(), true, true);
@@ -81,7 +79,7 @@ namespace vorpadminmenu_cl.Functions.Teleports
             }
         }
 
-        
+
 
         public static async void TpToCoords(List<object> args)
         {
@@ -188,7 +186,8 @@ namespace vorpadminmenu_cl.Functions.Teleports
         [Tick]
         public async Task OnTpView()
         {
-            if (GetUserInfo.loaded) { 
+            if (GetUserInfo.loaded)
+            {
                 int entity = 0;
                 bool hit = false;
                 Vector3 endCoord = new Vector3();

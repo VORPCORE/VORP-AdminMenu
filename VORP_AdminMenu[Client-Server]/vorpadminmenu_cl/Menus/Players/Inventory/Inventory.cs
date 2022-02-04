@@ -1,11 +1,6 @@
-﻿using CitizenFX.Core.Native;
-using MenuAPI;
-using System;
+﻿using MenuAPI;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using vorpadminmenu_cl.Functions;
 using vorpadminmenu_cl.Functions.Database;
 
 namespace vorpadminmenu_cl.Menus.Players.Inventory
@@ -63,7 +58,7 @@ namespace vorpadminmenu_cl.Menus.Players.Inventory
                     {
                         itemQuantity = (itemInventoryList[_itemIndex].count - _listIndex);
                     }
-                    
+
                     MainMenu.args.Add(itemQuantity);
                     DatabaseFunctions.DelItem(MainMenu.args);
                     MainMenu.args.Clear();
@@ -79,7 +74,7 @@ namespace vorpadminmenu_cl.Menus.Players.Inventory
             foreach (var i in items)
             {
                 List<string> itemCount = new List<string>();
-                for (var a = 0; a < i.limit+1; a++)
+                for (var a = 0; a < i.limit + 1; a++)
                 {
                     itemCount.Add($"{a}");
                 }
@@ -94,6 +89,6 @@ namespace vorpadminmenu_cl.Menus.Players.Inventory
             return inventory;
         }
 
-        
+
     }
 }

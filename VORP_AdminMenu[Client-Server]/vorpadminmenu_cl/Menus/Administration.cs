@@ -1,19 +1,14 @@
-﻿using CitizenFX.Core;
-using MenuAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using vorpadminmenu_cl.Functions.Utils;
+﻿using MenuAPI;
 using vorpadminmenu_cl.Functions.Administration;
+using vorpadminmenu_cl.Functions.Utils;
 
 namespace vorpadminmenu_cl.Menus
 {
     class Administration
     {
         private static Menu administrationMenu = new Menu(GetConfig.Langs["MenuAdministrationTitle"], GetConfig.Langs["MenuAdministrationDesc"]);
-        private static MenuCheckboxItem pfollow = new MenuCheckboxItem(GetConfig.Langs["PlayersBlipsTitle"], GetConfig.Langs["PlayersBlipsDesc"], false) {
+        private static MenuCheckboxItem pfollow = new MenuCheckboxItem(GetConfig.Langs["PlayersBlipsTitle"], GetConfig.Langs["PlayersBlipsDesc"], false)
+        {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
         private static bool setupDone = false;
@@ -22,15 +17,15 @@ namespace vorpadminmenu_cl.Menus
             if (setupDone) return;
             setupDone = true;
             MenuController.AddMenu(administrationMenu);
-           
+
             //Administration
             MenuController.AddSubmenu(administrationMenu, Players.Players.GetMenu());
-           
+
             MenuItem subMenuPlayersBtn = new MenuItem(GetConfig.Langs["PlayersListTitle"], " ")
             {
                 RightIcon = MenuItem.Icon.ARROW_RIGHT
             };
-           
+
             administrationMenu.AddMenuItem(subMenuPlayersBtn);
             MenuController.BindMenuItem(administrationMenu, Players.Players.GetMenu(), subMenuPlayersBtn);
 
@@ -110,7 +105,7 @@ namespace vorpadminmenu_cl.Menus
                     AdministrationFunctions.StopPlayer(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-               
+
                 else if (_index == 4)
                 {
                     dynamic idPlayer = await UtilsFunctions.GetInput(GetConfig.Langs["SpectateTitle"], GetConfig.Langs["ID"]);
@@ -161,13 +156,14 @@ namespace vorpadminmenu_cl.Menus
             {
                 if (_index == 8)
                 {
-                    if (!_checked) {
+                    if (!_checked)
+                    {
                         AdministrationFunctions.ClearBlips();
                     };
                 }
             };
         }
-        public static Menu GetMenu()    
+        public static Menu GetMenu()
         {
             SetupMenu();
             return administrationMenu;

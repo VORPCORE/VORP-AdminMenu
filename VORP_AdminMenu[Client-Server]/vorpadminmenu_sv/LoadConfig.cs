@@ -50,7 +50,7 @@ namespace vorpadminmenu_sv
                 Debug.WriteLine($"{API.GetCurrentResourceName()}: Config.json Not Found");
             }
         }
-        private void getConfig([FromSource]Player source)
+        private void getConfig([FromSource] Player source)
         {
             source.TriggerEvent($"{API.GetCurrentResourceName()}:SendConfig", ConfigString, Langs);
         }

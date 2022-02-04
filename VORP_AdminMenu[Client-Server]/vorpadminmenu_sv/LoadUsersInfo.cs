@@ -1,9 +1,5 @@
 ﻿using CitizenFX.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace vorpadminmenu_sv
 {
@@ -20,13 +16,13 @@ namespace vorpadminmenu_sv
             }));
         }
 
-        private void LoadPlayerInfo([FromSource]Player source)
+        private void LoadPlayerInfo([FromSource] Player source)
         {
             int _source = int.Parse(source.Handle);
             dynamic UserCharacter = VORPCORE.getUser(_source).getUsedCharacter;
             string group = UserCharacter.group;
 
-            source.TriggerEvent("vorp_admin:GetPlayerInfo",group);
+            source.TriggerEvent("vorp_admin:GetPlayerInfo", group);
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using CitizenFX.Core.Native;
-using MenuAPI;
-using System;
+﻿using MenuAPI;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using vorpadminmenu_cl.Functions.Database;
 using vorpadminmenu_cl.Functions.Utils;
 
@@ -43,7 +39,7 @@ namespace vorpadminmenu_cl.Menus.Players
                     playersListDatabaseMenu.AddMenuItem(playerNameDatabaseButton);
                     MenuController.BindMenuItem(playersListDatabaseMenu, playersOptionsDatabaseMenu, playerNameDatabaseButton);
 
-                    
+
                 }
             };
             playersListDatabaseMenu.OnItemSelect += (_menu, _item, _index) =>
