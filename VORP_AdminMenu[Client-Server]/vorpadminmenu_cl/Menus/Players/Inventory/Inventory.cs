@@ -1,4 +1,6 @@
-﻿using MenuAPI;
+﻿using CitizenFX.Core;
+using CitizenFX.Core.Native;
+using MenuAPI;
 using System.Collections.Generic;
 using System.Linq;
 using vorpadminmenu_cl.Functions.Database;

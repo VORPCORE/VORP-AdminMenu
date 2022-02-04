@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CitizenFX.Core;
+using CitizenFX.Core.Native;
+using System;
 using System.Collections.Generic;
 using vorpadminmenu_cl.Functions.Utils;
 using vorpadminmenu_cl.Menus.Players.Inventory;
