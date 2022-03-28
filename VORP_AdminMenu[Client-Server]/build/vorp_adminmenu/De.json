@@ -1,0 +1,162 @@
+﻿{
+  //Shared
+  "ID": "Spieler ID",
+
+
+
+  //Texts
+
+  "MenuMainTitle": "Rising Sun Admin Menü",
+  "MenuMainDesc": "Admin Menü",
+
+
+
+  "MenuAdministrationTitle": "Administration",
+  "MenuAdministrationDesc": "Administration Menü",
+
+
+  "KickPlayerTitle": "Kick Spieler",
+  "KickPlayerDesc": "Drücken Sie hier, um einen Spieler vom Server zu kicken oder: Command:/k id.",
+
+  "BanPlayerTitle": "Ban Spieler",
+  "BanPlayerDesc": "Drücken Sie hier, um einen Spieler vom Server zu bannen oder: Befehlsbeispiel: /ban 1 1H Grund.",
+  "BanPlayerTime": "Beispiel: /ban 1 1H Grund",
+  "BanPlayerReason": "Grund",
+  "YouArePermanentBanned": "Du hast eine dauerhafte Sperre.",
+  "YouAreTempBanned": "Deine Sperre läuft in {0} Tagen {1} Stunden {2} Minuten ab.",
+  "YouHasBeenBanned": "Sie wurden gesperrt für ({0}) | Ablaufen: ({1})",
+  "Permament": "Dauerhaft",
+  "SyntaxIncorrect": "Bitte verwenden Sie die korrekte Syntax [ 0 = Permanent, 10Y = 10 Jahre, 10M = 10 Monate, 10D = 10 Tage, 10H = 10 Std, 10m = 10 Minuten ]",
+
+  "ReviveTitle": "Spieler wiederbeleben",
+  "ReviveDesc": "Belebe einen Spieler wieder",
+
+  "HealTitle": "Heile einen Spieler",
+  "HealDesc": "Heile einen Spieler",
+
+  "FreezeTitle": "Einfrieren",
+  "FreezeDesc": "Friere einen Spieler ein",
+
+  "SlapTitle": "Schlagen",
+  "SlapDesc": "Einen Spieler schlagen",
+
+  "LightningTitle": "Blitz",
+  "LightningDesc": "Wirf einen Blitz",
+
+  "FireTitle": "Feuer",
+  "FireDesc": "Verbrenne einen Spieler zu Tode",
+
+  "SpectateTitle": "Zuschauer",
+  "SpectateDesc": "Beobachten Sie einen Spieler",
+
+  "SpectateTitleOff": "Zuschauer aus",
+  "SpectateDescOff": "Hör auf zuzuschauen",
+
+  "PlayersBlipsTitle": "Spieler auf der Karte",
+  "PlayersBlipsDesc": "Alle Spieler auf der Karte anzeigen",
+
+  "PlayersListTitle": "Spieler",
+  "PlayersListDesc": "Spielerliste",
+
+  "MenuNotificationsTitle": "Benachrichtigungen",
+  "MenuNotificationsDesc": "Benachrichtigungen Menü",
+
+  "MenuBoostersTitle": "Boosters",
+  "MenuBoostersDesc": "Boosters Menü",
+
+  "GodModeTitle": "Gottmodus",
+  "GodModeDesc": "Gottmodus",
+
+  "ThorTitle": "Thor",
+  "ThorDesc": "Thor",
+
+  "NoClipTitle": "Noclip",
+  "NoClipDesc": "Noclip",
+
+  "NoClip2Title": "NoclipV2",
+  "NoClip2Desc": "Verbessert noclip",
+
+  "GoldenTitle": "Golden",
+  "GoldenDesc": "Goldener Modus",
+
+  "HorseTitle": "Pferd",
+  "HorseDesc": "Spawne ein Pferd",
+  "VehicleTitle": "Kutsche",
+  "VehicleDesc": "Spawn eine Kutsche",
+
+  "InfiniteAmmoOnTitle": "Unendlich Munition an",
+  "InfiniteAmmoOnDesc": "Schalte ein",
+  "InfiniteAmmoOffTitle": "Unendlich Munition aus",
+  "InfiniteAmmoOffDesc": "Ausschalten",
+
+  "Quantity": "Menge",
+
+  "MenuDatabaseTitle": "Datenbank",
+  "MenuDatabaseDesc": "Datenbank Menü",
+
+  "AddMoneyTitle": "Geld hinzufügen",
+  "AddMoneyDesc": "Geld hinzufügen",
+
+  "TypeOfMoneyTitle": "Art: 0 Dollar, 1 Gold, 2 Rollenpunkte",
+  "TypeOfMoneyDesc": "Art",
+
+  "DelMoneyTitle": "Geld löschen",
+  "DelMoneyDesc": "Geld löschen",
+
+  "AddXpTitle": "Add Xp",
+  "AddXpDesc": "Add Xp",
+
+  "DelXpTitle": "Del Xp",
+  "DelXpDesc": "Del Xp",
+
+  "AddItemTitle": "Item hinzufügen",
+  "AddItemDesc": "Item hinzufügen",
+
+  "ItemName": "Item name",
+
+  "AddWeaponTitle": "Waffe hinzufügen",
+  "AddWeaponDesc": "Waffe hinzufügen",
+
+  "WeaponName": "Waffenname",
+  "Weaponammo": "Waffenmunition",
+
+  "InventoryTitle": "Inventar",
+  "InventoryListTitle": "Inventar",
+  "InventoryListDesc": "Inventar",
+
+  "LoadingTitle": "Wird geladen",
+  "LoadingDesc": "Wird geladen",
+
+  "NeedWeaponOnHand": "Du musst eine Waffe in deinen Händen halten",
+
+
+
+  "PrivateMessageTitle": "Private Nachricht an einen Spieler",
+  "PrivateMessageDesc": "Drücken Sie hier, um eine private Nachricht zu senden",
+  "PMDesc": "Nachricht",
+  "BroadcastMessageTitle": "Broadcast-Nachricht",
+  "BroadcastMessageDesc": "Drücken Sie hier, um eine Broadcast-Nachricht zu senden",
+  "BMDesc": "message",
+
+  "MenuTeleportsTitle": "Teleport",
+  "MenuTeleportsDesc": "Teleport Menü",
+
+  "TpToCursorTitle": "Tp zum Cursor",
+  "TpToCursorDesc": "Zum Cursor teleportieren.",
+  "TpToWaypointTitle": "Tp zum Wegpunkt",
+  "TpToWaypointDesc": "Zum Wegpunkt teleportieren.\n Vorher einen Wegpunkt auf der Karte hinzufügen",
+  "TpToCoordsTitle": "Tp zu Koordinaten",
+  "TpToCoordsDesc": "Zu Koordinaten teleportieren.",
+  "XCoord": "X Koordinate",
+  "YCoord": "Y Koordinate",
+  "TpToPlayerTitle": "Tp zum Spieler",
+  "TpToPlayerDesc": "Telepotieren zum Spieler.",
+  "BringPlayerTitle": "Spieler bringen",
+  "BringPlayerDesc": "Spieler zu dir Telepotieren.",
+  "TpBackTitle": "Zurück zum ersten tp",
+  "TpBackDesc": "Teleportiere dich zurück zum ersten und löscht den Blip in der Karte.",
+  "DelBackTitle": "Koordinaten des ersten TP löschen",
+  "DelBackDesc": "Löschen Sie die Markierung und Position der ersten tp-Position.",
+  "GuarmaTitle": "Guarma",
+  "GuarmaDesc": "Zur Guarma-Karte teleportieren. Verwenden Sie erneut, um zur normalen Karte zurückzukehren"
+}
