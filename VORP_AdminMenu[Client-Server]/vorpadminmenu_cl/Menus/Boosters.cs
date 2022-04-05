@@ -1,72 +1,76 @@
 ﻿using MenuAPI;
+
 using vorpadminmenu_cl.Functions.Boosters;
 using vorpadminmenu_cl.Functions.Utils;
 
 namespace vorpadminmenu_cl.Menus
 {
-    class Boosters
+    public class Boosters
     {
-        private static Menu boostersMenu = new Menu(GetConfig.Langs["MenuBoostersTitle"], GetConfig.Langs["MenuBoostersDesc"]);
-        private static MenuCheckboxItem gmode = new MenuCheckboxItem(GetConfig.Langs["GodModeTitle"], GetConfig.Langs["GodModeDesc"], false)
+        private static bool _setupDone = false;
+        private readonly static Menu _boostersMenu = new Menu(GetConfig.Langs["MenuBoostersTitle"], GetConfig.Langs["MenuBoostersDesc"]);
+        private readonly static MenuCheckboxItem _gmode = new MenuCheckboxItem(GetConfig.Langs["GodModeTitle"], GetConfig.Langs["GodModeDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private static MenuCheckboxItem tmode = new MenuCheckboxItem(GetConfig.Langs["ThorTitle"], GetConfig.Langs["ThorDesc"], false)
+        private readonly static MenuCheckboxItem _tmode = new MenuCheckboxItem(GetConfig.Langs["ThorTitle"], GetConfig.Langs["ThorDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private static MenuCheckboxItem nclip = new MenuCheckboxItem(GetConfig.Langs["NoClipTitle"], GetConfig.Langs["NoClipDesc"], false)
+        private readonly static MenuCheckboxItem _nclip = new MenuCheckboxItem(GetConfig.Langs["NoClipTitle"], GetConfig.Langs["NoClipDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private static MenuCheckboxItem mclip = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
+        private readonly static MenuCheckboxItem _mclip = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private static bool setupDone = false;
+
+        #region Private Method
         private static void SetupMenu()
         {
-            if (setupDone) return;
-            setupDone = true;
-            MenuController.AddMenu(boostersMenu);
+            if (_setupDone)
+            {
+                return;
+            }
 
-            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["GoldenTitle"], GetConfig.Langs["GoldenDesc"])
+            _setupDone = true;
+            MenuController.AddMenu(_boostersMenu);
+
+            _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["GoldenTitle"], GetConfig.Langs["GoldenDesc"])
             {
                 Enabled = true,
             });
 
-            boostersMenu.AddMenuItem(gmode);
+            _boostersMenu.AddMenuItem(_gmode);
+            _boostersMenu.AddMenuItem(_tmode);
+            _boostersMenu.AddMenuItem(_nclip);
+            _boostersMenu.AddMenuItem(_mclip);
 
-            boostersMenu.AddMenuItem(tmode);
-
-            boostersMenu.AddMenuItem(nclip);
-
-            boostersMenu.AddMenuItem(mclip);
-
-            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseDesc"])
+            _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseDesc"])
             {
                 Enabled = true,
             });
 
-            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"])
+            _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"])
             {
                 Enabled = true,
             });
-            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["InfiniteAmmoOnTitle"], GetConfig.Langs["InfiniteAmmoOnDesc"])
-            {
-                Enabled = true,
-            });
-
-            boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["InfiniteAmmoOffTitle"], GetConfig.Langs["InfiniteAmmoOffDesc"])
+            _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["InfiniteAmmoOnTitle"], GetConfig.Langs["InfiniteAmmoOnDesc"])
             {
                 Enabled = true,
             });
 
-            boostersMenu.OnItemSelect += async (_menu, _item, _index) =>
+            _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["InfiniteAmmoOffTitle"], GetConfig.Langs["InfiniteAmmoOffDesc"])
+            {
+                Enabled = true,
+            });
+
+            _boostersMenu.OnItemSelect += async (_menu, _item, _index) =>
             {
                 if (_index == 0)
                 {
-                    BoosterFunctions.Golden(MainMenu.args);
+                    BoosterFunctions.Golden();
                 }
                 else if (_index == 5)
                 {
@@ -84,75 +88,76 @@ namespace vorpadminmenu_cl.Menus
                 }
                 else if (_index == 7)
                 {
-                    BoosterFunctions.InfiniteAmmo(MainMenu.args);
+                    BoosterFunctions.InfiniteAmmo();
                 }
                 else if (_index == 8)
                 {
-                    BoosterFunctions.InfiniteAmmoOff(MainMenu.args);
+                    BoosterFunctions.InfiniteAmmoOff();
                 }
             };
 
-            boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
-        {
-            if (_index == 3)
+            _boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
-                BoosterFunctions.SetClip(_checked);
-                if (_checked) { mclip.Checked = false; };
-            }
-            else if (_index == 4)
-            {
-                BoosterFunctions.SetClip(_checked);
-                if (_checked) { nclip.Checked = false; };
-            }
-        };
-
+                if (_index == 3)
+                {
+                    BoosterFunctions.NoClipMode("v1", false);
+                }
+                else if (_index == 4)
+                {
+                    BoosterFunctions.NoClipMode("v2", false);
+                }
+            };
         }
+        #endregion
+
+        #region Public Methods
         public static Menu GetMenu()
         {
             SetupMenu();
-            return boostersMenu;
+            return _boostersMenu;
         }
 
         public static bool Getgmode()
         {
-            return gmode.Checked;
+            return _gmode.Checked;
         }
 
         public static void Setgmode(bool gMode)
         {
-            gmode.Checked = gMode;
+            _gmode.Checked = gMode;
         }
 
         public static bool Gettmode()
         {
-            return tmode.Checked;
+            return _tmode.Checked;
         }
 
         public static void Settmode(bool tMode)
         {
-            tmode.Checked = tMode;
+            _tmode.Checked = tMode;
         }
 
         public static bool Getnclip()
         {
-            return nclip.Checked;
+            return _nclip.Checked;
         }
 
         public static void Setnclip(bool nClip)
         {
-            nclip.Checked = nClip;
-            mclip.Checked = false;
+            _nclip.Checked = nClip;
+            _mclip.Checked = false;
         }
 
         public static bool Getmclip()
         {
-            return mclip.Checked;
+            return _mclip.Checked;
         }
 
         public static void Setmclip(bool mClip)
         {
-            mclip.Checked = mClip;
-            nclip.Checked = false;
+            _mclip.Checked = mClip;
+            _nclip.Checked = false;
         }
+        #endregion
     }
 }
