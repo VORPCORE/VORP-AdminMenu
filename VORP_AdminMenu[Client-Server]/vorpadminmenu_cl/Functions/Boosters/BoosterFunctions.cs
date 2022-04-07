@@ -18,7 +18,6 @@ namespace vorpadminmenu_cl.Functions.Boosters
         {
             EventHandlers["vorp:thordone"] += new Action<Vector3>(ThorDone);
 
-            Tick += Noc;
             Tick += Noc2;
             Tick += OnLight;
         }
@@ -40,12 +39,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
 
             API.RegisterCommand(GetConfig.Config["Noclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                NoClipMode("v1", true);
-            }), false);
-
-            API.RegisterCommand(GetConfig.Config["Mclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                NoClipMode("v2", true);
+                NoClipMode(true);
             }), false);
 
             API.RegisterCommand(GetConfig.Config["Thor"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
@@ -133,63 +127,25 @@ namespace vorpadminmenu_cl.Functions.Boosters
             }
         }
 
-        public static void NoClipMode(string noClipType, bool isFromCommandLine)
+        public static void NoClipMode(bool isFromCommandLine)
         {
             int playerPed = API.PlayerPedId();
             _heading = API.GetEntityHeading(playerPed);
 
             bool clipStatus;
-            if (noClipType == "v2")
+            
+            if (isFromCommandLine)
             {
-                if (isFromCommandLine)
-                {
-                    clipStatus = !Menus.Boosters.Getmclip();
-                }
-                else
-                {
-                    clipStatus = Menus.Boosters.Getmclip();
-                }
-
-                SetNoClipEntity(playerPed, clipStatus);
-                Menus.Boosters.Setmclip(clipStatus);
+                clipStatus = !Menus.Boosters.GetNoClip();
             }
             else
             {
-                if (isFromCommandLine)
-                {
-                    clipStatus = !Menus.Boosters.Getnclip();
-                }
-                else
-                {
-                    clipStatus = Menus.Boosters.Getnclip();
-                }
-
-                SetNoClipEntity(playerPed, clipStatus);
-                Menus.Boosters.Setnclip(clipStatus);
+                clipStatus = Menus.Boosters.GetNoClip();
             }
+
+            SetNoClipEntity(playerPed, clipStatus);
+            Menus.Boosters.SetNoClip(clipStatus);
         }
-
-        //public static void NoClipMode(string noClipType, bool isCommandLine = false)
-        //{
-        //    int playerPed = API.PlayerPedId();
-        //    _heading = API.GetEntityHeading(playerPed);
-
-        //    bool clipStatus;
-        //    if (noClipType == "v2")
-        //    {
-        //        clipStatus = !Menus.Boosters.Getmclip();
-        //        SetNoClipEntity(playerPed, clipStatus);
-
-        //        Menus.Boosters.Setmclip(clipStatus);
-        //    }
-        //    else
-        //    {
-        //        clipStatus = !Menus.Boosters.Getnclip();
-        //        SetNoClipEntity(playerPed, clipStatus);
-
-        //        Menus.Boosters.Setnclip(clipStatus);
-        //    }
-        //}
 
         public static void Thor()
         {
@@ -290,89 +246,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
         }
 
         [Tick]
-        private async Task Noc()
-        {
-            if (GetUserInfo.loaded)
-            {
-                if (Menus.Boosters.Getnclip())
-                {
-                    int playerPed = API.PlayerPedId();
-                    API.SetEntityHeading(playerPed, _heading);
-                    if (API.IsControlPressed(0, 0x8FD015D8)) //W
-                    {
-                        Vector3 c = API.GetOffsetFromEntityInWorldCoords(playerPed, 0.0F, _speed, -1.0F);
-                        API.SetEntityCoords(playerPed, c.X, c.Y, c.Z, true, true, true, true);
-                    }
-
-                    if (API.IsControlPressed(0, 0xD27782E3)) //S
-                    {
-                        Vector3 c = API.GetOffsetFromEntityInWorldCoords(playerPed, 0.0F, -_speed, -1.0F);
-                        API.SetEntityCoords(playerPed, c.X, c.Y, c.Z, true, true, true, true);
-                    }
-
-                    if (API.IsControlPressed(0, 0x7065027D)) //A
-                    {
-                        Vector3 c = API.GetOffsetFromEntityInWorldCoords(playerPed, -_speed, 0.0F, -1.0F);
-                        API.SetEntityCoords(playerPed, c.X, c.Y, c.Z, true, true, true, true);
-                    }
-
-                    if (API.IsControlPressed(0, 0xB4E465B4)) //D
-                    {
-                        Vector3 c = API.GetOffsetFromEntityInWorldCoords(playerPed, _speed, 0.0F, -1.0F);
-                        API.SetEntityCoords(playerPed, c.X, c.Y, c.Z, true, true, true, true);
-                    }
-
-                    if (API.IsControlPressed(0, 0xD9D0E1C0)) //SPACE
-                    {
-                        Vector3 c = new Vector3();
-                        if (_speed > 1.0F)
-                        {
-                            c = API.GetOffsetFromEntityInWorldCoords(playerPed, 0.0F, 0.0F, -_speed * 2);
-                        }
-                        else
-                        {
-                            c = API.GetOffsetFromEntityInWorldCoords(playerPed, 0.0F, 0.0F, -_speed - 1.0F);
-                        }
-                        API.SetEntityCoords(playerPed, c.X, c.Y, c.Z, true, true, true, true);
-                    }
-
-                    if (API.IsControlPressed(0, 0x8FFC75D6)) //SHIFT
-                    {
-                        Vector3 c = API.GetOffsetFromEntityInWorldCoords(playerPed, 0.0F, 0.0F, _speed - 1.0F);
-                        API.SetEntityCoords(playerPed, c.X, c.Y, c.Z, true, true, true, true);
-                    }
-
-                    if (API.IsControlPressed(0, 0x6319DB71)) //UP
-                    {
-                        if (_speed > 0.5F)
-                        {
-                            _speed += 0.5F;
-                        }
-                    }
-                    if (API.IsControlPressed(0, 0x05CA7C52)) //DOWN
-                    {
-                        if (_speed > 0.5)
-                        {
-                            _speed -= 0.5F;
-                        }
-                    }
-                    if (API.IsControlPressed(0, 0x9959A6F0)) //C
-                    {
-                        _speed = 1.28F;
-                    }
-
-                    _heading += API.GetGameplayCamRelativeHeading();
-                }
-            }
-        }
-
-        [Tick]
         private async Task Noc2()
         {
             if (GetUserInfo.loaded)
             {
                 int playerPed = API.PlayerPedId();
-                if (Menus.Boosters.Getmclip())
+                if (Menus.Boosters.GetNoClip())
                 {
                     API.SetEntityHeading(playerPed, _heading);
                     if (API.IsControlPressed(0, 0x8FD015D8)) //W
@@ -440,7 +319,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
 
                     if (API.IsControlPressed(0, 0xB2F377E8)) //F-turn off noclip2
                     {
-                        NoClipMode("v2", false);
+                        NoClipMode(false);
                     }
                     
                     _heading += API.GetGameplayCamRelativeHeading();
