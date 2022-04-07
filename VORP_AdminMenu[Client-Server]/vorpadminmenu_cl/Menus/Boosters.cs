@@ -17,11 +17,7 @@ namespace vorpadminmenu_cl.Menus
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private readonly static MenuCheckboxItem _nclip = new MenuCheckboxItem(GetConfig.Langs["NoClipTitle"], GetConfig.Langs["NoClipDesc"], false)
-        {
-            Style = MenuCheckboxItem.CheckboxStyle.Tick
-        };
-        private readonly static MenuCheckboxItem _mclip = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
+        private readonly static MenuCheckboxItem _noClip = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
@@ -44,8 +40,7 @@ namespace vorpadminmenu_cl.Menus
 
             _boostersMenu.AddMenuItem(_gmode);
             _boostersMenu.AddMenuItem(_tmode);
-            _boostersMenu.AddMenuItem(_nclip);
-            _boostersMenu.AddMenuItem(_mclip);
+            _boostersMenu.AddMenuItem(_noClip);
 
             _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseDesc"])
             {
@@ -100,11 +95,7 @@ namespace vorpadminmenu_cl.Menus
             {
                 if (_index == 3)
                 {
-                    BoosterFunctions.NoClipMode("v1", false);
-                }
-                else if (_index == 4)
-                {
-                    BoosterFunctions.NoClipMode("v2", false);
+                    BoosterFunctions.NoClipMode(false);
                 }
             };
         }
@@ -137,26 +128,14 @@ namespace vorpadminmenu_cl.Menus
             _tmode.Checked = tMode;
         }
 
-        public static bool Getnclip()
+        public static bool GetNoClip()
         {
-            return _nclip.Checked;
+            return _noClip.Checked;
         }
 
-        public static void Setnclip(bool nClip)
+        public static void SetNoClip(bool noClip)
         {
-            _nclip.Checked = nClip;
-            _mclip.Checked = false;
-        }
-
-        public static bool Getmclip()
-        {
-            return _mclip.Checked;
-        }
-
-        public static void Setmclip(bool mClip)
-        {
-            _mclip.Checked = mClip;
-            _nclip.Checked = false;
+            _noClip.Checked = noClip;
         }
         #endregion
     }
