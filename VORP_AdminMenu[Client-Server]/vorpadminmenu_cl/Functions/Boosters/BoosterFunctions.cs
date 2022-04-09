@@ -27,14 +27,34 @@ namespace vorpadminmenu_cl.Functions.Boosters
         {
             // Command line for booster commands
             // Note: Methods registered into commands cannot have optional parameters
-            API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>(async (source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Golden"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                await HorseAsync(args);
+                Golden();
             }), false);
-            
-            API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>(async (source, args, cl, raw) =>
+
+            API.RegisterCommand(GetConfig.Config["Gm"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                await VehicleAsync(args);
+                GodMode(true);
+            }), false);
+
+            API.RegisterCommand(GetConfig.Config["Noclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                NoClipMode(true);
+            }), false);
+
+            API.RegisterCommand(GetConfig.Config["Thor"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
+            {
+                Thor();
+            }), false);
+
+            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOn"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                InfiniteAmmo(true);
+            }), false);
+
+            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOff"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            {
+                InfiniteAmmo(false);
             }), false);
         }
 
@@ -83,17 +103,53 @@ namespace vorpadminmenu_cl.Functions.Boosters
             Function.Call((Hash)0x4AF5A4C7B9157D14, entity, 2, 5000.0);
         }
 
-        public static void GodMode(bool isChecked)
+        public static void GodMode(bool isFromCommandLine)
         {
-            Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), isChecked);
+            bool godModeStatus;
+
+            if (isFromCommandLine)
+            {
+                godModeStatus = !Menus.Boosters.GetGodModeCheckboxStatus();
+            }
+            else
+            {
+                godModeStatus = Menus.Boosters.GetGodModeCheckboxStatus();
+            }
+
+            Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), godModeStatus);
+            Menus.Boosters.SetGodMode(godModeStatus);
         }
 
-        public static void NoClipMode(bool isChecked)
+        public static void NoClipMode(bool isFromCommandLine)
         {
             int playerPed = API.PlayerPedId();
             _heading = API.GetEntityHeading(playerPed);
 
-            SetNoClipEntity(playerPed, isChecked);
+            bool clipStatus;
+
+            if (isFromCommandLine)
+            {
+                clipStatus = !Menus.Boosters.GetNoClipCheckboxStatus();
+            }
+            else
+            {
+                clipStatus = Menus.Boosters.GetNoClipCheckboxStatus();
+            }
+
+            SetNoClipEntity(playerPed, clipStatus);
+            Menus.Boosters.SetNoClipCheckboxStatus(clipStatus);
+        }
+
+        public static void Thor()
+        {
+            if (Menus.Boosters.GetThorModeCheckboxStatus())
+            {
+                Menus.Boosters.SetThorModeCheckboxStatus(false);
+            }
+            else
+            {
+                Menus.Boosters.SetThorModeCheckboxStatus(true);
+            }
         }
 
         public static async Task HorseAsync(List<object> args)

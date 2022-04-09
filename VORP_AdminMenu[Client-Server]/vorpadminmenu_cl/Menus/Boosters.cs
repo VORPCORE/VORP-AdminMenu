@@ -95,11 +95,11 @@ namespace vorpadminmenu_cl.Menus
             {
                 if (_index == 1)
                 {
-                    BoosterFunctions.GodMode(_checked);
+                    BoosterFunctions.GodMode(false);
                 }
                 else if (_index == 3)
                 {
-                    BoosterFunctions.NoClipMode(_checked);
+                    BoosterFunctions.NoClipMode(false);
                 }
             };
         }
@@ -112,14 +112,34 @@ namespace vorpadminmenu_cl.Menus
             return _boostersMenu;
         }
 
-        public static bool GetThorModeCheckboxStatus()
+        public static bool GetGodModeCheckboxStatus()
         {
-            return _thorModeCheckbox.Checked;
+            return _godModeCheckbox.Checked;
+        }
+
+        public static void SetGodMode(bool gMode)
+        {
+            _godModeCheckbox.Checked = gMode;
         }
 
         public static bool GetNoClipCheckboxStatus()
         {
             return _noClipCheckbox.Checked;
+        }
+
+        public static void SetNoClipCheckboxStatus(bool noClip)
+        {
+            _noClipCheckbox.Checked = noClip;
+        }
+
+        public static bool GetThorModeCheckboxStatus()
+        {
+            return _thorModeCheckbox.Checked;
+        }
+
+        public static void SetThorModeCheckboxStatus(bool status)
+        {
+            _thorModeCheckbox.Checked = status;
         }
         #endregion
     }
