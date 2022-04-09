@@ -88,15 +88,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
             Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), isChecked);
         }
 
-        public static void NoClipMode()
+        public static void NoClipMode(bool isChecked)
         {
             int playerPed = API.PlayerPedId();
             _heading = API.GetEntityHeading(playerPed);
 
-            bool clipStatus = Menus.Boosters.GetNoClip();
-
-            SetNoClipEntity(playerPed, clipStatus);
-            Menus.Boosters.SetNoClip(clipStatus);
+            SetNoClipEntity(playerPed, isChecked);
         }
 
         public static async Task Horse(List<object> args)
@@ -255,11 +252,6 @@ namespace vorpadminmenu_cl.Functions.Boosters
                     if (API.IsControlPressed(0, 0x8CC9CD42)) //X-default speed
                     {
                         _speed = 1.28F;
-                    }
-
-                    if (API.IsControlPressed(0, 0xB2F377E8)) //F-turn off noclip2
-                    {
-                        NoClipMode();
                     }
                     
                     _heading += API.GetGameplayCamRelativeHeading();

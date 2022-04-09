@@ -99,7 +99,7 @@ namespace vorpadminmenu_cl.Menus
                 }
                 else if (_index == 3)
                 {
-                    BoosterFunctions.NoClipMode();
+                    BoosterFunctions.NoClipMode(_checked);
                 }
             };
         }
@@ -120,11 +120,6 @@ namespace vorpadminmenu_cl.Menus
         public static bool GetNoClip()
         {
             return _noClip.Checked;
-        }
-
-        public static void SetNoClip(bool noClip)
-        {
-            _noClip.Checked = noClip;
         }
         #endregion
     }
