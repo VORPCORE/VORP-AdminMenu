@@ -1,12 +1,14 @@
 ﻿using CitizenFX.Core;
+
 using System;
 using System.Collections.Generic;
+
+using vorpadminmenu_sv.Diagnostics;
 
 namespace vorpadminmenu_sv
 {
     class TriggersDatabase : BaseScript
     {
-
         public TriggersDatabase()
         {
             EventHandlers["vorp:adminAddMoney"] += new Action<Player, List<object>>(AdminAddMoney);
@@ -20,8 +22,6 @@ namespace vorpadminmenu_sv
 
             EventHandlers["vorp:getInventory"] += new Action<Player, List<object>>(GetInventory);
         }
-
-
 
         private void AdminAddMoney([FromSource] Player source, List<object> args)
         {
@@ -49,7 +49,7 @@ namespace vorpadminmenu_sv
                         }
                         else
                         {
-                            Debug.WriteLine("Bad syntax");
+                            Logger.Error("Bad syntax");
                         }
                     }
                 }
@@ -63,12 +63,12 @@ namespace vorpadminmenu_sv
                 }
                 else
                 {
-                    Debug.WriteLine("Bad syntax");
+                    Logger.Error("Bad syntax");
                 }
             }
             else
             {
-                Debug.WriteLine("Bad syntax");
+                Logger.Error("Bad syntax");
             }
         }
 
@@ -98,7 +98,7 @@ namespace vorpadminmenu_sv
                         }
                         else
                         {
-                            Debug.WriteLine("Bad syntax");
+                            Logger.Error("Bad syntax");
                         }
                     }
                 }
@@ -112,12 +112,12 @@ namespace vorpadminmenu_sv
                 }
                 else
                 {
-                    Debug.WriteLine("Bad syntax");
+                    Logger.Error("Bad syntax");
                 }
             }
             else
             {
-                Debug.WriteLine("Bad syntax");
+                Logger.Error("Bad syntax");
             }
         }
 
@@ -132,7 +132,7 @@ namespace vorpadminmenu_sv
             }
             else
             {
-                Debug.WriteLine("Bad syntax");
+                Logger.Error("Bad syntax");
             }
         }
 
@@ -147,7 +147,7 @@ namespace vorpadminmenu_sv
             }
             else
             {
-                Debug.WriteLine("Bad syntax");
+                Logger.Error("Bad syntax");
             }
         }
 
@@ -168,7 +168,7 @@ namespace vorpadminmenu_sv
                     }
                     else
                     {
-                        Debug.WriteLine(item + " doesn't exist in db");
+                        Logger.Error(item + " doesn't exist in db");
                     }
 
                 }));
@@ -176,7 +176,7 @@ namespace vorpadminmenu_sv
             }
             else
             {
-                Debug.WriteLine("Bad syntax");
+                Logger.Error("Bad syntax");
             }
         }
 
@@ -191,7 +191,7 @@ namespace vorpadminmenu_sv
             }
             else
             {
-                Debug.WriteLine("Bad syntax");
+                Logger.Error("Bad syntax");
             }
         }
 
@@ -205,7 +205,7 @@ namespace vorpadminmenu_sv
                 if (w == item)
                 {
                     wC = true;
-                    Debug.WriteLine("Va bien");
+                    Logger.Success("Va bien");
                 }
             }
 
@@ -216,20 +216,20 @@ namespace vorpadminmenu_sv
                 if (a == ammo)
                 {
                     aC = true;
-                    Debug.WriteLine("Esta bien");
+                    Logger.Success("Esta bien");
                 }
             }
             bool quantityC = int.TryParse(args[3].ToString(), out int quantity);
             if (idC && wC && aC && quantityC)
             {
-                Debug.WriteLine("No entiendo nada");
+                Logger.Success("No entiendo nada");
                 Dictionary<string, int> ammoaux = new Dictionary<string, int>();
                 ammoaux.Add(ammo, quantity);
                 TriggerEvent("vorpCore:registerWeapon", id, item, ammoaux, ammoaux);
             }
             else
             {
-                Debug.WriteLine("Bad syntax");
+                Logger.Error("Bad syntax");
             }
         }
 
