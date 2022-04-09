@@ -197,40 +197,32 @@ namespace vorpadminmenu_sv
 
         private void AdminAddWeapon([FromSource] Player source, List<object> args)
         {
-            bool idC = int.TryParse(args[0].ToString(), out int id);
-            string item = args[1].ToString();
-            bool wC = false;
-            foreach (string w in Utils.WeaponList.weapons)
+            if (args.Count != 4)
             {
-                if (w == item)
-                {
-                    wC = true;
-                    Logger.Success("Va bien");
-                }
+                Logger.Error("There are 4 arguments in /addweapon");
+                return;
             }
 
+            if (!int.TryParse(args[0].ToString(), out int playerId))
+            {
+                Logger.Error($"{args[0]} is not a valid player ID");
+                return;
+            }
+
+            string weaponHash = args[1].ToString();
             string ammo = args[2].ToString();
-            bool aC = false;
-            foreach (string a in Utils.AmmoList.ammo)
+
+            if (!int.TryParse(args[3].ToString(), out int quantity))
             {
-                if (a == ammo)
-                {
-                    aC = true;
-                    Logger.Success("Esta bien");
-                }
+                Logger.Error($"{args[3]} is not a proper ammo amount");
             }
-            bool quantityC = int.TryParse(args[3].ToString(), out int quantity);
-            if (idC && wC && aC && quantityC)
+
+            Dictionary<string, int> ammoAux = new Dictionary<string, int>
             {
-                Logger.Success("No entiendo nada");
-                Dictionary<string, int> ammoaux = new Dictionary<string, int>();
-                ammoaux.Add(ammo, quantity);
-                TriggerEvent("vorpCore:registerWeapon", id, item, ammoaux, ammoaux);
-            }
-            else
-            {
-                Logger.Error("Bad syntax");
-            }
+                { ammo, quantity }
+            };
+
+            TriggerEvent("vorpCore:registerWeapon", playerId, weaponHash, ammoAux, new System.Dynamic.ExpandoObject());
         }
 
         private void GetInventory([FromSource] Player source, List<object> args)
