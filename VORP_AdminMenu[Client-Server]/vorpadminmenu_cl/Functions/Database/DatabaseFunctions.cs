@@ -14,8 +14,6 @@ namespace vorpadminmenu_cl.Functions.Database
             EventHandlers["vorp:loadPlayerInventory"] += new Action<dynamic>(LoadPlayerInventory);
         }
 
-
-
         public static void SetupDatabase()
         {
             if (GetUserInfo.userGroup.Contains("admin"))
@@ -39,16 +37,6 @@ namespace vorpadminmenu_cl.Functions.Database
                 API.RegisterCommand(GetConfig.Config["AddItem"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
                 {
                     AddItem(args);
-                }), false);
-
-                API.RegisterCommand(GetConfig.Config["AddWeapon"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-                {
-                    AddWeapon(args);
-                }), false);
-
-                API.RegisterCommand(GetConfig.Config["AddAmmo"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-                {
-                    AddAmmo(args);
                 }), false);
             }
         }
@@ -119,7 +107,6 @@ namespace vorpadminmenu_cl.Functions.Database
             }
         }
 
-
         public static void GetInventoryItems(List<object> args)
         {
             TriggerServerEvent("vorp:getInventory", args);
@@ -129,7 +116,5 @@ namespace vorpadminmenu_cl.Functions.Database
         {
             Inventory.LoadItems(items);
         }
-
-
     }
 }

@@ -18,14 +18,14 @@ namespace vorpadminmenu_cl.Functions.Boosters
         {
             EventHandlers["vorp:thordone"] += new Action<Vector3>(ThorDone);
 
-            Tick += Noc2;
-            Tick += OnLight;
+            Tick += NoClipTick;
+            Tick += OnLightTick;
         }
 
         #region Public Methods
         public static void SetupBoosters()
         {
-            // Setup command line for booster commands
+            // Command line for booster commands
             // Note: Methods registered into commands cannot have optional parameters
             API.RegisterCommand(GetConfig.Config["Golden"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
@@ -34,7 +34,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
 
             API.RegisterCommand(GetConfig.Config["Gm"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                GodMode();
+                GodMode(true);
             }), false);
 
             API.RegisterCommand(GetConfig.Config["Noclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
@@ -46,25 +46,15 @@ namespace vorpadminmenu_cl.Functions.Boosters
             {
                 Thor();
             }), false);
-            
-            API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Horse(args);
-            }), false);
-            
-            API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Vehicle(args);
-            }), false);
-            
+
             API.RegisterCommand(GetConfig.Config["InfiniteAmmoOn"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                InfiniteAmmo();
+                InfiniteAmmo(true);
             }), false);
-            
+
             API.RegisterCommand(GetConfig.Config["InfiniteAmmoOff"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
-                InfiniteAmmoOff();
+                InfiniteAmmo(false);
             }), false);
         }
 
@@ -113,18 +103,21 @@ namespace vorpadminmenu_cl.Functions.Boosters
             Function.Call((Hash)0x4AF5A4C7B9157D14, entity, 2, 5000.0);
         }
 
-        public static void GodMode()
+        public static void GodMode(bool isFromCommandLine)
         {
-            if (!Menus.Boosters.Getgmode())
+            bool godModeStatus;
+
+            if (isFromCommandLine)
             {
-                Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), true);
-                Menus.Boosters.Setgmode(true);
+                godModeStatus = !Menus.Boosters.GetGodModeCheckboxStatus();
             }
             else
             {
-                Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), false);
-                Menus.Boosters.Setgmode(false);
+                godModeStatus = Menus.Boosters.GetGodModeCheckboxStatus();
             }
+
+            Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), godModeStatus);
+            Menus.Boosters.SetGodMode(godModeStatus);
         }
 
         public static void NoClipMode(bool isFromCommandLine)
@@ -133,33 +126,33 @@ namespace vorpadminmenu_cl.Functions.Boosters
             _heading = API.GetEntityHeading(playerPed);
 
             bool clipStatus;
-            
+
             if (isFromCommandLine)
             {
-                clipStatus = !Menus.Boosters.GetNoClip();
+                clipStatus = !Menus.Boosters.GetNoClipCheckboxStatus();
             }
             else
             {
-                clipStatus = Menus.Boosters.GetNoClip();
+                clipStatus = Menus.Boosters.GetNoClipCheckboxStatus();
             }
 
             SetNoClipEntity(playerPed, clipStatus);
-            Menus.Boosters.SetNoClip(clipStatus);
+            Menus.Boosters.SetNoClipCheckboxStatus(clipStatus);
         }
 
         public static void Thor()
         {
-            if (Menus.Boosters.Gettmode())
+            if (Menus.Boosters.GetThorModeCheckboxStatus())
             {
-                Menus.Boosters.Settmode(false);
+                Menus.Boosters.SetThorModeCheckboxStatus(false);
             }
             else
             {
-                Menus.Boosters.Settmode(true);
+                Menus.Boosters.SetThorModeCheckboxStatus(true);
             }
         }
 
-        public static async Task Horse(List<object> args)
+        public static async Task HorseAsync(List<object> args)
         {
             string ped = args[0].ToString();
             int HashPed = API.GetHashKey(ped);
@@ -171,7 +164,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
             API.SetModelAsNoLongerNeeded((uint)HashPed);
         }
 
-        public static async Task Vehicle(List<object> args)
+        public static async Task VehicleAsync(List<object> args)
         {
             string veh = args[0].ToString();
             int HashVeh = API.GetHashKey(veh);
@@ -191,7 +184,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
             API.SetModelAsNoLongerNeeded((uint)HashVeh);
         }
 
-        public static void InfiniteAmmo()
+        public static void InfiniteAmmo(bool isEnabled)
         {
             uint weaponHash = 0;
             if (API.GetCurrentPedWeapon(API.PlayerPedId(), ref weaponHash, false, 0, false))
@@ -204,25 +197,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
                 else
                 {
 
-                    API.SetPedInfiniteAmmo(API.PlayerPedId(), true, weaponHash);
-                }
-            }
-        }
-
-        public static void InfiniteAmmoOff()
-        {
-            uint weaponHash = 0;
-            if (API.GetCurrentPedWeapon(API.PlayerPedId(), ref weaponHash, false, 0, false))
-            {
-                string weaponName = Function.Call<string>((Hash)0x89CF5FF3D363311E, weaponHash);
-                if (weaponName.Contains("UNARMED"))
-                {
-                    TriggerEvent("vorp:Tip", GetConfig.Langs["NeedWeaponOnHand"], 3000);
-                }
-                else
-                {
-
-                    API.SetPedInfiniteAmmo(API.PlayerPedId(), false, weaponHash);
+                    API.SetPedInfiniteAmmo(API.PlayerPedId(), isEnabled, weaponHash);
                 }
             }
         }
@@ -246,12 +221,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
         }
 
         [Tick]
-        private async Task Noc2()
+        private async Task NoClipTick()
         {
             if (GetUserInfo.loaded)
             {
                 int playerPed = API.PlayerPedId();
-                if (Menus.Boosters.GetNoClip())
+                if (Menus.Boosters.GetNoClipCheckboxStatus())
                 {
                     API.SetEntityHeading(playerPed, _heading);
                     if (API.IsControlPressed(0, 0x8FD015D8)) //W
@@ -316,11 +291,6 @@ namespace vorpadminmenu_cl.Functions.Boosters
                     {
                         _speed = 1.28F;
                     }
-
-                    if (API.IsControlPressed(0, 0xB2F377E8)) //F-turn off noclip2
-                    {
-                        NoClipMode(false);
-                    }
                     
                     _heading += API.GetGameplayCamRelativeHeading();
                 }
@@ -328,7 +298,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
         }
 
         [Tick]
-        private async Task OnLight()
+        private async Task OnLightTick()
         {
             if (GetUserInfo.loaded)
             {
@@ -340,12 +310,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
                 Vector3 sourceCoords = UtilsFunctions.GetCoordsFromCam(1000.0F);
                 int rayHandle = API.StartShapeTestRay(camCoords.X, camCoords.Y, camCoords.Z, sourceCoords.X, sourceCoords.Y, sourceCoords.Z, -1, API.PlayerPedId(), 0);
                 API.GetShapeTestResult(rayHandle, ref hit, ref endCoord, ref surfaceNormal, ref entity);
-                if (API.IsControlJustPressed(0, 0xCEE12B50) && Menus.Boosters.Gettmode())
+                if (API.IsControlJustPressed(0, 0xCEE12B50) && Menus.Boosters.GetThorModeCheckboxStatus())
                 {
                     TriggerServerEvent("vorp:thor", endCoord);
                 }
 
-                if (Menus.Boosters.Gettmode())
+                if (Menus.Boosters.GetThorModeCheckboxStatus())
                 {
                     Function.Call((Hash)0x2A32FAA57B937173, -1795314153, endCoord.X, endCoord.Y, endCoord.Z, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 50.0F, 255, 255, 0, 155, false, false, 2, false, 0, 0, false);
                 }

@@ -58,8 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TriggersDatabase.cs" />
     <Compile Include="TriggersServer.cs" />
-    <Compile Include="Utils\AmmoList.cs" />
-    <Compile Include="Utils\WeaponList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.json">

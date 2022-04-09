@@ -15,11 +15,11 @@ namespace vorpadminmenu_cl.Functions.Administration
         static List<int> blipsList = new List<int>();
         public static bool playersFollow = false;
         static bool fireguy = false;
+
         public AdministrationFunctions()
         {
             Tick += freezeAnim;
             Tick += CreateBlips;
-
 
             EventHandlers["vorp:slapback"] += new Action(SlapDone);
             EventHandlers["vorp:stopit"] += new Action(StopIt);
@@ -29,8 +29,6 @@ namespace vorpadminmenu_cl.Functions.Administration
 
             EventHandlers["vorp:healDone"] += new Action(healDone);
         }
-
-
 
         public static void SetupAdministration()
         {
@@ -50,8 +48,6 @@ namespace vorpadminmenu_cl.Functions.Administration
                 Ban(args);
             }), false);
 
-
-
             API.RegisterCommand(GetConfig.Config["Cblip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 PlayerBlips(args);
@@ -66,10 +62,7 @@ namespace vorpadminmenu_cl.Functions.Administration
             {
                 SpectateOff(args);
             }), false);
-            API.RegisterCommand(GetConfig.Config["Revive"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Revive(args);
-            }), false);
+
             API.RegisterCommand(GetConfig.Config["Heal"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Heal(args);

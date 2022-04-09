@@ -9,15 +9,15 @@ namespace vorpadminmenu_cl.Menus
     {
         private static bool _setupDone = false;
         private readonly static Menu _boostersMenu = new Menu(GetConfig.Langs["MenuBoostersTitle"], GetConfig.Langs["MenuBoostersDesc"]);
-        private readonly static MenuCheckboxItem _gmode = new MenuCheckboxItem(GetConfig.Langs["GodModeTitle"], GetConfig.Langs["GodModeDesc"], false)
+        private readonly static MenuCheckboxItem _godModeCheckbox = new MenuCheckboxItem(GetConfig.Langs["GodModeTitle"], GetConfig.Langs["GodModeDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private readonly static MenuCheckboxItem _tmode = new MenuCheckboxItem(GetConfig.Langs["ThorTitle"], GetConfig.Langs["ThorDesc"], false)
+        private readonly static MenuCheckboxItem _thorModeCheckbox = new MenuCheckboxItem(GetConfig.Langs["ThorTitle"], GetConfig.Langs["ThorDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private readonly static MenuCheckboxItem _noClip = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
+        private readonly static MenuCheckboxItem _noClipCheckbox = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
@@ -38,9 +38,9 @@ namespace vorpadminmenu_cl.Menus
                 Enabled = true,
             });
 
-            _boostersMenu.AddMenuItem(_gmode);
-            _boostersMenu.AddMenuItem(_tmode);
-            _boostersMenu.AddMenuItem(_noClip);
+            _boostersMenu.AddMenuItem(_godModeCheckbox);
+            _boostersMenu.AddMenuItem(_thorModeCheckbox);
+            _boostersMenu.AddMenuItem(_noClipCheckbox);
 
             _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseDesc"])
             {
@@ -67,33 +67,37 @@ namespace vorpadminmenu_cl.Menus
                 {
                     BoosterFunctions.Golden();
                 }
-                else if (_index == 5)
+                else if (_index == 4)
                 {
                     dynamic ped = await UtilsFunctions.GetInput(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseTitle"]);
                     MainMenu.args.Add(ped);
-                    BoosterFunctions.Horse(MainMenu.args);
+                    await BoosterFunctions.HorseAsync(MainMenu.args);
+                    MainMenu.args.Clear();
+                }
+                else if (_index == 5)
+                {
+                    dynamic veh = await UtilsFunctions.GetInput(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"]);
+                    MainMenu.args.Add(veh);
+                    await BoosterFunctions.VehicleAsync(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 6)
                 {
-                    dynamic veh = await UtilsFunctions.GetInput(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"]);
-                    MainMenu.args.Add(veh);
-                    BoosterFunctions.Vehicle(MainMenu.args);
-                    MainMenu.args.Clear();
+                    BoosterFunctions.InfiniteAmmo(true);
                 }
                 else if (_index == 7)
                 {
-                    BoosterFunctions.InfiniteAmmo();
-                }
-                else if (_index == 8)
-                {
-                    BoosterFunctions.InfiniteAmmoOff();
+                    BoosterFunctions.InfiniteAmmo(false);
                 }
             };
 
             _boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
-                if (_index == 3)
+                if (_index == 1)
+                {
+                    BoosterFunctions.GodMode(false);
+                }
+                else if (_index == 3)
                 {
                     BoosterFunctions.NoClipMode(false);
                 }
@@ -108,34 +112,34 @@ namespace vorpadminmenu_cl.Menus
             return _boostersMenu;
         }
 
-        public static bool Getgmode()
+        public static bool GetGodModeCheckboxStatus()
         {
-            return _gmode.Checked;
+            return _godModeCheckbox.Checked;
         }
 
-        public static void Setgmode(bool gMode)
+        public static void SetGodMode(bool gMode)
         {
-            _gmode.Checked = gMode;
+            _godModeCheckbox.Checked = gMode;
         }
 
-        public static bool Gettmode()
+        public static bool GetNoClipCheckboxStatus()
         {
-            return _tmode.Checked;
+            return _noClipCheckbox.Checked;
         }
 
-        public static void Settmode(bool tMode)
+        public static void SetNoClipCheckboxStatus(bool noClip)
         {
-            _tmode.Checked = tMode;
+            _noClipCheckbox.Checked = noClip;
         }
 
-        public static bool GetNoClip()
+        public static bool GetThorModeCheckboxStatus()
         {
-            return _noClip.Checked;
+            return _thorModeCheckbox.Checked;
         }
 
-        public static void SetNoClip(bool noClip)
+        public static void SetThorModeCheckboxStatus(bool status)
         {
-            _noClip.Checked = noClip;
+            _thorModeCheckbox.Checked = status;
         }
         #endregion
     }
