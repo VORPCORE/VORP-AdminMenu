@@ -27,14 +27,14 @@ namespace vorpadminmenu_cl.Functions.Boosters
         {
             // Command line for booster commands
             // Note: Methods registered into commands cannot have optional parameters
-            API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>(async (source, args, cl, raw) =>
             {
-                Horse(args);
+                await HorseAsync(args);
             }), false);
             
-            API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
+            API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>(async (source, args, cl, raw) =>
             {
-                Vehicle(args);
+                await VehicleAsync(args);
             }), false);
         }
 
@@ -96,7 +96,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
             SetNoClipEntity(playerPed, isChecked);
         }
 
-        public static async Task Horse(List<object> args)
+        public static async Task HorseAsync(List<object> args)
         {
             string ped = args[0].ToString();
             int HashPed = API.GetHashKey(ped);
@@ -108,7 +108,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
             API.SetModelAsNoLongerNeeded((uint)HashPed);
         }
 
-        public static async Task Vehicle(List<object> args)
+        public static async Task VehicleAsync(List<object> args)
         {
             string veh = args[0].ToString();
             int HashVeh = API.GetHashKey(veh);

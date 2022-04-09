@@ -71,14 +71,14 @@ namespace vorpadminmenu_cl.Menus
                 {
                     dynamic ped = await UtilsFunctions.GetInput(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseTitle"]);
                     MainMenu.args.Add(ped);
-                    BoosterFunctions.Horse(MainMenu.args);
+                    await BoosterFunctions.HorseAsync(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 5)
                 {
                     dynamic veh = await UtilsFunctions.GetInput(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"]);
                     MainMenu.args.Add(veh);
-                    BoosterFunctions.Vehicle(MainMenu.args);
+                    await BoosterFunctions.VehicleAsync(MainMenu.args);
                     MainMenu.args.Clear();
                 }
                 else if (_index == 6)
