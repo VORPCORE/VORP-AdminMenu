@@ -99,18 +99,6 @@ namespace vorpadminmenu_cl.Functions.Boosters
             Menus.Boosters.SetNoClip(clipStatus);
         }
 
-        public static void Thor()
-        {
-            if (Menus.Boosters.Gettmode())
-            {
-                Menus.Boosters.Settmode(false);
-            }
-            else
-            {
-                Menus.Boosters.Settmode(true);
-            }
-        }
-
         public static async Task Horse(List<object> args)
         {
             string ped = args[0].ToString();

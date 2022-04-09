@@ -117,11 +117,6 @@ namespace vorpadminmenu_cl.Menus
             return _tmode.Checked;
         }
 
-        public static void Settmode(bool tMode)
-        {
-            _tmode.Checked = tMode;
-        }
-
         public static bool GetNoClip()
         {
             return _noClip.Checked;
