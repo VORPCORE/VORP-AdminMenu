@@ -83,11 +83,11 @@ namespace vorpadminmenu_cl.Menus
                 }
                 else if (_index == 6)
                 {
-                    BoosterFunctions.InfiniteAmmo();
+                    BoosterFunctions.InfiniteAmmo(true);
                 }
                 else if (_index == 7)
                 {
-                    BoosterFunctions.InfiniteAmmoOff();
+                    BoosterFunctions.InfiniteAmmo(false);
                 }
             };
 

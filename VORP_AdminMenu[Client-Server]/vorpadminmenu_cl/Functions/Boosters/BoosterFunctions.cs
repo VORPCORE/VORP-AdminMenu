@@ -128,7 +128,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
             API.SetModelAsNoLongerNeeded((uint)HashVeh);
         }
 
-        public static void InfiniteAmmo()
+        public static void InfiniteAmmo(bool isEnabled)
         {
             uint weaponHash = 0;
             if (API.GetCurrentPedWeapon(API.PlayerPedId(), ref weaponHash, false, 0, false))
@@ -141,25 +141,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
                 else
                 {
 
-                    API.SetPedInfiniteAmmo(API.PlayerPedId(), true, weaponHash);
-                }
-            }
-        }
-
-        public static void InfiniteAmmoOff()
-        {
-            uint weaponHash = 0;
-            if (API.GetCurrentPedWeapon(API.PlayerPedId(), ref weaponHash, false, 0, false))
-            {
-                string weaponName = Function.Call<string>((Hash)0x89CF5FF3D363311E, weaponHash);
-                if (weaponName.Contains("UNARMED"))
-                {
-                    TriggerEvent("vorp:Tip", GetConfig.Langs["NeedWeaponOnHand"], 3000);
-                }
-                else
-                {
-
-                    API.SetPedInfiniteAmmo(API.PlayerPedId(), false, weaponHash);
+                    API.SetPedInfiniteAmmo(API.PlayerPedId(), isEnabled, weaponHash);
                 }
             }
         }
