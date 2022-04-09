@@ -38,10 +38,6 @@ namespace vorpadminmenu_cl.Functions.Database
                 {
                     AddItem(args);
                 }), false);
-                API.RegisterCommand(GetConfig.Config["AddAmmo"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-                {
-                    AddAmmo(args);
-                }), false);
             }
         }
 
