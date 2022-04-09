@@ -25,28 +25,8 @@ namespace vorpadminmenu_cl.Functions.Boosters
         #region Public Methods
         public static void SetupBoosters()
         {
-            // Setup command line for booster commands
+            // Command line for booster commands
             // Note: Methods registered into commands cannot have optional parameters
-            API.RegisterCommand(GetConfig.Config["Golden"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                Golden();
-            }), false);
-
-            API.RegisterCommand(GetConfig.Config["Gm"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                GodMode();
-            }), false);
-
-            API.RegisterCommand(GetConfig.Config["Noclip"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                NoClipMode(true);
-            }), false);
-
-            API.RegisterCommand(GetConfig.Config["Thor"].ToString(), new Action<int, List<object>, string>((source, args, raw) =>
-            {
-                Thor();
-            }), false);
-            
             API.RegisterCommand(GetConfig.Config["Horse"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Horse(args);
@@ -55,16 +35,6 @@ namespace vorpadminmenu_cl.Functions.Boosters
             API.RegisterCommand(GetConfig.Config["Veh"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
             {
                 Vehicle(args);
-            }), false);
-            
-            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOn"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                InfiniteAmmo();
-            }), false);
-            
-            API.RegisterCommand(GetConfig.Config["InfiniteAmmoOff"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-            {
-                InfiniteAmmoOff();
             }), false);
         }
 
@@ -113,35 +83,17 @@ namespace vorpadminmenu_cl.Functions.Boosters
             Function.Call((Hash)0x4AF5A4C7B9157D14, entity, 2, 5000.0);
         }
 
-        public static void GodMode()
+        public static void GodMode(bool isChecked)
         {
-            if (!Menus.Boosters.Getgmode())
-            {
-                Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), true);
-                Menus.Boosters.Setgmode(true);
-            }
-            else
-            {
-                Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), false);
-                Menus.Boosters.Setgmode(false);
-            }
+            Function.Call(Hash.SET_PLAYER_INVINCIBLE, API.PlayerId(), isChecked);
         }
 
-        public static void NoClipMode(bool isFromCommandLine)
+        public static void NoClipMode()
         {
             int playerPed = API.PlayerPedId();
             _heading = API.GetEntityHeading(playerPed);
 
-            bool clipStatus;
-            
-            if (isFromCommandLine)
-            {
-                clipStatus = !Menus.Boosters.GetNoClip();
-            }
-            else
-            {
-                clipStatus = Menus.Boosters.GetNoClip();
-            }
+            bool clipStatus = Menus.Boosters.GetNoClip();
 
             SetNoClipEntity(playerPed, clipStatus);
             Menus.Boosters.SetNoClip(clipStatus);
@@ -319,7 +271,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
 
                     if (API.IsControlPressed(0, 0xB2F377E8)) //F-turn off noclip2
                     {
-                        NoClipMode(false);
+                        NoClipMode();
                     }
                     
                     _heading += API.GetGameplayCamRelativeHeading();

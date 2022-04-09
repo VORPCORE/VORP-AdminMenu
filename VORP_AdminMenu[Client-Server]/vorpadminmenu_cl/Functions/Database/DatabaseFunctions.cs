@@ -18,15 +18,6 @@ namespace vorpadminmenu_cl.Functions.Database
         {
             if (GetUserInfo.userGroup.Contains("admin"))
             {
-                TriggerEvent("chat:addSuggestion", "/addweapon", "VORPadmin command to give a weapon and ammo to a player by ID.",
-                    new List<dynamic>
-                    {
-                        new { name = "Id", help = "Player ID" },
-                        new { name = "Weapon Hash", help = "Name of the weapon by hash (ex: WEAPON_RIFLE_VARMINT)" },
-                        new { name = "Ammo Hash", help = "Name of the ammo by hash (ex: AMMO_22)" },
-                        new { name = "Ammo Count", help = "Number of rounds for the weapon" }
-                    });
-                
                 API.RegisterCommand(GetConfig.Config["AddMoney"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
                 {
                     AddMoney(args);
@@ -46,10 +37,6 @@ namespace vorpadminmenu_cl.Functions.Database
                 API.RegisterCommand(GetConfig.Config["AddItem"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
                 {
                     AddItem(args);
-                }), false);
-                API.RegisterCommand(GetConfig.Config["AddWeapon"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
-                {
-                    AddWeapon(args);
                 }), false);
                 API.RegisterCommand(GetConfig.Config["AddAmmo"].ToString(), new Action<int, List<object>, string, string>((source, args, cl, raw) =>
                 {

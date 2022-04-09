@@ -67,25 +67,25 @@ namespace vorpadminmenu_cl.Menus
                 {
                     BoosterFunctions.Golden();
                 }
-                else if (_index == 5)
+                else if (_index == 4)
                 {
                     dynamic ped = await UtilsFunctions.GetInput(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseTitle"]);
                     MainMenu.args.Add(ped);
                     BoosterFunctions.Horse(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 6)
+                else if (_index == 5)
                 {
                     dynamic veh = await UtilsFunctions.GetInput(GetConfig.Langs["VehicleTitle"], GetConfig.Langs["VehicleDesc"]);
                     MainMenu.args.Add(veh);
                     BoosterFunctions.Vehicle(MainMenu.args);
                     MainMenu.args.Clear();
                 }
-                else if (_index == 7)
+                else if (_index == 6)
                 {
                     BoosterFunctions.InfiniteAmmo();
                 }
-                else if (_index == 8)
+                else if (_index == 7)
                 {
                     BoosterFunctions.InfiniteAmmoOff();
                 }
@@ -93,9 +93,13 @@ namespace vorpadminmenu_cl.Menus
 
             _boostersMenu.OnCheckboxChange += (_menu, _item, _index, _checked) =>
             {
-                if (_index == 3)
+                if (_index == 1)
                 {
-                    BoosterFunctions.NoClipMode(false);
+                    BoosterFunctions.GodMode(_checked);
+                }
+                else if (_index == 3)
+                {
+                    BoosterFunctions.NoClipMode();
                 }
             };
         }
@@ -106,16 +110,6 @@ namespace vorpadminmenu_cl.Menus
         {
             SetupMenu();
             return _boostersMenu;
-        }
-
-        public static bool Getgmode()
-        {
-            return _gmode.Checked;
-        }
-
-        public static void Setgmode(bool gMode)
-        {
-            _gmode.Checked = gMode;
         }
 
         public static bool Gettmode()
