@@ -18,8 +18,8 @@ namespace vorpadminmenu_cl.Functions.Boosters
         {
             EventHandlers["vorp:thordone"] += new Action<Vector3>(ThorDone);
 
-            Tick += Noc2;
-            Tick += OnLight;
+            Tick += NoClipTick;
+            Tick += OnLightTick;
         }
 
         #region Public Methods
@@ -165,12 +165,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
         }
 
         [Tick]
-        private async Task Noc2()
+        private async Task NoClipTick()
         {
             if (GetUserInfo.loaded)
             {
                 int playerPed = API.PlayerPedId();
-                if (Menus.Boosters.GetNoClip())
+                if (Menus.Boosters.GetNoClipCheckboxStatus())
                 {
                     API.SetEntityHeading(playerPed, _heading);
                     if (API.IsControlPressed(0, 0x8FD015D8)) //W
@@ -242,7 +242,7 @@ namespace vorpadminmenu_cl.Functions.Boosters
         }
 
         [Tick]
-        private async Task OnLight()
+        private async Task OnLightTick()
         {
             if (GetUserInfo.loaded)
             {
@@ -254,12 +254,12 @@ namespace vorpadminmenu_cl.Functions.Boosters
                 Vector3 sourceCoords = UtilsFunctions.GetCoordsFromCam(1000.0F);
                 int rayHandle = API.StartShapeTestRay(camCoords.X, camCoords.Y, camCoords.Z, sourceCoords.X, sourceCoords.Y, sourceCoords.Z, -1, API.PlayerPedId(), 0);
                 API.GetShapeTestResult(rayHandle, ref hit, ref endCoord, ref surfaceNormal, ref entity);
-                if (API.IsControlJustPressed(0, 0xCEE12B50) && Menus.Boosters.Gettmode())
+                if (API.IsControlJustPressed(0, 0xCEE12B50) && Menus.Boosters.GetThorModeCheckboxStatus())
                 {
                     TriggerServerEvent("vorp:thor", endCoord);
                 }
 
-                if (Menus.Boosters.Gettmode())
+                if (Menus.Boosters.GetThorModeCheckboxStatus())
                 {
                     Function.Call((Hash)0x2A32FAA57B937173, -1795314153, endCoord.X, endCoord.Y, endCoord.Z, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.5F, 0.5F, 50.0F, 255, 255, 0, 155, false, false, 2, false, 0, 0, false);
                 }

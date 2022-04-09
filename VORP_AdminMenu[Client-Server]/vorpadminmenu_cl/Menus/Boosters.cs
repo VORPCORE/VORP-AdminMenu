@@ -9,15 +9,15 @@ namespace vorpadminmenu_cl.Menus
     {
         private static bool _setupDone = false;
         private readonly static Menu _boostersMenu = new Menu(GetConfig.Langs["MenuBoostersTitle"], GetConfig.Langs["MenuBoostersDesc"]);
-        private readonly static MenuCheckboxItem _gmode = new MenuCheckboxItem(GetConfig.Langs["GodModeTitle"], GetConfig.Langs["GodModeDesc"], false)
+        private readonly static MenuCheckboxItem _godModeCheckbox = new MenuCheckboxItem(GetConfig.Langs["GodModeTitle"], GetConfig.Langs["GodModeDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private readonly static MenuCheckboxItem _tmode = new MenuCheckboxItem(GetConfig.Langs["ThorTitle"], GetConfig.Langs["ThorDesc"], false)
+        private readonly static MenuCheckboxItem _thorModeCheckbox = new MenuCheckboxItem(GetConfig.Langs["ThorTitle"], GetConfig.Langs["ThorDesc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
-        private readonly static MenuCheckboxItem _noClip = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
+        private readonly static MenuCheckboxItem _noClipCheckbox = new MenuCheckboxItem(GetConfig.Langs["NoClip2Title"], GetConfig.Langs["NoClip2Desc"], false)
         {
             Style = MenuCheckboxItem.CheckboxStyle.Tick
         };
@@ -38,9 +38,9 @@ namespace vorpadminmenu_cl.Menus
                 Enabled = true,
             });
 
-            _boostersMenu.AddMenuItem(_gmode);
-            _boostersMenu.AddMenuItem(_tmode);
-            _boostersMenu.AddMenuItem(_noClip);
+            _boostersMenu.AddMenuItem(_godModeCheckbox);
+            _boostersMenu.AddMenuItem(_thorModeCheckbox);
+            _boostersMenu.AddMenuItem(_noClipCheckbox);
 
             _boostersMenu.AddMenuItem(new MenuItem(GetConfig.Langs["HorseTitle"], GetConfig.Langs["HorseDesc"])
             {
@@ -112,14 +112,14 @@ namespace vorpadminmenu_cl.Menus
             return _boostersMenu;
         }
 
-        public static bool Gettmode()
+        public static bool GetThorModeCheckboxStatus()
         {
-            return _tmode.Checked;
+            return _thorModeCheckbox.Checked;
         }
 
-        public static bool GetNoClip()
+        public static bool GetNoClipCheckboxStatus()
         {
-            return _noClip.Checked;
+            return _noClipCheckbox.Checked;
         }
         #endregion
     }
